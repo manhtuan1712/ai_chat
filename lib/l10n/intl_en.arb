@@ -1,1 +1,7 @@
-{}
+{
+  "appTitle": "Shuei AI Chat",
+  "addNewConversationCTA": "Add new conversation",
+  "chatListEmpty": "You do not have any conversation, please add a new one",
+  "select": "Select",
+  "startAChat": "Start a chat"
+}

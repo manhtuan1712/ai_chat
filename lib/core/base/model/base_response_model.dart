@@ -4,16 +4,13 @@ part 'base_response_model.g.dart';
 
 @JsonSerializable()
 class BaseResponseModel {
-  final String? status;
+  final int? limit;
 
-  final String? message;
-
-  final String? code;
+  final bool? has_more;
 
   BaseResponseModel({
-    this.status,
-    this.message,
-    this.code,
+    this.limit,
+    this.has_more,
   });
 
   factory BaseResponseModel.fromJson(Map<String, dynamic> json) =>
