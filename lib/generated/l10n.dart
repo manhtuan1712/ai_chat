@@ -49,6 +49,56 @@ class S {
   static S? maybeOf(BuildContext context) {
     return Localizations.of<S>(context, S);
   }
+
+  /// `Shuei AI Chat`
+  String get appTitle {
+    return Intl.message(
+      'Shuei AI Chat',
+      name: 'appTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add new conversation`
+  String get addNewConversationCTA {
+    return Intl.message(
+      'Add new conversation',
+      name: 'addNewConversationCTA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You do not have any conversation, please add a new one`
+  String get chatListEmpty {
+    return Intl.message(
+      'You do not have any conversation, please add a new one',
+      name: 'chatListEmpty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select`
+  String get select {
+    return Intl.message(
+      'Select',
+      name: 'select',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Start a chat`
+  String get startAChat {
+    return Intl.message(
+      'Start a chat',
+      name: 'startAChat',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -57,6 +107,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ja'),
     ];
   }
 

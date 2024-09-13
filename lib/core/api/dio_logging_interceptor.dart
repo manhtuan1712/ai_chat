@@ -100,6 +100,7 @@ class DioLoggingInterceptor extends InterceptorsWrapper {
   }
 
   void _addXApiKeyHeader(RequestOptions options) {
-    options.headers['X-Api-Key'] = dotenv.env[GlobalConfig.difyApiKey];
+    options.headers['Authorization'] =
+        'Bearer ${dotenv.env[GlobalConfig.difyApiKey]}';
   }
 }

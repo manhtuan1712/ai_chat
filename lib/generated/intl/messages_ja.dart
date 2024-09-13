@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a en locale. All the
+// This is a library that provides messages for a ja locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -18,16 +18,16 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'en';
+  String get localeName => 'ja';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "addNewConversationCTA":
-            MessageLookupByLibrary.simpleMessage("Add new conversation"),
+            MessageLookupByLibrary.simpleMessage("新しい会話を追加"),
         "appTitle": MessageLookupByLibrary.simpleMessage("Shuei AI Chat"),
-        "chatListEmpty": MessageLookupByLibrary.simpleMessage(
-            "You do not have any conversation, please add a new one"),
-        "select": MessageLookupByLibrary.simpleMessage("Select"),
-        "startAChat": MessageLookupByLibrary.simpleMessage("Start a chat")
+        "chatListEmpty":
+            MessageLookupByLibrary.simpleMessage("会話がありません。新しい会話を追加してください"),
+        "select": MessageLookupByLibrary.simpleMessage("選択"),
+        "startAChat": MessageLookupByLibrary.simpleMessage("チャットを開始")
       };
 }
