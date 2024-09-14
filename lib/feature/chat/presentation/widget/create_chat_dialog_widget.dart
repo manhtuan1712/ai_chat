@@ -101,7 +101,6 @@ class CreateChatDialogWidgetState extends State<CreateChatDialogWidget> {
             widget.callBack(
               _data,
             );
-            Navigator.pop(context);
           },
         ),
       ],

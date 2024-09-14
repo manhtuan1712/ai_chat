@@ -7,4 +7,8 @@ abstract class ChatRepository {
   Future<Either<ServerFailure, List<ParameterSelectModel>>> getParameters();
 
   Future<Either<ServerFailure, List<ConversationModel>>> getConversations();
+
+  Future<Either<ServerFailure, Stream<String>>> initChatStream(
+    Map<String, dynamic> data,
+  );
 }

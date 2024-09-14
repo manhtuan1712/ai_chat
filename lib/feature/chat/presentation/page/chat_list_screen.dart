@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_button_widget.dart';
+import 'package:shuei_ai_chat/core/di/injection_container.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
+import 'package:shuei_ai_chat/core/navigation/navigation_center.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/conversation_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/parameter_select_model.dart';
+import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_detail_cubit.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_list_cubit.dart';
+import 'package:shuei_ai_chat/feature/chat/presentation/page/chat_detail_screen.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/widget/create_chat_dialog_widget.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/widget/empty_chat_list_widget.dart';
 import 'package:shuei_ai_chat/generated/l10n.dart';
@@ -64,7 +68,17 @@ class ChatListScreenState extends State<ChatListScreen> {
               builder: (contextModal) => CreateChatDialogWidget(
                 parameters: _parameters,
                 callBack: (data) {
-                  debugPrint('======> $data');
+                  Navigator.pop(context);
+                  NavigationCenter.goToScreen(
+                    context,
+                    NavigationCenter.chatDetailScreen,
+                    BlocProvider(
+                      create: (context) => sl<ChatDetailCubit>(),
+                      child: ChatDetailScreen(
+                        data: data,
+                      ),
+                    ),
+                  );
                 },
               ),
             ),

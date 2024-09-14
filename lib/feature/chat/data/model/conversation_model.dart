@@ -8,8 +8,6 @@ class ConversationModel {
 
   final String? name;
 
-  final List<String>? inputs;
-
   final String? status;
 
   final String? introduction;
@@ -19,7 +17,6 @@ class ConversationModel {
   ConversationModel({
     this.id,
     this.name,
-    this.inputs,
     this.status,
     this.introduction,
     this.created_at,

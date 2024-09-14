@@ -3,5 +3,7 @@
   "addNewConversationCTA": "Add new conversation",
   "chatListEmpty": "You do not have any conversation, please add a new one",
   "select": "Select",
-  "startAChat": "Start a chat"
+  "startAChat": "Start a chat",
+  "newConversations": "New Conversations",
+  "helloText": "Hello! Leave a message here"
 }

@@ -10,3 +10,14 @@ class NoParams extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class InitChatParams extends Equatable {
+  final Map<String, dynamic> data;
+
+  const InitChatParams({
+    required this.data,
+  });
+
+  @override
+  List<Object> get props => [data];
+}
