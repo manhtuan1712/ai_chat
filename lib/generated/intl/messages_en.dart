@@ -27,6 +27,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "appTitle": MessageLookupByLibrary.simpleMessage("Shuei AI Chat"),
         "chatListEmpty": MessageLookupByLibrary.simpleMessage(
             "You do not have any conversation, please add a new one"),
+        "helloText":
+            MessageLookupByLibrary.simpleMessage("Hello! Leave a message here"),
+        "newConversations":
+            MessageLookupByLibrary.simpleMessage("New Conversations"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
         "startAChat": MessageLookupByLibrary.simpleMessage("Start a chat")
       };

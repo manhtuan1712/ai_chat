@@ -15,5 +15,6 @@ class ResponseMessageModel extends BaseResponseModel {
   factory ResponseMessageModel.fromJson(Map<String, dynamic> json) =>
       _$ResponseMessageModelFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$ResponseMessageModelToJson(this);
 }

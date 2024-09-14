@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:provider/provider.dart';
 import 'package:shuei_ai_chat/core/api/dio_logging_interceptor.dart';
 import 'package:shuei_ai_chat/core/api/service/base/base_rest_client.dart';
+import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/core/helpers/global_configs.dart';
+import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_conversation_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_parameter_model.dart';
 
@@ -35,8 +38,11 @@ class BaseRestService {
 
   Future<ResponseConversationModel> getConversations() async {
     Map<String, dynamic> data = {};
+    AppProvider appProvider = AppUtils.contextMain.read<AppProvider>();
     data['limit'] = 100;
     data['pinned'] = false;
+    await appProvider.getUser();
+    data['user'] = appProvider.user;
     return _baseRestClient!.getConversations(
       data,
     );

@@ -99,6 +99,26 @@ class S {
       args: [],
     );
   }
+
+  /// `New Conversations`
+  String get newConversations {
+    return Intl.message(
+      'New Conversations',
+      name: 'newConversations',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hello! Leave a message here`
+  String get helloText {
+    return Intl.message(
+      'Hello! Leave a message here',
+      name: 'helloText',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

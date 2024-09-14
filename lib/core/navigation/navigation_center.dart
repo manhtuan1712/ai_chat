@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class NavigationCenter {
   static final navigatorKey = GlobalKey<NavigatorState>();
+  static const String chatDetailScreen = 'chat-detail-screen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {

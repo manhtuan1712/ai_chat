@@ -4,19 +4,19 @@ part 'message_model.g.dart';
 
 @JsonSerializable()
 class MessageModel {
-  final String? id;
+  String? id;
 
-  final String? conversation_id;
+  String? conversation_id;
 
-  final Map<String, String>? inputs;
+  Map<String, String>? inputs;
 
-  final String? query;
+  String? query;
 
-  final String? answer;
+  String? answer;
 
-  final String? status;
+  String? status;
 
-  final int? created_at;
+  int? created_at;
 
   MessageModel({
     this.id,

@@ -46,4 +46,24 @@ class ChatRepositoryImpl implements ChatRepository {
       );
     }
   }
+
+  @override
+  Future<Either<ServerFailure, Stream<String>>> initChatStream(
+    Map<String, dynamic> data,
+  ) async {
+    try {
+      var response = await chatRemoteDataSource.initChatStream(
+        data,
+      );
+      return Right(
+        response,
+      );
+    } catch (e) {
+      return Left(
+        ServerFailure(
+          mess: e.toString(),
+        ),
+      );
+    }
+  }
 }
