@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shuei_ai_chat/core/usecase/usecase.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/conversation_model.dart';
+import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
+import 'package:shuei_ai_chat/feature/chat/domain/usecase/get_messages.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/init_chat_stream.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/update_conversation_name.dart';
 
@@ -14,11 +16,14 @@ class ChatDetailCubit extends Cubit<ChatDetailState> {
 
   UpdateConversationName updateConversationName;
 
+  GetMessages getMessages;
+
   StreamSubscription<String>? _streamSubscription;
 
   ChatDetailCubit({
     required this.initChatStream,
     required this.updateConversationName,
+    required this.getMessages,
   }) : super(ChatDetailInitialState());
 
   Future<void> initChatStreamAction(
@@ -95,6 +100,35 @@ class ChatDetailCubit extends Cubit<ChatDetailState> {
         emit(
           UpdateConversationNameSuccessState(
             conversationModel: r,
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> getMessagesAction(
+    String conversationId,
+  ) async {
+    emit(
+      ChatDetailLoadingState(),
+    );
+    final result = await getMessages(
+      UpdateConversationNameParams(
+        conversationId: conversationId,
+      ),
+    );
+    result.fold(
+      (l) {
+        emit(
+          GetMessageFailureState(
+            error: l.mess ?? '',
+          ),
+        );
+      },
+      (r) {
+        emit(
+          GetMessageSuccessState(
+            messages: r,
           ),
         );
       },

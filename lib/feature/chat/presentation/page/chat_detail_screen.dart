@@ -48,11 +48,6 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        _messages.add(
-          MessageModel(
-            answer: S.of(context).helloText,
-          ),
-        );
         _title =
             widget.conversationModel?.name ?? S.of(context).newConversations;
         _data = {
@@ -62,6 +57,17 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
           'response_mode': 'streaming',
           'user': context.read<AppProvider>().user,
         };
+        if (widget.conversationModel?.id != '') {
+          context.read<ChatDetailCubit>().getMessagesAction(
+                widget.conversationModel?.id ?? '',
+              );
+        } else {
+          _messages.add(
+            MessageModel(
+              answer: S.of(context).helloText,
+            ),
+          );
+        }
         setState(() {});
       },
     );
@@ -145,6 +151,20 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
             _title = state.conversationModel.name ?? '';
             context.read<ChatListCubit>().getConversationsAction();
             setState(() {});
+          } else if (state is GetMessageSuccessState) {
+            _messages.clear();
+            _messages.add(
+              MessageModel(
+                answer: S.of(context).helloText,
+              ),
+            );
+            _messages.addAll(
+              state.messages,
+            );
+            _scrollToBottom();
+            setState(() {});
+          } else if (state is GetMessageFailureState) {
+            debugPrint('======> error: ${state.error}');
           } else if (state is UpdateConversationNameFailureState) {
             debugPrint('======> error: ${state.error}');
           } else if (state is ChatFailureState) {

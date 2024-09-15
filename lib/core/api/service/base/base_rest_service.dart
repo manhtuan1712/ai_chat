@@ -7,6 +7,7 @@ import 'package:shuei_ai_chat/core/helpers/global_configs.dart';
 import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/conversation_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_conversation_model.dart';
+import 'package:shuei_ai_chat/feature/chat/data/model/response_message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_parameter_model.dart';
 
 class BaseRestService {
@@ -58,6 +59,19 @@ class BaseRestService {
     data['auto_generate'] = true;
     return _baseRestClient!.updateConversationName(
       conversationId,
+      data,
+    );
+  }
+
+  Future<ResponseMessageModel> getMessages(
+    String conversationId,
+  ) async {
+    Map<String, dynamic> data = {};
+    AppProvider appProvider = AppUtils.contextMain.read<AppProvider>();
+    data['limit'] = 50;
+    data['conversation_id'] = conversationId;
+    data['user'] = appProvider.user;
+    return _baseRestClient!.getMessages(
       data,
     );
   }
