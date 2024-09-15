@@ -23,6 +23,11 @@ abstract class ChatRemoteDataSource {
   Future<List<MessageModel>> getMessages(
     String conversationId,
   );
+
+  Future<ConversationModel> renameConversation(
+    String conversationId,
+    String name,
+  );
 }
 
 class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
@@ -96,6 +101,25 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       );
       EasyLoading.dismiss();
       return response.data ?? [];
+    } on DioExceptionType {
+      EasyLoading.dismiss();
+      throw DioExceptionType;
+    }
+  }
+
+  @override
+  Future<ConversationModel> renameConversation(
+    String conversationId,
+    String name,
+  ) async {
+    try {
+      EasyLoading.show();
+      final response = await baseRestService.renameConversation(
+        conversationId,
+        name,
+      );
+      EasyLoading.dismiss();
+      return response;
     } on DioExceptionType {
       EasyLoading.dismiss();
       throw DioExceptionType;

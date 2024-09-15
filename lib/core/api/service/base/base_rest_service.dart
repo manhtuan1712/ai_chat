@@ -75,4 +75,18 @@ class BaseRestService {
       data,
     );
   }
+
+  Future<ConversationModel> renameConversation(
+    String conversationId,
+    String name,
+  ) async {
+    Map<String, dynamic> data = {};
+    AppProvider appProvider = AppUtils.contextMain.read<AppProvider>();
+    data['name'] = name;
+    data['user'] = appProvider.user;
+    return _baseRestClient!.renameConversation(
+      conversationId,
+      data,
+    );
+  }
 }

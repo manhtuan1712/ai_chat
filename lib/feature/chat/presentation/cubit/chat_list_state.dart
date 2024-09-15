@@ -38,3 +38,19 @@ class GetConversationsFailureState extends ChatListState {
     this.error,
   });
 }
+
+class RenameConversationSuccessState extends ChatListState {
+  final ConversationModel conversation;
+
+  RenameConversationSuccessState({
+    required this.conversation,
+  });
+}
+
+class RenameConversationFailureState extends ChatListState {
+  final String? error;
+
+  RenameConversationFailureState({
+    this.error,
+  });
+}

@@ -5,5 +5,8 @@
   "select": "Select",
   "startAChat": "Start a chat",
   "newConversations": "New Conversations",
-  "helloText": "Hello! Leave a message here"
+  "helloText": "Hello! Leave a message here",
+  "changeConversationName": "Change conversation name",
+  "ok": "OK",
+  "cancel": "Cancel"
 }

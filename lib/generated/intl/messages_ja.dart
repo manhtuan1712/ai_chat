@@ -25,10 +25,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "addNewConversationCTA":
             MessageLookupByLibrary.simpleMessage("新しい会話を追加"),
         "appTitle": MessageLookupByLibrary.simpleMessage("Shuei AI Chat"),
+        "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
+        "changeConversationName":
+            MessageLookupByLibrary.simpleMessage("会話名を変更"),
         "chatListEmpty":
             MessageLookupByLibrary.simpleMessage("会話がありません。新しい会話を追加してください"),
         "helloText": MessageLookupByLibrary.simpleMessage("こんにちは！ここにメッセージをどーぞ"),
         "newConversations": MessageLookupByLibrary.simpleMessage("新しい会話"),
+        "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "select": MessageLookupByLibrary.simpleMessage("選択"),
         "startAChat": MessageLookupByLibrary.simpleMessage("チャットを開始")
       };

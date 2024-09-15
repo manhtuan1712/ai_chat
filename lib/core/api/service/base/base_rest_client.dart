@@ -29,4 +29,10 @@ abstract class BaseRestClient {
   Future<ResponseMessageModel> getMessages(
     @Queries() Map<String, dynamic> queries,
   );
+
+  @POST('conversations/{conversationId}/name')
+  Future<ConversationModel> renameConversation(
+    @Path('conversationId') String conversationId,
+    @Body() Map<String, dynamic> queries,
+  );
 }

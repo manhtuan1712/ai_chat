@@ -5,5 +5,8 @@
   "select": "選択",
   "startAChat": "チャットを開始",
   "newConversations": "新しい会話",
-  "helloText": "こんにちは！ここにメッセージをどーぞ"
+  "helloText": "こんにちは！ここにメッセージをどーぞ",
+  "changeConversationName": "会話名を変更",
+  "ok": "OK",
+  "cancel": "キャンセル"
 }
