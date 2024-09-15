@@ -38,3 +38,19 @@ class UpdateConversationNameFailureState extends ChatDetailState {
     required this.error,
   });
 }
+
+class GetMessageSuccessState extends ChatDetailState {
+  final List<MessageModel> messages;
+
+  GetMessageSuccessState({
+    required this.messages,
+  });
+}
+
+class GetMessageFailureState extends ChatDetailState {
+  final String error;
+
+  GetMessageFailureState({
+    required this.error,
+  });
+}
