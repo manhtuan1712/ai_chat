@@ -14,12 +14,15 @@ class ConversationModel {
 
   final int? created_at;
 
+  final Map<String, String>? inputs;
+
   ConversationModel({
     this.id,
     this.name,
     this.status,
     this.introduction,
     this.created_at,
+    this.inputs,
   });
 
   factory ConversationModel.fromJson(Map<String, dynamic> json) =>

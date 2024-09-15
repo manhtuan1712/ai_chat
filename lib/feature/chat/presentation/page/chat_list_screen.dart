@@ -96,24 +96,45 @@ class ChatListScreenState extends State<ChatListScreen> {
         child: _conversations?.isEmpty ?? false
             ? const EmptyChatListWidget()
             : ListView.separated(
-                padding: EdgeInsets.zero,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0,
+                  vertical: 16.0,
+                ),
                 itemCount: _conversations?.length ?? 0,
                 itemBuilder: (context, index) {
                   final ConversationModel conversation = _conversations![index];
-                  return ListTile(
-                    title: Text(
-                      conversation.name ?? '',
-                      style: AppConstants.textHeadingH5.copyWith(
-                        color: Theme.of(context).colorScheme.surfaceDim,
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.secondaryContainer,
+                      borderRadius: BorderRadius.circular(
+                        8.0,
                       ),
                     ),
-                    subtitle: Text(
-                      conversation.introduction ?? '',
-                      style: AppConstants.textBody2Regular.copyWith(
-                        color: Theme.of(context).colorScheme.surfaceDim,
+                    child: ListTile(
+                      onTap: () => NavigationCenter.goToScreen(
+                        context,
+                        NavigationCenter.chatDetailScreen,
+                        BlocProvider(
+                          create: (context) => sl<ChatDetailCubit>(),
+                          child: ChatDetailScreen(
+                            conversationModel: conversation,
+                            data: conversation.inputs,
+                          ),
+                        ),
+                      ),
+                      title: Text(
+                        conversation.name ?? '',
+                        style: AppConstants.textHeadingH5.copyWith(
+                          color: Theme.of(context).colorScheme.surfaceDim,
+                        ),
+                      ),
+                      subtitle: Text(
+                        conversation.introduction ?? '',
+                        style: AppConstants.textBody2Regular.copyWith(
+                          color: Theme.of(context).colorScheme.surfaceDim,
+                        ),
                       ),
                     ),
-                    onTap: () => {},
                   );
                 },
                 separatorBuilder: (context, index) => const SizedBox(

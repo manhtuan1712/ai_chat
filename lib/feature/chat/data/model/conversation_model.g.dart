@@ -13,6 +13,9 @@ ConversationModel _$ConversationModelFromJson(Map<String, dynamic> json) =>
       status: json['status'] as String?,
       introduction: json['introduction'] as String?,
       created_at: (json['created_at'] as num?)?.toInt(),
+      inputs: (json['inputs'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(k, e as String),
+      ),
     );
 
 Map<String, dynamic> _$ConversationModelToJson(ConversationModel instance) =>
@@ -22,4 +25,5 @@ Map<String, dynamic> _$ConversationModelToJson(ConversationModel instance) =>
       'status': instance.status,
       'introduction': instance.introduction,
       'created_at': instance.created_at,
+      'inputs': instance.inputs,
     };

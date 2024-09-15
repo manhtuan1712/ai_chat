@@ -21,3 +21,14 @@ class InitChatParams extends Equatable {
   @override
   List<Object> get props => [data];
 }
+
+class UpdateConversationNameParams extends Equatable {
+  final String conversationId;
+
+  const UpdateConversationNameParams({
+    required this.conversationId,
+  });
+
+  @override
+  List<Object> get props => [conversationId];
+}
