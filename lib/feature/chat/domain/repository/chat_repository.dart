@@ -11,4 +11,8 @@ abstract class ChatRepository {
   Future<Either<ServerFailure, Stream<String>>> initChatStream(
     Map<String, dynamic> data,
   );
+
+  Future<Either<ServerFailure, ConversationModel>> updateConversationName(
+    String conversationId,
+  );
 }

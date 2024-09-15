@@ -14,6 +14,10 @@ abstract class ChatRemoteDataSource {
   Future<Stream<String>> initChatStream(
     Map<String, dynamic> data,
   );
+
+  Future<ConversationModel> updateConversationName(
+    String conversationId,
+  );
 }
 
 class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
@@ -36,12 +40,9 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   @override
   Future<List<ConversationModel>> getConversations() async {
     try {
-      EasyLoading.show();
       final response = await baseRestService.getConversations();
-      EasyLoading.dismiss();
       return response.data ?? [];
     } on DioExceptionType {
-      EasyLoading.dismiss();
       throw DioExceptionType;
     }
   }
@@ -59,6 +60,23 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       return sseStream;
     } catch (e) {
       throw Exception(e);
+    }
+  }
+
+  @override
+  Future<ConversationModel> updateConversationName(
+    String conversationId,
+  ) async {
+    try {
+      EasyLoading.show();
+      final response = await baseRestService.updateConversationName(
+        conversationId,
+      );
+      EasyLoading.dismiss();
+      return response;
+    } on DioExceptionType {
+      EasyLoading.dismiss();
+      throw DioExceptionType;
     }
   }
 }

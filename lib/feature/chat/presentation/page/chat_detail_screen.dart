@@ -5,9 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_text_field_widget.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/core/helpers/enums.dart';
+import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/conversation_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_detail_cubit.dart';
+import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_list_cubit.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/widget/message_list_widget.dart';
 import 'package:shuei_ai_chat/generated/l10n.dart';
 
@@ -55,10 +57,10 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
             widget.conversationModel?.name ?? S.of(context).newConversations;
         _data = {
           'inputs': widget.data,
-          'conversation_id': '',
+          'conversation_id': widget.conversationModel?.id ?? '',
           'query': '',
           'response_mode': 'streaming',
-          'user': 'abc',
+          'user': context.read<AppProvider>().user,
         };
         setState(() {});
       },
@@ -73,7 +75,6 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
   }
 
   void _scrollToBottom() {
-    debugPrint('======> scrollToBottom');
     Future.delayed(
       (const Duration(
         milliseconds: 100,
@@ -120,6 +121,11 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
               debugPrint('======> event: ${event['data']['event']}');
               if (event['data']['event'] ==
                   ChatMessageEvent.workflowStarted.get()) {
+                if (_data['conversation_id'] == '') {
+                  context.read<ChatDetailCubit>().updateConversationNameAction(
+                        event['data']['conversation_id'],
+                      );
+                }
                 _data['conversation_id'] = event['data']['conversation_id'];
                 _messages.last.conversation_id =
                     event['data']['conversation_id'];
@@ -135,6 +141,14 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
             }
             _scrollToBottom();
             setState(() {});
+          } else if (state is UpdateConversationNameSuccessState) {
+            _title = state.conversationModel.name ?? '';
+            context.read<ChatListCubit>().getConversationsAction();
+            setState(() {});
+          } else if (state is UpdateConversationNameFailureState) {
+            debugPrint('======> error: ${state.error}');
+          } else if (state is ChatFailureState) {
+            debugPrint('======> error: ${state.error}');
           }
         },
         child: Column(

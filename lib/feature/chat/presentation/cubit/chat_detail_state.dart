@@ -22,3 +22,19 @@ class ChatFailureState extends ChatDetailState {
     required this.error,
   });
 }
+
+class UpdateConversationNameSuccessState extends ChatDetailState {
+  final ConversationModel conversationModel;
+
+  UpdateConversationNameSuccessState({
+    required this.conversationModel,
+  });
+}
+
+class UpdateConversationNameFailureState extends ChatDetailState {
+  final String error;
+
+  UpdateConversationNameFailureState({
+    required this.error,
+  });
+}

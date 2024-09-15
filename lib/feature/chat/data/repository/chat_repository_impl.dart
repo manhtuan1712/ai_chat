@@ -66,4 +66,24 @@ class ChatRepositoryImpl implements ChatRepository {
       );
     }
   }
+
+  @override
+  Future<Either<ServerFailure, ConversationModel>> updateConversationName(
+    String conversationId,
+  ) async {
+    try {
+      var response = await chatRemoteDataSource.updateConversationName(
+        conversationId,
+      );
+      return Right(
+        response,
+      );
+    } on DioException catch (error) {
+      return Left(
+        ServerFailure(
+          mess: error.message,
+        ),
+      );
+    }
+  }
 }
