@@ -20,4 +20,9 @@ abstract class ChatRepository {
   Future<Either<ServerFailure, List<MessageModel>>> getMessages(
     String conversationId,
   );
+
+  Future<Either<ServerFailure, ConversationModel>> renameConversation(
+    String conversationId,
+    String name,
+  );
 }

@@ -32,3 +32,17 @@ class UpdateConversationNameParams extends Equatable {
   @override
   List<Object> get props => [conversationId];
 }
+
+class RenameConversationNameParams extends Equatable {
+  final String conversationId;
+
+  final String name;
+
+  const RenameConversationNameParams({
+    required this.conversationId,
+    required this.name,
+  });
+
+  @override
+  List<Object> get props => [conversationId];
+}

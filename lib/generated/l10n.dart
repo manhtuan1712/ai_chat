@@ -119,6 +119,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Change conversation name`
+  String get changeConversationName {
+    return Intl.message(
+      'Change conversation name',
+      name: 'changeConversationName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `OK`
+  String get ok {
+    return Intl.message(
+      'OK',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

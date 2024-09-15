@@ -11,6 +11,7 @@ import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_detail_cubit.
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_list_cubit.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/page/chat_detail_screen.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/widget/create_chat_dialog_widget.dart';
+import 'package:shuei_ai_chat/feature/chat/presentation/widget/edit_conversation_name_dialog_widget.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/widget/empty_chat_list_widget.dart';
 import 'package:shuei_ai_chat/generated/l10n.dart';
 
@@ -91,54 +92,89 @@ class ChatListScreenState extends State<ChatListScreen> {
           if (state is GetConversationsSuccessState) {
             _conversations = state.conversations;
             setState(() {});
+          } else if (state is RenameConversationSuccessState) {
+            final conversation = state.conversation;
+            final index = _conversations!.indexWhere(
+              (element) => element.id == conversation.id,
+            );
+            _conversations![index] = conversation;
+            setState(() {});
           }
         },
         child: _conversations?.isEmpty ?? false
             ? const EmptyChatListWidget()
-            : ListView.separated(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16.0,
-                  vertical: 16.0,
-                ),
-                itemCount: _conversations?.length ?? 0,
-                itemBuilder: (context, index) {
-                  final ConversationModel conversation = _conversations![index];
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.secondaryContainer,
-                      borderRadius: BorderRadius.circular(
-                        8.0,
+            : RefreshIndicator(
+                onRefresh: () async =>
+                    context.read<ChatListCubit>().getConversationsAction(),
+                child: ListView.separated(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                    vertical: 16.0,
+                  ),
+                  itemCount: _conversations?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    final ConversationModel conversation =
+                        _conversations![index];
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.secondaryContainer,
+                        borderRadius: BorderRadius.circular(
+                          8.0,
+                        ),
                       ),
-                    ),
-                    child: ListTile(
-                      onTap: () => NavigationCenter.goToScreen(
-                        context,
-                        NavigationCenter.chatDetailScreen,
-                        BlocProvider(
-                          create: (context) => sl<ChatDetailCubit>(),
-                          child: ChatDetailScreen(
-                            conversationModel: conversation,
-                            data: conversation.inputs,
+                      child: ListTile(
+                        onTap: () => NavigationCenter.goToScreen(
+                          context,
+                          NavigationCenter.chatDetailScreen,
+                          BlocProvider(
+                            create: (context) => sl<ChatDetailCubit>(),
+                            child: ChatDetailScreen(
+                              conversationModel: conversation,
+                              data: conversation.inputs,
+                            ),
+                          ),
+                        ),
+                        title: Text(
+                          conversation.name ?? '',
+                          style: AppConstants.textHeadingH5.copyWith(
+                            color: Theme.of(context).colorScheme.surfaceDim,
+                          ),
+                        ),
+                        subtitle: Text(
+                          conversation.introduction ?? '',
+                          style: AppConstants.textBody2Regular.copyWith(
+                            color: Theme.of(context).colorScheme.surfaceDim,
+                          ),
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(
+                            Icons.edit,
+                            color: Theme.of(context).colorScheme.surfaceDim,
+                            size: 20.0,
+                          ),
+                          onPressed: () => showDialog(
+                            context: AppUtils.contextMain,
+                            builder: (contextModal) =>
+                                EditConversationNameDialogWidget(
+                              name: conversation.name ?? '',
+                              onEdit: (name) {
+                                context
+                                    .read<ChatListCubit>()
+                                    .renameConversationAction(
+                                      conversation.id ?? '',
+                                      name,
+                                    );
+                                Navigator.pop(context);
+                              },
+                            ),
                           ),
                         ),
                       ),
-                      title: Text(
-                        conversation.name ?? '',
-                        style: AppConstants.textHeadingH5.copyWith(
-                          color: Theme.of(context).colorScheme.surfaceDim,
-                        ),
-                      ),
-                      subtitle: Text(
-                        conversation.introduction ?? '',
-                        style: AppConstants.textBody2Regular.copyWith(
-                          color: Theme.of(context).colorScheme.surfaceDim,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: 8.0,
+                    );
+                  },
+                  separatorBuilder: (context, index) => const SizedBox(
+                    height: 8.0,
+                  ),
                 ),
               ),
       ),
