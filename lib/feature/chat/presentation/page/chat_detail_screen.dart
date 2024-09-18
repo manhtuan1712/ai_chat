@@ -110,7 +110,7 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _title,
+          '',
           style: AppConstants.textHeadingH3.copyWith(
             color: Theme.of(context).colorScheme.surface,
             fontWeight: FontWeight.bold,
@@ -173,6 +173,16 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
         },
         child: Column(
           children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(
+                30.0,
+              ),
+              child: Image.asset(
+                AppConstants.icPersonalAssistant,
+                fit: BoxFit.fill,
+                width: 300.0,
+              ),
+            ),
             Expanded(
               child: MessageListWidget(
                 messages: _messages,
