@@ -57,7 +57,7 @@ class MessageListWidget extends StatelessWidget {
                   isSender: true,
                   color: Theme.of(context).colorScheme.secondaryContainer,
                   textStyle: AppConstants.textBody1Regular.copyWith(
-                    color: Colors.black,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
                 const SizedBox(
@@ -130,7 +130,7 @@ class MessageListWidget extends StatelessWidget {
                       isSender: false,
                       color: Theme.of(context).colorScheme.secondary,
                       textStyle: AppConstants.textBody1Regular.copyWith(
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.surface,
                       ),
                     ),
             ],

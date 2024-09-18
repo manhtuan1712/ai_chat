@@ -112,7 +112,7 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
         title: Text(
           _title,
           style: AppConstants.textHeadingH3.copyWith(
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.surface,
             fontWeight: FontWeight.bold,
           ),
         ),

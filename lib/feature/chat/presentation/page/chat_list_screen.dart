@@ -44,7 +44,7 @@ class ChatListScreenState extends State<ChatListScreen> {
         title: Text(
           '🤖 ${S.of(context).appTitle}',
           style: AppConstants.textHeadingH3.copyWith(
-            color: Colors.black,
+            color: Theme.of(context).colorScheme.surface,
             fontWeight: FontWeight.bold,
           ),
         ),

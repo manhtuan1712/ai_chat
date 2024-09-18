@@ -30,7 +30,7 @@ class CreateChatDialogWidgetState extends State<CreateChatDialogWidget> {
       title: Text(
         '🤖 ${S.of(context).addNewConversationCTA}',
         style: AppConstants.textHeadingH5.copyWith(
-          color: Colors.black,
+          color: Theme.of(context).colorScheme.surface,
           fontWeight: FontWeight.bold,
         ),
       ),
