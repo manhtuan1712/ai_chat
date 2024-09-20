@@ -94,7 +94,7 @@ class CreateChatDialogWidgetState extends State<CreateChatDialogWidget> {
       actions: [
         BaseButtonWidget(
           text: S.of(context).startAChat,
-          buttonState: _data.keys.length == 2
+          buttonState: _data.keys.length == 3
               ? ButtonState.normal
               : ButtonState.disabled,
           onClick: () {

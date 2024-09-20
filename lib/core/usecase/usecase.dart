@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shuei_ai_chat/core/api/error/failures.dart';
+import 'package:shuei_ai_chat/feature/chat/data/model/request_post_message_model.dart';
 
 abstract class UseCase<Type, Params> {
   Future<Either<Failure, Type>> call(Params params);
@@ -45,4 +46,15 @@ class RenameConversationNameParams extends Equatable {
 
   @override
   List<Object> get props => [conversationId];
+}
+
+class PostMessageParams extends Equatable {
+  final RequestPostMessageModel requestPostMessageModel;
+
+  const PostMessageParams({
+    required this.requestPostMessageModel,
+  });
+
+  @override
+  List<Object> get props => [requestPostMessageModel];
 }

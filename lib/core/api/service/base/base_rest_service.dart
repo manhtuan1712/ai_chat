@@ -2,10 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:provider/provider.dart';
 import 'package:shuei_ai_chat/core/api/dio_logging_interceptor.dart';
 import 'package:shuei_ai_chat/core/api/service/base/base_rest_client.dart';
+import 'package:shuei_ai_chat/core/api/service/base/chat_rest_client.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/core/helpers/global_configs.dart';
 import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/conversation_model.dart';
+import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
+import 'package:shuei_ai_chat/feature/chat/data/model/request_post_message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_conversation_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_parameter_model.dart';
@@ -14,6 +17,8 @@ class BaseRestService {
   Dio? _dio;
 
   BaseRestClient? _baseRestClient;
+
+  ChatRestClient? _chatRestClient;
 
   BaseRestService() {
     BaseOptions options = BaseOptions(
@@ -31,6 +36,10 @@ class BaseRestService {
     _baseRestClient = BaseRestClient(
       _dio!,
       baseUrl: GlobalConfig.baseUrl,
+    );
+    _chatRestClient = ChatRestClient(
+      _dio!,
+      baseUrl: GlobalConfig.chatUrl,
     );
   }
 
@@ -87,6 +96,12 @@ class BaseRestService {
     return _baseRestClient!.renameConversation(
       conversationId,
       data,
+    );
+  }
+
+  Future<MessageModel> postMessage(RequestPostMessageModel request) async {
+    return _chatRestClient!.postMessage(
+      request,
     );
   }
 }

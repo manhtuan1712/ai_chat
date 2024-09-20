@@ -10,6 +10,7 @@ import 'package:shuei_ai_chat/feature/chat/domain/usecase/get_conversations.dart
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/get_messages.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/get_parameters.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/init_chat_stream.dart';
+import 'package:shuei_ai_chat/feature/chat/domain/usecase/post_message_case.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/rename_conversation.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/update_conversation_name.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_detail_cubit.dart';
@@ -63,6 +64,11 @@ Future<void> init() async {
       chatRepository: sl(),
     ),
   );
+  sl.registerLazySingleton<PostMessage>(
+    () => PostMessage(
+      chatRepository: sl(),
+    ),
+  );
 
   // Cubit
   sl.registerFactory<ChatListCubit>(
@@ -77,6 +83,7 @@ Future<void> init() async {
       initChatStream: sl(),
       updateConversationName: sl(),
       getMessages: sl(),
+      postMessage: sl(),
     ),
   );
 

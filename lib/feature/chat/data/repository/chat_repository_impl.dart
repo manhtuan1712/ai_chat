@@ -5,6 +5,7 @@ import 'package:shuei_ai_chat/feature/chat/data/datasource/chat_remote_data_sour
 import 'package:shuei_ai_chat/feature/chat/data/model/conversation_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/parameter_select_model.dart';
+import 'package:shuei_ai_chat/feature/chat/data/model/request_post_message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/repository/chat_repository.dart';
 
 class ChatRepositoryImpl implements ChatRepository {
@@ -117,6 +118,26 @@ class ChatRepositoryImpl implements ChatRepository {
       var response = await chatRemoteDataSource.renameConversation(
         conversationId,
         name,
+      );
+      return Right(
+        response,
+      );
+    } on DioException catch (error) {
+      return Left(
+        ServerFailure(
+          mess: error.message,
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, MessageModel>> postMessage(
+    RequestPostMessageModel requestPostMessageModel,
+  ) async {
+    try {
+      var response = await chatRemoteDataSource.postMessage(
+        requestPostMessageModel,
       );
       return Right(
         response,

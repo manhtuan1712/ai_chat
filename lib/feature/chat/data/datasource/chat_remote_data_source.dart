@@ -6,6 +6,7 @@ import 'package:shuei_ai_chat/core/helpers/global_configs.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/conversation_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/parameter_select_model.dart';
+import 'package:shuei_ai_chat/feature/chat/data/model/request_post_message_model.dart';
 
 abstract class ChatRemoteDataSource {
   Future<List<ParameterSelectModel>> getParameters();
@@ -27,6 +28,10 @@ abstract class ChatRemoteDataSource {
   Future<ConversationModel> renameConversation(
     String conversationId,
     String name,
+  );
+
+  Future<MessageModel> postMessage(
+    RequestPostMessageModel requestPostMessageModel,
   );
 }
 
@@ -122,6 +127,20 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       return response;
     } on DioExceptionType {
       EasyLoading.dismiss();
+      throw DioExceptionType;
+    }
+  }
+
+  @override
+  Future<MessageModel> postMessage(
+    RequestPostMessageModel requestPostMessageModel,
+  ) async {
+    try {
+      final response = await baseRestService.postMessage(
+        requestPostMessageModel,
+      );
+      return response;
+    } on DioExceptionType {
       throw DioExceptionType;
     }
   }

@@ -18,6 +18,8 @@ class MessageModel {
 
   int? created_at;
 
+  String? message;
+
   MessageModel({
     this.id,
     this.conversation_id,
@@ -26,6 +28,7 @@ class MessageModel {
     this.answer,
     this.status,
     this.created_at,
+    this.message,
   });
 
   factory MessageModel.fromJson(Map<String, dynamic> json) =>
