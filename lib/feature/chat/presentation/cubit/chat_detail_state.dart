@@ -8,10 +8,10 @@ class ChatDetailInitialState extends ChatDetailState {}
 class ChatDetailLoadingState extends ChatDetailState {}
 
 class ChatEventReceivedState extends ChatDetailState {
-  final String event;
+  final MessageModel messageModel;
 
   ChatEventReceivedState({
-    required this.event,
+    required this.messageModel,
   });
 }
 

@@ -16,6 +16,7 @@ MessageModel _$MessageModelFromJson(Map<String, dynamic> json) => MessageModel(
       answer: json['answer'] as String?,
       status: json['status'] as String?,
       created_at: (json['created_at'] as num?)?.toInt(),
+      message: json['message'] as String?,
     );
 
 Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
@@ -27,4 +28,5 @@ Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
       'answer': instance.answer,
       'status': instance.status,
       'created_at': instance.created_at,
+      'message': instance.message,
     };

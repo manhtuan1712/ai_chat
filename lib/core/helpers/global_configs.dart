@@ -1,6 +1,7 @@
 class GlobalConfig {
   // The Movie DB
   static const String baseUrl = 'https://api.dify.ai/v1/';
+  static const String chatUrl = 'http://163.43.158.202/';
 
   // Locale
   static const String languageJa = 'ja';
