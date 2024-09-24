@@ -30,4 +30,6 @@ abstract class ChatRepository {
   Future<Either<ServerFailure, MessageModel>> postMessage(
     RequestPostMessageModel requestPostMessageModel,
   );
+
+  Future<Either<ServerFailure, List<int>>> getVoice();
 }

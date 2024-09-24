@@ -8,8 +8,8 @@ class GlobalConfig {
   static const String languageEn = 'en';
 
   // Dio
-  static const int connectTimeOut = 30000;
-  static const int receiveTimeout = 30000;
+  static const int connectTimeOut = 50000;
+  static const int receiveTimeout = 50000;
 
   // Format date time
   static const dateTimeFormatHeader = 'EEE d MMMM, yyyy';

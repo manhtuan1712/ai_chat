@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:http/http.dart' as http;
 import 'package:shuei_ai_chat/core/api/service/base/base_rest_service.dart';
 import 'package:shuei_ai_chat/core/api/service/base/sse_service.dart';
 import 'package:shuei_ai_chat/core/helpers/global_configs.dart';
@@ -33,6 +35,8 @@ abstract class ChatRemoteDataSource {
   Future<MessageModel> postMessage(
     RequestPostMessageModel requestPostMessageModel,
   );
+
+  Future<List<int>> getVoice();
 }
 
 class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
@@ -142,6 +146,29 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       return response;
     } on DioExceptionType {
       throw DioExceptionType;
+    }
+  }
+
+  @override
+  Future<List<int>> getVoice() async {
+    try {
+      var url = Uri.parse('${GlobalConfig.chatUrl}voice');
+      var response = await http.post(url);
+      if (response.statusCode == 200) {
+        String? contentDisposition = response.headers['content-disposition'];
+        if (contentDisposition != null &&
+            contentDisposition.contains('attachment')) {
+          var audioBytes = response.bodyBytes;
+          return audioBytes;
+        } else {
+          return [];
+        }
+      } else {
+        return [];
+      }
+    } catch (e) {
+      debugPrint('=========> voice error ${e.toString()}');
+      return [];
     }
   }
 }

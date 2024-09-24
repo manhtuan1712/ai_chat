@@ -126,7 +126,7 @@ class MessageListWidget extends StatelessWidget {
                       ),
                     )
                   : BubbleSpecialOne(
-                      text: message.answer ?? '',
+                      text: message.answerFormat ?? '',
                       isSender: false,
                       color: Theme.of(context).colorScheme.secondary,
                       textStyle: AppConstants.textBody1Regular.copyWith(
