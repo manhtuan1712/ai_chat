@@ -54,3 +54,19 @@ class GetMessageFailureState extends ChatDetailState {
     required this.error,
   });
 }
+
+class GetVoiceSuccessState extends ChatDetailState {
+  final List<int> voice;
+
+  GetVoiceSuccessState({
+    required this.voice,
+  });
+}
+
+class GetVoiceFailureState extends ChatDetailState {
+  final String error;
+
+  GetVoiceFailureState({
+    required this.error,
+  });
+}

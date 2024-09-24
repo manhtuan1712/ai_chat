@@ -7,6 +7,7 @@ import 'package:shuei_ai_chat/feature/chat/data/model/conversation_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/request_post_message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/get_messages.dart';
+import 'package:shuei_ai_chat/feature/chat/domain/usecase/get_voice.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/init_chat_stream.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/post_message_case.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/update_conversation_name.dart';
@@ -22,11 +23,14 @@ class ChatDetailCubit extends Cubit<ChatDetailState> {
 
   PostMessage postMessage;
 
+  GetVoice getVoice;
+
   ChatDetailCubit({
     required this.initChatStream,
     required this.updateConversationName,
     required this.getMessages,
     required this.postMessage,
+    required this.getVoice,
   }) : super(ChatDetailInitialState());
 
   Future<void> updateConversationNameAction(
@@ -123,6 +127,24 @@ class ChatDetailCubit extends Cubit<ChatDetailState> {
           ),
         );
       },
+    );
+  }
+
+  Future<void> getVoiceAction() async {
+    final result = await getVoice(
+      NoParams(),
+    );
+    result.fold(
+      (l) => emit(
+        GetVoiceFailureState(
+          error: l.mess ?? '',
+        ),
+      ),
+      (r) => emit(
+        GetVoiceSuccessState(
+          voice: r,
+        ),
+      ),
     );
   }
 }

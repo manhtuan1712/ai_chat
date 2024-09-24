@@ -150,4 +150,19 @@ class ChatRepositoryImpl implements ChatRepository {
       );
     }
   }
+
+  @override
+  Future<Either<ServerFailure, List<int>>> getVoice() async {
+    List<int> audioBytes = [];
+    audioBytes = await chatRemoteDataSource.getVoice();
+    if (audioBytes.isNotEmpty) {
+      return Right(
+        audioBytes,
+      );
+    } else {
+      return Left(
+        ServerFailure(mess: 'Voice not found'),
+      );
+    }
+  }
 }

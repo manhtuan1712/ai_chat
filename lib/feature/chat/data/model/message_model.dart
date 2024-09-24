@@ -20,6 +20,11 @@ class MessageModel {
 
   String? message;
 
+  String get answerFormat => (answer ?? '').replaceAll(
+        '\n',
+        '',
+      );
+
   MessageModel({
     this.id,
     this.conversation_id,
