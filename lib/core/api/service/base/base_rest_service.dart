@@ -53,9 +53,7 @@ class BaseRestService {
     data['limit'] = 100;
     data['pinned'] = false;
     await appProvider.getUser();
-    // data['user'] = appProvider.user;
-    // Testing static user
-    data['user'] = 'enomoto';
+    data['user'] = appProvider.user;
     return _baseRestClient!.getConversations(
       data,
     );
@@ -66,9 +64,7 @@ class BaseRestService {
   ) async {
     Map<String, dynamic> data = {};
     AppProvider appProvider = AppUtils.contextMain.read<AppProvider>();
-    // data['user'] = appProvider.user;
-    // Testing static user
-    data['user'] = 'enomoto';
+    data['user'] = appProvider.user;
     data['auto_generate'] = true;
     return _baseRestClient!.updateConversationName(
       conversationId,
@@ -83,9 +79,7 @@ class BaseRestService {
     AppProvider appProvider = AppUtils.contextMain.read<AppProvider>();
     data['limit'] = 50;
     data['conversation_id'] = conversationId;
-    // data['user'] = appProvider.user;
-    // Testing static user
-    data['user'] = 'enomoto';
+    data['user'] = appProvider.user;
     return _baseRestClient!.getMessages(
       data,
     );
@@ -98,9 +92,7 @@ class BaseRestService {
     Map<String, dynamic> data = {};
     AppProvider appProvider = AppUtils.contextMain.read<AppProvider>();
     data['name'] = name;
-    // data['user'] = appProvider.user;
-    // Testing static user
-    data['user'] = 'enomoto';
+    data['user'] = appProvider.user;
     return _baseRestClient!.renameConversation(
       conversationId,
       data,
@@ -108,6 +100,9 @@ class BaseRestService {
   }
 
   Future<MessageModel> postMessage(RequestPostMessageModel request) async {
+    AppProvider appProvider = AppUtils.contextMain.read<AppProvider>();
+    await appProvider.getUser();
+    request.user = appProvider.user;
     return _chatRestClient!.postMessage(
       request,
     );

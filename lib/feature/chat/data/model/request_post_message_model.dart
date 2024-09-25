@@ -14,12 +14,15 @@ class RequestPostMessageModel {
 
   final String? lang;
 
+  String? user;
+
   RequestPostMessageModel({
     this.name,
     this.llm,
     this.message,
     this.conversation_id,
     this.lang,
+    this.user,
   });
 
   factory RequestPostMessageModel.fromJson(Map<String, dynamic> json) =>

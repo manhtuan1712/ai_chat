@@ -77,4 +77,5 @@ class AppConstants {
           : 'assets/icon/ic_splash.png';
   static String icRetry = 'assets/icon/ic_retry.svg';
   static String icPersonalAssistant = 'assets/icon/ic-personal-assistant.jpg';
+  static String icPersonalAnimation = 'assets/animation/person-action.gif';
 }

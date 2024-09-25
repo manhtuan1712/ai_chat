@@ -14,6 +14,7 @@ RequestPostMessageModel _$RequestPostMessageModelFromJson(
       message: json['message'] as String?,
       conversation_id: json['conversation_id'] as String?,
       lang: json['lang'] as String?,
+      user: json['user'] as String?,
     );
 
 Map<String, dynamic> _$RequestPostMessageModelToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$RequestPostMessageModelToJson(
       'message': instance.message,
       'conversation_id': instance.conversation_id,
       'lang': instance.lang,
+      'user': instance.user,
     };

@@ -50,6 +50,7 @@ flutter:
   assets:
     - assets/icon/
     - assets/font/
+    - assets/animation/
     - .env
   fonts:
     - family: SFProDisplay

@@ -3,7 +3,6 @@ import 'dart:typed_data';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_text_field_widget.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/core/helpers/enums.dart';
@@ -134,19 +133,29 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
       body: BlocListener<ChatDetailCubit, ChatDetailState>(
         listener: (context, state) async {
           if (state is ChatEventReceivedState) {
-            context.read<ChatDetailCubit>().getVoiceAction();
+            context.read<ChatDetailCubit>().getVoiceAction().then(
+              (value) {
+                Future.delayed(
+                  const Duration(seconds: 3),
+                  () {
+                    _messages.last.answer = state.messageModel.message;
+                    _messages.last.status = MessagingStatus.done.get();
+                    _messages.last.conversation_id =
+                        state.messageModel.conversation_id;
+                    _messages.last.id = state.messageModel.id;
+                    _data['conversation_id'] =
+                        state.messageModel.conversation_id;
+                    _scrollToBottom();
+                    setState(() {});
+                  },
+                );
+              },
+            );
             if (_data['conversation_id'] == '') {
               context.read<ChatDetailCubit>().updateConversationNameAction(
                     state.messageModel.conversation_id ?? '',
                   );
             }
-            _messages.last.answer = state.messageModel.message;
-            _messages.last.status = MessagingStatus.done.get();
-            _messages.last.conversation_id = state.messageModel.conversation_id;
-            _messages.last.id = state.messageModel.id;
-            _data['conversation_id'] = state.messageModel.conversation_id;
-            _scrollToBottom();
-            setState(() {});
           } else if (state is UpdateConversationNameSuccessState) {
             _title = state.conversationModel.name ?? '';
             context.read<ChatListCubit>().getConversationsAction();
@@ -164,7 +173,6 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
             setState(() {});
             _scrollToBottom();
           } else if (state is GetVoiceSuccessState) {
-            _isPlaying = true;
             _audioPlayer.setReleaseMode(ReleaseMode.stop);
             await _audioPlayer.setSource(
               BytesSource(
@@ -174,6 +182,8 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
               ),
             );
             await _audioPlayer.resume();
+            _isPlaying = true;
+            _scrollToBottom();
             setState(() {});
           } else if (state is GetMessageFailureState) {
             debugPrint('======> error: ${state.error}');
@@ -190,31 +200,33 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
             const SizedBox(
               height: 10.0,
             ),
-            Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                    30.0,
-                  ),
-                  child: Image.asset(
-                    AppConstants.icPersonalAssistant,
-                    fit: BoxFit.fill,
-                    width: 180.0,
-                  ),
+            SizedBox(
+              height: 180.0,
+              width: 180.0,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(
+                  30.0,
                 ),
-                Visibility(
-                  visible: _isPlaying,
-                  child: Positioned(
-                    bottom: 5.0,
-                    left: 0.0,
-                    right: 0.0,
-                    child: SpinKitWave(
-                      color: Theme.of(context).colorScheme.primary,
-                      size: 24.0,
+                child: Stack(
+                  children: [
+                    Image.asset(
+                      AppConstants.icPersonalAssistant,
+                      fit: BoxFit.fill,
+                      width: 180.0,
                     ),
-                  ),
-                )
-              ],
+                    Visibility(
+                      visible: _isPlaying,
+                      child: Positioned.fill(
+                        child: Image.asset(
+                          AppConstants.icPersonalAnimation,
+                          fit: BoxFit.fill,
+                          width: 180.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
             Expanded(
               child: MessageListWidget(
@@ -223,7 +235,7 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
               ),
             ),
             Container(
-              height: _focusNode.hasFocus ? 80.0 : 120.0,
+              height: 80.0,
               color: Theme.of(context).colorScheme.secondary,
               padding: const EdgeInsets.symmetric(
                 horizontal: 16.0,
