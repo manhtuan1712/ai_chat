@@ -8,5 +8,9 @@
   "helloText": "Hello! Leave a message here",
   "changeConversationName": "Change conversation name",
   "ok": "OK",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "mainHomeBottom": "Home",
+  "mainFavoriteBottom": "Favorite",
+  "mainChatBottom": "Chat",
+  "mainProfileBottom": "Profile"
 }

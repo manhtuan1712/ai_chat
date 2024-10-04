@@ -31,6 +31,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "chatListEmpty":
             MessageLookupByLibrary.simpleMessage("会話がありません。新しい会話を追加してください"),
         "helloText": MessageLookupByLibrary.simpleMessage("こんにちは！ここにメッセージをどーぞ"),
+        "mainChatBottom": MessageLookupByLibrary.simpleMessage("チャット"),
+        "mainFavoriteBottom": MessageLookupByLibrary.simpleMessage("お気に入り"),
+        "mainHomeBottom": MessageLookupByLibrary.simpleMessage("家"),
+        "mainProfileBottom": MessageLookupByLibrary.simpleMessage("プロフィール"),
         "newConversations": MessageLookupByLibrary.simpleMessage("新しい会話"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "select": MessageLookupByLibrary.simpleMessage("選択"),
