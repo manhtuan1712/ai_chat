@@ -12,7 +12,7 @@ import 'package:shuei_ai_chat/core/navigation/navigation_center.dart';
 import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 import 'package:shuei_ai_chat/core/theme/theme_style.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_list_cubit.dart';
-import 'package:shuei_ai_chat/feature/chat/presentation/page/chat_list_screen.dart';
+import 'package:shuei_ai_chat/feature/main/presentation/page/main_screen.dart';
 import 'package:shuei_ai_chat/generated/l10n.dart';
 
 class MyApp extends StatefulWidget {
@@ -67,7 +67,7 @@ class MyAppState extends State<MyApp> {
           ],
           supportedLocales: S.delegate.supportedLocales,
           onGenerateRoute: NavigationCenter.generateRoute,
-          home: const ChatListScreen(),
+          home: const MainScreen(),
         ),
       ),
     );

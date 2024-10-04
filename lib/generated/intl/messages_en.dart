@@ -32,6 +32,10 @@ class MessageLookup extends MessageLookupByLibrary {
             "You do not have any conversation, please add a new one"),
         "helloText":
             MessageLookupByLibrary.simpleMessage("Hello! Leave a message here"),
+        "mainChatBottom": MessageLookupByLibrary.simpleMessage("Chat"),
+        "mainFavoriteBottom": MessageLookupByLibrary.simpleMessage("Favorite"),
+        "mainHomeBottom": MessageLookupByLibrary.simpleMessage("Home"),
+        "mainProfileBottom": MessageLookupByLibrary.simpleMessage("Profile"),
         "newConversations":
             MessageLookupByLibrary.simpleMessage("New Conversations"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
