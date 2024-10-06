@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
+import 'package:shuei_ai_chat/core/helpers/event_bus.dart';
 import 'package:shuei_ai_chat/feature/main/presentation/widget/tab_navigator.dart';
 import 'package:shuei_ai_chat/generated/l10n.dart';
 
@@ -44,6 +45,23 @@ class MainScreenState extends State<MainScreen> {
         _currentTab = tabItem;
       });
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    eventBus.on<GoToFavoriteEvent>().listen(
+      (event) {
+        _tabSelected(
+          1,
+        );
+        _navigatorKeys[_currentTab]!.currentState!.popUntil(
+              (route) => route.isFirst,
+            );
+        _currentIndex = 1;
+        setState(() {});
+      },
+    );
   }
 
   @override
