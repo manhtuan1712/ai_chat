@@ -4,9 +4,15 @@ import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 class AIAGentCardWidget extends StatelessWidget {
   final AIAgentModel agentModel;
 
+  final double? imageWidth;
+
+  final bool isShowDetail;
+
   const AIAGentCardWidget(
     this.agentModel, {
     super.key,
+    this.imageWidth,
+    this.isShowDetail = true,
   });
 
   @override
@@ -41,7 +47,7 @@ class AIAGentCardWidget extends StatelessWidget {
           Flexible(
             child: Image.asset(
               agentModel.image ?? '',
-              width: MediaQuery.sizeOf(context).width,
+              width: imageWidth ?? MediaQuery.sizeOf(context).width,
               fit: BoxFit.fitWidth,
             ),
           ),
@@ -60,30 +66,35 @@ class AIAGentCardWidget extends StatelessWidget {
                     fontSize: 20,
                   ),
                 ),
-                const SizedBox(
-                  height: 5.0,
-                ),
-                Text(
-                  agentModel.description ?? '',
-                  style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 15,
+                Visibility(
+                  visible: isShowDetail,
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                      vertical: 5.0,
+                    ),
+                    child: Text(
+                      agentModel.description ?? '',
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 15,
+                      ),
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Wrap(
-                  children: [
-                    ...agentModel.attributes?.keys.map(
-                          (attr) => Chip(
-                            label: Text(
-                              attr,
+                Visibility(
+                  visible: isShowDetail,
+                  child: Wrap(
+                    children: [
+                      ...agentModel.attributes?.keys.map(
+                            (attr) => Chip(
+                              label: Text(
+                                attr,
+                              ),
                             ),
-                          ),
-                        ) ??
-                        [],
-                  ],
+                          ) ??
+                          [],
+                    ],
+                  ),
                 ),
               ],
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:shuei_ai_chat/core/helpers/event_bus.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/widget/ai_agent_card_widget.dart';
 
@@ -12,6 +13,8 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   final CardSwiperController controller = CardSwiperController();
+
+  late AIAgentModel _currentAgent;
 
   final List<AIAgentModel> _agents = [
     AIAgentModel(
@@ -106,6 +109,7 @@ class HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _cards = _agents.map(AIAGentCardWidget.new).toList();
+    _currentAgent = _agents[0];
   }
 
   @override
@@ -164,12 +168,35 @@ class HomeScreenState extends State<HomeScreen> {
                   ),
                   FloatingActionButton(
                     backgroundColor: Colors.white,
-                    onPressed: () => controller.swipe(
-                      CardSwiperDirection.right,
-                    ),
+                    onPressed: () {
+                      controller.swipe(
+                        CardSwiperDirection.right,
+                      );
+                      eventBus.fire(
+                        AddFavoriteEvent(
+                          _currentAgent,
+                        ),
+                      );
+                      eventBus.fire(
+                        GoToFavoriteEvent(),
+                      );
+                    },
                     child: const Icon(
                       Icons.favorite,
                       color: Colors.greenAccent,
+                    ),
+                  ),
+                  FloatingActionButton(
+                    backgroundColor: Colors.white,
+                    onPressed: () {
+                      controller.swipe(
+                        CardSwiperDirection.right,
+                      );
+                      // TODO Go to chat screen
+                    },
+                    child: const Icon(
+                      Icons.chat_bubble,
+                      color: Colors.purpleAccent,
                     ),
                   ),
                 ],
@@ -189,6 +216,7 @@ class HomeScreenState extends State<HomeScreen> {
     debugPrint(
       'The card $previousIndex was swiped to the ${direction.name}. Now the card $currentIndex is on top',
     );
+    _currentAgent = _agents[currentIndex!];
     return true;
   }
 
