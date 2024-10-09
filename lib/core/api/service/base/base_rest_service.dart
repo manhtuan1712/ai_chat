@@ -12,6 +12,7 @@ import 'package:shuei_ai_chat/feature/chat/data/model/request_post_message_model
 import 'package:shuei_ai_chat/feature/chat/data/model/response_conversation_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_parameter_model.dart';
+import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 
 class BaseRestService {
   Dio? _dio;
@@ -106,5 +107,9 @@ class BaseRestService {
     return _chatRestClient!.postMessage(
       request,
     );
+  }
+
+  Future<List<AIAgentModel>> getRecommendAgent() async {
+    return _baseRestClient!.getRecommendAgent();
   }
 }

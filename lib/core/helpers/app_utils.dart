@@ -37,4 +37,7 @@ class AppUtils {
       );
     }
   }
+
+  static double getBottomBarHeight() =>
+      42.0 + MediaQuery.paddingOf(contextMain).bottom + 18.0;
 }

@@ -9,18 +9,18 @@ part of 'ai_agent_model.dart';
 AIAgentModel _$AIAgentModelFromJson(Map<String, dynamic> json) => AIAgentModel(
       id: json['id'] as String?,
       name: json['name'] as String?,
-      subName: json['subName'] as String?,
-      description: json['description'] as String?,
-      attributes: json['attributes'] as Map<String, dynamic>?,
-      image: json['image'] as String?,
+      place: json['place'] as String?,
+      age: json['age'] as num?,
+      note: json['note'] as String?,
+      photo: json['photo'] as String?,
     );
 
 Map<String, dynamic> _$AIAgentModelToJson(AIAgentModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'subName': instance.subName,
-      'description': instance.description,
-      'attributes': instance.attributes,
-      'image': instance.image,
+      'place': instance.place,
+      'age': instance.age,
+      'note': instance.note,
+      'photo': instance.photo,
     };

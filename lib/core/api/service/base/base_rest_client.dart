@@ -4,6 +4,7 @@ import 'package:shuei_ai_chat/feature/chat/data/model/conversation_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_conversation_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_parameter_model.dart';
+import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 
 part 'base_rest_client.g.dart';
 
@@ -35,4 +36,7 @@ abstract class BaseRestClient {
     @Path('conversationId') String conversationId,
     @Body() Map<String, dynamic> queries,
   );
+
+  @GET('recommend/agent')
+  Future<List<AIAgentModel>> getRecommendAgent();
 }

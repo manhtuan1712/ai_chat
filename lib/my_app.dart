@@ -10,8 +10,8 @@ import 'package:shuei_ai_chat/core/di/injection_container.dart';
 import 'package:shuei_ai_chat/core/helpers/global_configs.dart';
 import 'package:shuei_ai_chat/core/navigation/navigation_center.dart';
 import 'package:shuei_ai_chat/core/provider/app_provider.dart';
-import 'package:shuei_ai_chat/core/theme/theme_style.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_list_cubit.dart';
+import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_recommend_cubit.dart';
 import 'package:shuei_ai_chat/feature/main/presentation/page/main_screen.dart';
 import 'package:shuei_ai_chat/generated/l10n.dart';
 
@@ -46,13 +46,14 @@ class MyAppState extends State<MyApp> {
           BlocProvider(
             create: (_) => sl<ChatListCubit>(),
           ),
+          BlocProvider(
+            create: (_) => sl<HomeRecommendCubit>(),
+          ),
         ],
         child: MaterialApp(
           navigatorKey: NavigationCenter.navigatorKey,
           title: '',
           builder: EasyLoading.init(),
-          theme: ThemeStyle.lightTheme,
-          darkTheme: ThemeStyle.darkTheme,
           debugShowCheckedModeBanner: false,
           locale: Platform.localeName.isEmpty
               ? const Locale(GlobalConfig.languageEn)

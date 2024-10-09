@@ -1,6 +1,6 @@
 class GlobalConfig {
-  // The Movie DB
-  static const String baseUrl = 'https://api.dify.ai/v1/';
+  static const String baseUrl =
+      'https://personal-ai.hayato-enomoto.workers.dev/api/';
   static const String chatUrl = 'http://163.43.158.202/';
 
   // Locale
@@ -19,6 +19,7 @@ class GlobalConfig {
   // .env
   static const String envPath = '.env';
   static const String difyApiKey = 'difyApiKey';
+  static const String xApiKey = 'xApiKey';
 
   // PageSize
   static const int pageSize = 20;
