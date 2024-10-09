@@ -78,4 +78,25 @@ class AppConstants {
   static String icRetry = 'assets/icon/ic_retry.svg';
   static String icPersonalAssistant = 'assets/icon/ic-personal-assistant.jpg';
   static String icPersonalAnimation = 'assets/animation/person-action.gif';
+  static String icHomeGrid = 'assets/icon/ic-home-grid.svg';
+  static String icHomeList = 'assets/icon/ic-home-list.svg';
+  static String icFilter = 'assets/icon/ic-filter.svg';
+  static String icFavorite = 'assets/icon/ic-favorite.svg';
+  static String icMessage = 'assets/icon/ic-message.svg';
+  static String icHolderGrid = 'assets/image/ic-holder-grid.png';
+  static String icHolderList = 'assets/image/ic-holder-list.png';
+  static String icBottomHomeActive = 'assets/icon/ic-bottom-home-active.svg';
+  static String icBottomHomeInActive =
+      'assets/icon/ic-bottom-home-inactive.svg';
+  static String icBottomFavoriteActive =
+      'assets/icon/ic-bottom-favorite-active.svg';
+  static String icBottomFavoriteInActive =
+      'assets/icon/ic-bottom-favorite-inactive.svg';
+  static String icBottomChatActive = 'assets/icon/ic-bottom-chat-active.svg';
+  static String icBottomChatInActive =
+      'assets/icon/ic-bottom-chat-inactive.svg';
+  static String icBottomProfileActive =
+      'assets/icon/ic-bottom-profile-active.svg';
+  static String icBottomProfileInActive =
+      'assets/icon/ic-bottom-profile-inactive.svg';
 }

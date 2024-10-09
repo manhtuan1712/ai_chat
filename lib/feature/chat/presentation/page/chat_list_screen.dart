@@ -30,11 +30,11 @@ class ChatListScreenState extends State<ChatListScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => context.read<ChatListCubit>()
-        ..getParametersAction()
-        ..getConversationsAction(),
-    );
+    // WidgetsBinding.instance.addPostFrameCallback(
+    //   (_) => context.read<ChatListCubit>()
+    //     ..getParametersAction()
+    //     ..getConversationsAction(),
+    // );
   }
 
   @override

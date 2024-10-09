@@ -40,7 +40,6 @@ class FavoriteScreenState extends State<FavoriteScreen> {
         return AIAGentCardWidget(
           _favorites[index],
           imageWidth: MediaQuery.sizeOf(context).width * .5,
-          isShowDetail: false,
         );
       },
     );

@@ -8,21 +8,21 @@ class AIAgentModel {
 
   final String? name;
 
-  final String? subName;
+  final String? place;
 
-  final String? description;
+  final num? age;
 
-  final Map<String, dynamic>? attributes;
+  final String? note;
 
-  final String? image;
+  final String? photo;
 
   AIAgentModel({
     this.id,
     this.name,
-    this.subName,
-    this.description,
-    this.attributes,
-    this.image,
+    this.place,
+    this.age,
+    this.note,
+    this.photo,
   });
 
   factory AIAgentModel.fromJson(Map<String, dynamic> json) =>

@@ -16,6 +16,11 @@ import 'package:shuei_ai_chat/feature/chat/domain/usecase/rename_conversation.da
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/update_conversation_name.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_detail_cubit.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_list_cubit.dart';
+import 'package:shuei_ai_chat/feature/home/data/datasource/home_remote_data_source.dart';
+import 'package:shuei_ai_chat/feature/home/data/repository/home_repository_impl.dart';
+import 'package:shuei_ai_chat/feature/home/domain/repository/home_repository.dart';
+import 'package:shuei_ai_chat/feature/home/domain/usecase/get_recommend_agent.dart';
+import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_recommend_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -27,10 +32,21 @@ Future<void> init() async {
     ),
   );
 
+  sl.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSourceImpl(
+      baseRestService: sl(),
+    ),
+  );
+
   // Repository
   sl.registerLazySingleton<ChatRepository>(
     () => ChatRepositoryImpl(
       chatRemoteDataSource: sl(),
+    ),
+  );
+  sl.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(
+      homeRemoteDataSource: sl(),
     ),
   );
 
@@ -75,6 +91,11 @@ Future<void> init() async {
       chatRepository: sl(),
     ),
   );
+  sl.registerLazySingleton<GetRecommendAgent>(
+    () => GetRecommendAgent(
+      homeRepository: sl(),
+    ),
+  );
 
   // Cubit
   sl.registerFactory<ChatListCubit>(
@@ -91,6 +112,11 @@ Future<void> init() async {
       getMessages: sl(),
       postMessage: sl(),
       getVoice: sl(),
+    ),
+  );
+  sl.registerFactory<HomeRecommendCubit>(
+    () => HomeRecommendCubit(
+      getRecommendAgent: sl(),
     ),
   );
 

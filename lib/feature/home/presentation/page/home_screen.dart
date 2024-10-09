@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-import 'package:shuei_ai_chat/core/helpers/event_bus.dart';
-import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
+import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
+import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_recommend_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/widget/ai_agent_card_widget.dart';
+import 'package:shuei_ai_chat/feature/home/presentation/widget/home_filter_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,222 +15,129 @@ class HomeScreen extends StatefulWidget {
 }
 
 class HomeScreenState extends State<HomeScreen> {
-  final CardSwiperController controller = CardSwiperController();
+  bool _isGrid = false;
 
-  late AIAgentModel _currentAgent;
-
-  final List<AIAgentModel> _agents = [
-    AIAgentModel(
-      id: '001',
-      name: 'さくら',
-      subName: 'Sakura',
-      description:
-          'A calm and intelligent AI agent who excels at problem-solving and managing large tasks.',
-      attributes: {
-        'intelligence': 9.5,
-        'empathy': 8.0,
-        'agility': 6.0,
-        'communication': 9.0,
-      },
-      image: 'assets/image/sakura.png',
-    ),
-    AIAgentModel(
-      id: '002',
-      name: 'ひかり',
-      subName: 'Hikari',
-      description:
-          'A lively and enthusiastic AI agent known for her energy and creativity.',
-      attributes: {
-        'intelligence': 7.5,
-        'empathy': 8.5,
-        'agility': 7.0,
-        'creativity': 9.5,
-      },
-      image: 'assets/image/hikari.png',
-    ),
-    AIAgentModel(
-      id: '003',
-      name: 'あい',
-      subName: 'Ai',
-      description:
-          'An empathetic and thoughtful AI agent specializing in customer support and emotional intelligence.',
-      attributes: {
-        'intelligence': 8.0,
-        'empathy': 9.8,
-        'communication': 9.5,
-        'problem_solving': 7.5,
-      },
-      image: 'assets/image/ai.png',
-    ),
-    AIAgentModel(
-      id: '004',
-      name: 'みゆき',
-      subName: 'Miyuki',
-      description:
-          'A calm and reserved AI agent who excels in organizing and structuring complex tasks.',
-      attributes: {
-        'intelligence': 8.5,
-        'empathy': 7.0,
-        'organization': 9.8,
-        'attention_to_detail': 9.0,
-      },
-      image: 'assets/image/miyuki.png',
-    ),
-    AIAgentModel(
-      id: '005',
-      name: 'つばさ',
-      subName: 'Tsubasa',
-      description:
-          'A dynamic and strong-willed AI agent focused on leadership and decision making.',
-      attributes: {
-        'intelligence': 9.0,
-        'leadership': 9.7,
-        'agility': 8.0,
-        'problem_solving': 9.2,
-      },
-      image: 'assets/image/tsubasa.png',
-    ),
-    AIAgentModel(
-      id: '006',
-      name: 'すみれ',
-      subName: 'Sumire',
-      description:
-          'An artistic AI agent with a creative mind and excellent visualization skills.',
-      attributes: {
-        'intelligence': 7.5,
-        'empathy': 7.8,
-        'creativity': 9.8,
-        'communication': 8.0,
-      },
-      image: 'assets/image/sumire.png',
-    ),
-  ];
-
-  var _cards = [];
+  var _aiAgents = [];
 
   @override
   void initState() {
     super.initState();
-    _cards = _agents.map(AIAGentCardWidget.new).toList();
-    _currentAgent = _agents[0];
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        context.read<HomeRecommendCubit>().getRecommendAgentAction();
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Flexible(
-              child: CardSwiper(
-                controller: controller,
-                cardsCount: _cards.length,
-                onSwipe: _onSwipe,
-                onUndo: _onUndo,
-                numberOfCardsDisplayed: 2,
+      appBar: AppBar(
+        leading: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () {
+            _isGrid = !_isGrid;
+            setState(() {});
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(
+              12.0,
+            ),
+            child: SvgPicture.asset(
+              _isGrid ? AppConstants.icHomeList : AppConstants.icHomeGrid,
+              width: 33.0,
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+        ),
+        actions: [
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              showModalBottomSheet(
+                isScrollControlled: true,
+                isDismissible: true,
+                backgroundColor: Colors.transparent,
+                context: AppUtils.contextMain,
+                builder: (context) {
+                  return const FractionallySizedBox(
+                    heightFactor: .9,
+                    child: HomeFilterWidget(),
+                  );
+                },
+              );
+            },
+            child: Container(
+              margin: const EdgeInsets.only(
+                right: 4.0,
+              ),
+              child: Padding(
                 padding: const EdgeInsets.all(
-                  16.0,
+                  8.0,
                 ),
-                cardBuilder: (
-                  context,
-                  index,
-                  horizontalThresholdPercentage,
-                  verticalThresholdPercentage,
-                ) =>
-                    _cards[index],
+                child: SvgPicture.asset(
+                  AppConstants.icFilter,
+                  width: 33.0,
+                  fit: BoxFit.fitWidth,
+                ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  FloatingActionButton(
-                    backgroundColor: Colors.white,
-                    onPressed: controller.undo,
-                    child: const Icon(
-                      Icons.rotate_left,
-                      color: Colors.blueAccent,
-                    ),
+          ),
+        ],
+      ),
+      body: BlocListener<HomeRecommendCubit, HomeRecommendState>(
+        listener: (context, state) {
+          if (state is HomeRecommendSuccessState) {
+            _aiAgents = state.aiAgents ?? [];
+            setState(() {});
+          } else if (state is HomeRecommendFailureState) {
+            AppUtils.showToastMessage(
+              state.error ?? '',
+              context,
+            );
+          }
+        },
+        child: RefreshIndicator(
+          onRefresh: () async =>
+              context.read<HomeRecommendCubit>().getRecommendAgentAction(),
+          child: _isGrid
+              ? GridView.builder(
+                  primary: false,
+                  shrinkWrap: true,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 8.0,
+                    childAspectRatio: 0.48,
                   ),
-                  FloatingActionButton(
-                    backgroundColor: Colors.white,
-                    onPressed: () => controller.swipe(
-                      CardSwiperDirection.left,
-                    ),
-                    child: const Icon(
-                      Icons.heart_broken_outlined,
-                      color: Colors.redAccent,
-                    ),
+                  padding: const EdgeInsets.all(
+                    16.0,
                   ),
-                  FloatingActionButton(
-                    backgroundColor: Colors.white,
-                    onPressed: () {
-                      controller.swipe(
-                        CardSwiperDirection.right,
-                      );
-                      eventBus.fire(
-                        AddFavoriteEvent(
-                          _currentAgent,
-                        ),
-                      );
-                      eventBus.fire(
-                        GoToFavoriteEvent(),
-                      );
-                    },
-                    child: const Icon(
-                      Icons.favorite,
-                      color: Colors.greenAccent,
-                    ),
+                  itemCount: _aiAgents.length,
+                  itemBuilder: (context, index) {
+                    return AIAGentCardWidget(
+                      _aiAgents[index],
+                      imageWidth: MediaQuery.sizeOf(context).width * .5,
+                      isGrid: true,
+                    );
+                  },
+                )
+              : ListView.builder(
+                  primary: false,
+                  shrinkWrap: true,
+                  itemCount: _aiAgents.length,
+                  padding: const EdgeInsets.all(
+                    16.0,
                   ),
-                  FloatingActionButton(
-                    backgroundColor: Colors.white,
-                    onPressed: () {
-                      controller.swipe(
-                        CardSwiperDirection.right,
-                      );
-                      // TODO Go to chat screen
-                    },
-                    child: const Icon(
-                      Icons.chat_bubble,
-                      color: Colors.purpleAccent,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+                  itemBuilder: (context, index) {
+                    return AIAGentCardWidget(
+                      _aiAgents[index],
+                      imageWidth: MediaQuery.sizeOf(context).width,
+                      isGrid: false,
+                    );
+                  },
+                ),
         ),
       ),
     );
-  }
-
-  bool _onSwipe(
-    int previousIndex,
-    int? currentIndex,
-    CardSwiperDirection direction,
-  ) {
-    debugPrint(
-      'The card $previousIndex was swiped to the ${direction.name}. Now the card $currentIndex is on top',
-    );
-    _currentAgent = _agents[currentIndex!];
-    return true;
-  }
-
-  bool _onUndo(
-    int? previousIndex,
-    int currentIndex,
-    CardSwiperDirection direction,
-  ) {
-    debugPrint(
-      'The card $currentIndex was undo from the ${direction.name}',
-    );
-    return true;
   }
 }
