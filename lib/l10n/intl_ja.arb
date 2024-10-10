@@ -9,8 +9,9 @@
   "changeConversationName": "会話名を変更",
   "ok": "OK",
   "cancel": "キャンセル",
-  "mainHomeBottom": "家",
-  "mainFavoriteBottom": "お気に入り",
-  "mainChatBottom": "チャット",
-  "mainProfileBottom": "プロフィール"
+  "loginToYourAccount": "ログイン",
+  "loginEmail": "ログインid",
+  "signUpEmailWrongFormat": "メールの形式が正しくありません",
+  "loginPassword": "パスワード",
+  "pleaseLoginIn": "この機能を使用するにはログインしてください"
 }

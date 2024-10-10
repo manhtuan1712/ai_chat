@@ -58,3 +58,20 @@ class PostMessageParams extends Equatable {
   @override
   List<Object> get props => [requestPostMessageModel];
 }
+
+class AuthParams extends Equatable {
+  final String id;
+
+  final String password;
+
+  const AuthParams({
+    required this.id,
+    required this.password,
+  });
+
+  @override
+  List<Object> get props => [
+        id,
+        password,
+      ];
+}

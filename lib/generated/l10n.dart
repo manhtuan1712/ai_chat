@@ -150,41 +150,51 @@ class S {
     );
   }
 
-  /// `Home`
-  String get mainHomeBottom {
+  /// `Login`
+  String get loginToYourAccount {
     return Intl.message(
-      'Home',
-      name: 'mainHomeBottom',
+      'Login',
+      name: 'loginToYourAccount',
       desc: '',
       args: [],
     );
   }
 
-  /// `Favorite`
-  String get mainFavoriteBottom {
+  /// `Your Id`
+  String get loginEmail {
     return Intl.message(
-      'Favorite',
-      name: 'mainFavoriteBottom',
+      'Your Id',
+      name: 'loginEmail',
       desc: '',
       args: [],
     );
   }
 
-  /// `Chat`
-  String get mainChatBottom {
+  /// `Email is not in the correct format`
+  String get signUpEmailWrongFormat {
     return Intl.message(
-      'Chat',
-      name: 'mainChatBottom',
+      'Email is not in the correct format',
+      name: 'signUpEmailWrongFormat',
       desc: '',
       args: [],
     );
   }
 
-  /// `Profile`
-  String get mainProfileBottom {
+  /// `Password`
+  String get loginPassword {
     return Intl.message(
-      'Profile',
-      name: 'mainProfileBottom',
+      'Password',
+      name: 'loginPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please login to use this feature`
+  String get pleaseLoginIn {
+    return Intl.message(
+      'Please login to use this feature',
+      name: 'pleaseLoginIn',
       desc: '',
       args: [],
     );

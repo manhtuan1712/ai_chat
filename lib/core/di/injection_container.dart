@@ -3,6 +3,11 @@ import 'package:shuei_ai_chat/core/api/service/base/base_rest_service.dart';
 import 'package:shuei_ai_chat/core/helpers/secure_storage.dart';
 import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 import 'package:shuei_ai_chat/core/theme/theme_style.dart';
+import 'package:shuei_ai_chat/feature/authentication/data/datasource/authentication_remote_data_source.dart';
+import 'package:shuei_ai_chat/feature/authentication/data/repository/authentication_repository_impl.dart';
+import 'package:shuei_ai_chat/feature/authentication/domain/repository/authentication_repository.dart';
+import 'package:shuei_ai_chat/feature/authentication/domain/usecase/post_auth.dart';
+import 'package:shuei_ai_chat/feature/authentication/presentation/cubit/login_cubit.dart';
 import 'package:shuei_ai_chat/feature/chat/data/datasource/chat_remote_data_source.dart';
 import 'package:shuei_ai_chat/feature/chat/data/repository/chat_repository_impl.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/repository/chat_repository.dart';
@@ -31,9 +36,13 @@ Future<void> init() async {
       baseRestService: sl(),
     ),
   );
-
   sl.registerLazySingleton<HomeRemoteDataSource>(
     () => HomeRemoteDataSourceImpl(
+      baseRestService: sl(),
+    ),
+  );
+  sl.registerLazySingleton<AuthenticationRemoteDataSource>(
+    () => AuthenticationRemoteDataSourceImpl(
       baseRestService: sl(),
     ),
   );
@@ -47,6 +56,11 @@ Future<void> init() async {
   sl.registerLazySingleton<HomeRepository>(
     () => HomeRepositoryImpl(
       homeRemoteDataSource: sl(),
+    ),
+  );
+  sl.registerLazySingleton<AuthenticationRepository>(
+    () => AuthenticationRepositoryImpl(
+      authenticationRemoteDataSource: sl(),
     ),
   );
 
@@ -96,6 +110,11 @@ Future<void> init() async {
       homeRepository: sl(),
     ),
   );
+  sl.registerLazySingleton<PostAuth>(
+    () => PostAuth(
+      authenticationRepository: sl(),
+    ),
+  );
 
   // Cubit
   sl.registerFactory<ChatListCubit>(
@@ -117,6 +136,11 @@ Future<void> init() async {
   sl.registerFactory<HomeRecommendCubit>(
     () => HomeRecommendCubit(
       getRecommendAgent: sl(),
+    ),
+  );
+  sl.registerFactory<LoginCubit>(
+    () => LoginCubit(
+      postAuth: sl(),
     ),
   );
 

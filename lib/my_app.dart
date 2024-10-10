@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,9 +53,9 @@ class MyAppState extends State<MyApp> {
           title: '',
           builder: EasyLoading.init(),
           debugShowCheckedModeBanner: false,
-          locale: Platform.localeName.isEmpty
-              ? const Locale(GlobalConfig.languageEn)
-              : Locale(Platform.localeName),
+          locale: const Locale(
+            GlobalConfig.languageJa,
+          ),
           showPerformanceOverlay: false,
           showSemanticsDebugger: false,
           localizationsDelegates: const [

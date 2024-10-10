@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 import 'package:shuei_ai_chat/core/helpers/app_logger.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/core/helpers/global_configs.dart';
+import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 
 class DioLoggingInterceptor extends InterceptorsWrapper {
   @override
@@ -101,6 +103,9 @@ class DioLoggingInterceptor extends InterceptorsWrapper {
 
   void _addXApiKeyHeader(RequestOptions options) {
     options.headers['X-API-KEY'] = dotenv.env[GlobalConfig.xApiKey];
-    // options.headers['Authorization'] = '${dotenv.env[GlobalConfig.difyApiKey]}';
+    String accessToken = AppUtils.contextMain.read<AppProvider>().accessToken;
+    if (accessToken.isNotEmpty) {
+      options.headers['Authorization'] = accessToken;
+    }
   }
 }

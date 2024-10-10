@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shuei_ai_chat/core/di/injection_container.dart' as di;
 import 'package:shuei_ai_chat/core/helpers/secure_storage.dart';
 import 'package:shuei_ai_chat/core/navigation/navigation_center.dart';
+import 'package:shuei_ai_chat/core/theme/app_colors.dart';
 
 class AppUtils {
   static BuildContext get contextMain =>
@@ -21,7 +22,6 @@ class AppUtils {
     BuildContext context,
   ) {
     if (message.isNotEmpty) {
-      ThemeData themeData = Theme.of(context);
       Future.delayed(
         const Duration(milliseconds: 200),
         () {
@@ -30,8 +30,8 @@ class AppUtils {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.TOP,
             timeInSecForIosWeb: 2,
-            backgroundColor: themeData.colorScheme.secondaryFixedDim,
-            textColor: themeData.colorScheme.surfaceDim,
+            backgroundColor: AppColors.light.colorGrey10,
+            textColor: AppColors.light.colorTextPrimary,
           );
         },
       );

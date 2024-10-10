@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+import 'package:shuei_ai_chat/feature/authentication/data/model/response_auth_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/conversation_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_conversation_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/response_message_model.dart';
@@ -39,4 +40,9 @@ abstract class BaseRestClient {
 
   @GET('recommend/agent')
   Future<List<AIAgentModel>> getRecommendAgent();
+
+  @POST('auth')
+  Future<ResponseAuthModel> auth(
+    @Body() Map<String, dynamic> data,
+  );
 }
