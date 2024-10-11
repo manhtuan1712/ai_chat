@@ -20,3 +20,14 @@ class ChatMessageEvent {
   static const workflowFinished =
       ChatMessageEvent._internal('workflow_finished');
 }
+
+class MessageType {
+  final String _value;
+
+  const MessageType._internal(this._value);
+
+  String get() => _value;
+
+  static const userMessage = MessageType._internal('1');
+  static const aiAgentMessage = MessageType._internal('2');
+}

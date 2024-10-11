@@ -75,3 +75,37 @@ class AuthParams extends Equatable {
         password,
       ];
 }
+
+class AgentChatHistoryParams extends Equatable {
+  final String agentId;
+
+  const AgentChatHistoryParams({
+    required this.agentId,
+  });
+
+  @override
+  List<Object> get props => [
+        agentId,
+      ];
+}
+
+class SendMessageParams extends Equatable {
+  final String query;
+
+  final String agentId;
+
+  final String lang;
+
+  const SendMessageParams({
+    required this.query,
+    required this.agentId,
+    required this.lang,
+  });
+
+  @override
+  List<Object> get props => [
+        query,
+        agentId,
+        lang,
+      ];
+}

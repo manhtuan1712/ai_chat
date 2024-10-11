@@ -4,36 +4,24 @@ part 'message_model.g.dart';
 
 @JsonSerializable()
 class MessageModel {
-  String? id;
-
-  String? conversation_id;
-
-  Map<String, String>? inputs;
-
-  String? query;
-
-  String? answer;
-
-  String? status;
+  String? type;
 
   int? created_at;
 
   String? message;
 
-  String get answerFormat => (answer ?? '').replaceAll(
+  String? status;
+
+  String get messageFormat => (message ?? '').replaceAll(
         '\n',
         '',
       );
 
   MessageModel({
-    this.id,
-    this.conversation_id,
-    this.inputs,
-    this.query,
-    this.answer,
-    this.status,
+    this.type,
     this.created_at,
     this.message,
+    this.status,
   });
 
   factory MessageModel.fromJson(Map<String, dynamic> json) =>

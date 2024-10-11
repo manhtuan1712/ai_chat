@@ -7,26 +7,16 @@ part of 'message_model.dart';
 // **************************************************************************
 
 MessageModel _$MessageModelFromJson(Map<String, dynamic> json) => MessageModel(
-      id: json['id'] as String?,
-      conversation_id: json['conversation_id'] as String?,
-      inputs: (json['inputs'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as String),
-      ),
-      query: json['query'] as String?,
-      answer: json['answer'] as String?,
-      status: json['status'] as String?,
+      type: json['type'] as String?,
       created_at: (json['created_at'] as num?)?.toInt(),
       message: json['message'] as String?,
+      status: json['status'] as String?,
     );
 
 Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'conversation_id': instance.conversation_id,
-      'inputs': instance.inputs,
-      'query': instance.query,
-      'answer': instance.answer,
-      'status': instance.status,
+      'type': instance.type,
       'created_at': instance.created_at,
       'message': instance.message,
+      'status': instance.status,
     };

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/generated/l10n.dart';
 
 class EmptyChatListWidget extends StatelessWidget {
@@ -10,7 +10,7 @@ class EmptyChatListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(
-        16.0,
+        32.0,
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -27,7 +27,7 @@ class EmptyChatListWidget extends StatelessWidget {
             S.of(context).chatListEmpty,
             textAlign: TextAlign.center,
             style: AppConstants.textHeadingH5.copyWith(
-              color: Theme.of(context).colorScheme.surfaceDim,
+              color: Colors.black,
             ),
           ),
         ],

@@ -9,21 +9,15 @@ part of 'request_post_message_model.dart';
 RequestPostMessageModel _$RequestPostMessageModelFromJson(
         Map<String, dynamic> json) =>
     RequestPostMessageModel(
-      name: json['name'] as String?,
-      llm: json['llm'] as String?,
-      message: json['message'] as String?,
-      conversation_id: json['conversation_id'] as String?,
+      query: json['query'] as String?,
+      agentId: json['agentId'] as String?,
       lang: json['lang'] as String?,
-      user: json['user'] as String?,
     );
 
 Map<String, dynamic> _$RequestPostMessageModelToJson(
         RequestPostMessageModel instance) =>
     <String, dynamic>{
-      'name': instance.name,
-      'llm': instance.llm,
-      'message': instance.message,
-      'conversation_id': instance.conversation_id,
+      'query': instance.query,
+      'agentId': instance.agentId,
       'lang': instance.lang,
-      'user': instance.user,
     };
