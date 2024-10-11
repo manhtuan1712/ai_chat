@@ -30,14 +30,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("会話名を変更"),
         "chatListEmpty":
             MessageLookupByLibrary.simpleMessage("会話がありません。新しい会話を追加してください"),
+        "favoriteTitle": MessageLookupByLibrary.simpleMessage("お気に入り一覧"),
         "helloText": MessageLookupByLibrary.simpleMessage("こんにちは！ここにメッセージをどーぞ"),
-        "mainChatBottom": MessageLookupByLibrary.simpleMessage("チャット"),
-        "mainFavoriteBottom": MessageLookupByLibrary.simpleMessage("お気に入り"),
-        "mainHomeBottom": MessageLookupByLibrary.simpleMessage("家"),
-        "mainProfileBottom": MessageLookupByLibrary.simpleMessage("プロフィール"),
+        "loginEmail": MessageLookupByLibrary.simpleMessage("ログインid"),
+        "loginPassword": MessageLookupByLibrary.simpleMessage("パスワード"),
+        "loginToYourAccount": MessageLookupByLibrary.simpleMessage("ログイン"),
         "newConversations": MessageLookupByLibrary.simpleMessage("新しい会話"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "pleaseLoginIn":
+            MessageLookupByLibrary.simpleMessage("この機能を使用するにはログインしてください"),
         "select": MessageLookupByLibrary.simpleMessage("選択"),
+        "signUpEmailWrongFormat":
+            MessageLookupByLibrary.simpleMessage("メールの形式が正しくありません"),
         "startAChat": MessageLookupByLibrary.simpleMessage("チャットを開始")
       };
 }

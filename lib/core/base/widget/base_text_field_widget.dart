@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
+import 'package:shuei_ai_chat/core/theme/app_colors.dart';
 
 class BaseTextFieldWidget extends StatefulWidget {
   final double? height;
@@ -161,11 +162,11 @@ class BaseTextFieldWidgetState extends State<BaseTextFieldWidget> {
               widget.borderRadius,
             ),
             color: widget.alert
-                ? Theme.of(context).colorScheme.error.withAlpha(20)
+                ? AppColors.light.colorSystemError.withAlpha(20)
                 : widget.background ?? Colors.white,
             border: Border.all(
               color: widget.alert
-                  ? Theme.of(context).colorScheme.error
+                  ? AppColors.light.colorSystemError
                   : widget.borderColor ?? Colors.transparent,
               width: 1.0,
             ),
@@ -228,7 +229,9 @@ class BaseTextFieldWidgetState extends State<BaseTextFieldWidget> {
                       fontWeight: widget.fontWeight ?? FontWeight.w400,
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(widget.borderRadius),
+                      borderRadius: BorderRadius.circular(
+                        widget.borderRadius,
+                      ),
                       borderSide: BorderSide(
                         color: widget.showOutline!
                             ? Colors.white
@@ -237,7 +240,9 @@ class BaseTextFieldWidgetState extends State<BaseTextFieldWidget> {
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(widget.borderRadius),
+                      borderRadius: BorderRadius.circular(
+                        widget.borderRadius,
+                      ),
                       borderSide: BorderSide(
                         color: widget.showOutline!
                             ? Colors.black

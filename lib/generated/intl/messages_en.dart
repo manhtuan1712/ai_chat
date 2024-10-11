@@ -30,16 +30,20 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change conversation name"),
         "chatListEmpty": MessageLookupByLibrary.simpleMessage(
             "You do not have any conversation, please add a new one"),
+        "favoriteTitle": MessageLookupByLibrary.simpleMessage("Favorites list"),
         "helloText":
             MessageLookupByLibrary.simpleMessage("Hello! Leave a message here"),
-        "mainChatBottom": MessageLookupByLibrary.simpleMessage("Chat"),
-        "mainFavoriteBottom": MessageLookupByLibrary.simpleMessage("Favorite"),
-        "mainHomeBottom": MessageLookupByLibrary.simpleMessage("Home"),
-        "mainProfileBottom": MessageLookupByLibrary.simpleMessage("Profile"),
+        "loginEmail": MessageLookupByLibrary.simpleMessage("Your Id"),
+        "loginPassword": MessageLookupByLibrary.simpleMessage("Password"),
+        "loginToYourAccount": MessageLookupByLibrary.simpleMessage("Login"),
         "newConversations":
             MessageLookupByLibrary.simpleMessage("New Conversations"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "pleaseLoginIn": MessageLookupByLibrary.simpleMessage(
+            "Please login to use this feature"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
+        "signUpEmailWrongFormat": MessageLookupByLibrary.simpleMessage(
+            "Email is not in the correct format"),
         "startAChat": MessageLookupByLibrary.simpleMessage("Start a chat")
       };
 }

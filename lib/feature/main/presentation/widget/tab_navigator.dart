@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shuei_ai_chat/feature/chat/presentation/page/chat_list_screen.dart';
+import 'package:shuei_ai_chat/feature/chat/presentation/page/chat_screen.dart';
 import 'package:shuei_ai_chat/feature/favorite/presentation/page/favorite_screen.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/page/home_screen.dart';
 import 'package:shuei_ai_chat/feature/main/presentation/widget/app_bottom_bar.dart';
@@ -36,7 +36,7 @@ class TabNavigator extends StatelessWidget {
             } else if (tabItem == NaviTabItem.favorite) {
               return const FavoriteScreen();
             } else if (tabItem == NaviTabItem.message) {
-              return const ChatListScreen();
+              return const ChatScreen();
             }
             return const ProfileScreen();
           },

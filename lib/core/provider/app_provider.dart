@@ -10,6 +10,32 @@ class AppProvider extends ChangeNotifier {
 
   String get user => _user;
 
+  String _accessToken = '';
+
+  String get accessToken => _accessToken;
+
+  AppProvider() {
+    _getAccessToken();
+  }
+
+  void setAccessToken(
+    String value,
+  ) {
+    _accessToken = value;
+    sl<SecureStorage>().saveCustomString(
+      SecureStorage.apiToken,
+      value,
+    );
+    notifyListeners();
+  }
+
+  void _getAccessToken() async {
+    _accessToken = await sl<SecureStorage>().getCustomString(
+      SecureStorage.apiToken,
+    );
+    notifyListeners();
+  }
+
   void setUser(String user) {
     _user = user;
     notifyListeners();

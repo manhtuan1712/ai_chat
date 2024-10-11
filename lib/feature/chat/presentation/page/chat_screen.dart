@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shuei_ai_chat/core/base/widget/base_require_login_widget.dart';
+import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -10,6 +13,8 @@ class ChatScreen extends StatefulWidget {
 class ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.blue);
+    return context.watch<AppProvider>().accessToken.isEmpty
+        ? const BaseRequireLoginWidget()
+        : Container();
   }
 }
