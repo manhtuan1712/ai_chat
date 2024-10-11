@@ -1,8 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_bubbles/chat_bubbles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:shuei_ai_chat/core/base/widget/base_image_loading_widget.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/core/helpers/enums.dart';
+import 'package:shuei_ai_chat/core/theme/app_colors.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 
 class MessageListWidget extends StatelessWidget {
@@ -10,10 +13,13 @@ class MessageListWidget extends StatelessWidget {
 
   final ScrollController scrollController;
 
+  final String agentPhoto;
+
   const MessageListWidget({
     super.key,
     required this.messages,
     required this.scrollController,
+    required this.agentPhoto,
   });
 
   @override
@@ -42,100 +48,62 @@ class MessageListWidget extends StatelessWidget {
   ) {
     return Column(
       children: [
-        Visibility(
-          visible: message.query?.isNotEmpty ?? false,
-          child: Container(
-            margin: const EdgeInsets.only(
-              bottom: 12.0,
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                BubbleSpecialOne(
-                  text: message.query ?? '',
-                  isSender: true,
-                  color: Theme.of(context).colorScheme.secondaryContainer,
-                  textStyle: AppConstants.textBody1Regular.copyWith(
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-                ),
-                const SizedBox(
-                  width: 4.0,
-                ),
-                Container(
-                  width: 40.0,
-                  height: 40.0,
-                  decoration: BoxDecoration(
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: message.type == MessageType.userMessage.get()
+              ? MainAxisAlignment.end
+              : MainAxisAlignment.start,
+          children: [
+            message.type == MessageType.aiAgentMessage.get()
+                ? ClipRRect(
                     borderRadius: BorderRadius.circular(
                       40.0,
                     ),
-                    color: Theme.of(context).colorScheme.secondaryContainer,
-                  ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    '👤',
-                    style: AppConstants.textButtonLarge,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 40.0,
-                height: 40.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                    40.0,
-                  ),
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                alignment: Alignment.center,
-                child: Text(
-                  '🤖',
-                  style: AppConstants.textButtonLarge,
-                ),
-              ),
-              const SizedBox(
-                width: 4.0,
-              ),
-              message.status == MessagingStatus.loading.get()
-                  ? Container(
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.secondary,
-                        borderRadius: BorderRadius.circular(
-                          8.0,
-                        ),
+                    child: CachedNetworkImage(
+                      imageUrl: agentPhoto,
+                      errorWidget: (context, url, error) => Image.asset(
+                        AppConstants.icHolderList,
                       ),
-                      margin: const EdgeInsets.only(
-                        left: 16.0,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 6.0,
-                        horizontal: 10.0,
-                      ),
-                      child: SpinKitThreeBounce(
-                        color: Theme.of(context).colorScheme.primary,
-                        size: 24.0,
-                      ),
-                    )
-                  : BubbleSpecialOne(
-                      text: message.answerFormat,
-                      isSender: false,
-                      color: Theme.of(context).colorScheme.secondary,
-                      textStyle: AppConstants.textBody1Regular.copyWith(
-                        color: Theme.of(context).colorScheme.surface,
+                      placeholder: (context, url) =>
+                          const BaseImageLoadingWidget(),
+                      width: 40.0,
+                      fit: BoxFit.fitWidth,
+                    ),
+                  )
+                : const SizedBox(),
+            message.status == MessagingStatus.loading.get() &&
+                    message.type == MessageType.aiAgentMessage.get()
+                ? Container(
+                    decoration: BoxDecoration(
+                      color: AppColors.light.colorBrandBlue10,
+                      borderRadius: BorderRadius.circular(
+                        8.0,
                       ),
                     ),
-            ],
-          ),
-        )
+                    margin: const EdgeInsets.only(
+                      left: 16.0,
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 6.0,
+                      horizontal: 10.0,
+                    ),
+                    child: SpinKitThreeBounce(
+                      color: AppColors.light.colorBrandBlue,
+                      size: 24.0,
+                    ),
+                  )
+                : BubbleSpecialOne(
+                    text: message.messageFormat,
+                    isSender: message.type == MessageType.userMessage.get(),
+                    color: message.type == MessageType.aiAgentMessage.get()
+                        ? AppColors.light.colorBrandBlue10
+                        : AppColors.light.colorBackgroundSecondary,
+                    textStyle: AppConstants.textBody1Regular.copyWith(
+                      color: AppColors.light.colorTextLink,
+                    ),
+                  ),
+          ],
+        ),
       ],
     );
   }

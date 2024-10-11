@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("会話名を変更"),
         "chatListEmpty":
             MessageLookupByLibrary.simpleMessage("会話がありません。新しい会話を追加してください"),
+        "chatTitle": MessageLookupByLibrary.simpleMessage("チャットリスト"),
         "favoriteTitle": MessageLookupByLibrary.simpleMessage("お気に入り一覧"),
         "helloText": MessageLookupByLibrary.simpleMessage("こんにちは！ここにメッセージをどーぞ"),
         "loginEmail": MessageLookupByLibrary.simpleMessage("ログインid"),

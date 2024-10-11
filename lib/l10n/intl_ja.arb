@@ -14,5 +14,6 @@
   "signUpEmailWrongFormat": "メールの形式が正しくありません",
   "loginPassword": "パスワード",
   "pleaseLoginIn": "この機能を使用するにはログインしてください",
-  "favoriteTitle": "お気に入り一覧"
+  "favoriteTitle": "お気に入り一覧",
+  "chatTitle": "チャットリスト"
 }

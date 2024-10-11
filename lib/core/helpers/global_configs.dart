@@ -1,7 +1,6 @@
 class GlobalConfig {
   static const String baseUrl =
       'https://personal-ai.hayato-enomoto.workers.dev/api/';
-  static const String chatUrl = 'http://163.43.158.202/';
 
   // Locale
   static const String languageJa = 'ja';

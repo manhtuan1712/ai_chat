@@ -15,3 +15,7 @@ class AddFavoriteEvent {
 class GoToFavoriteEvent {
   GoToFavoriteEvent();
 }
+
+class RefreshChatListEvent {
+  RefreshChatListEvent();
+}

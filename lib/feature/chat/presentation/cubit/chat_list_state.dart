@@ -7,50 +7,18 @@ class ChatListInitialState extends ChatListState {}
 
 class ChatListLoadingState extends ChatListState {}
 
-class GetParametersSuccessState extends ChatListState {
-  final List<ParameterSelectModel> parameters;
+class GetChatHistorySuccessState extends ChatListState {
+  final List<ChatHistoryModel> messages;
 
-  GetParametersSuccessState({
-    required this.parameters,
+  GetChatHistorySuccessState({
+    required this.messages,
   });
 }
 
-class GetParametersFailureState extends ChatListState {
+class GetChatHistoryFailureState extends ChatListState {
   final String? error;
 
-  GetParametersFailureState({
-    this.error,
-  });
-}
-
-class GetConversationsSuccessState extends ChatListState {
-  final List<ConversationModel> conversations;
-
-  GetConversationsSuccessState({
-    required this.conversations,
-  });
-}
-
-class GetConversationsFailureState extends ChatListState {
-  final String? error;
-
-  GetConversationsFailureState({
-    this.error,
-  });
-}
-
-class RenameConversationSuccessState extends ChatListState {
-  final ConversationModel conversation;
-
-  RenameConversationSuccessState({
-    required this.conversation,
-  });
-}
-
-class RenameConversationFailureState extends ChatListState {
-  final String? error;
-
-  RenameConversationFailureState({
+  GetChatHistoryFailureState({
     this.error,
   });
 }

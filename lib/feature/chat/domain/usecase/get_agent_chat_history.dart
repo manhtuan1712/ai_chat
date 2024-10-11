@@ -4,19 +4,19 @@ import 'package:shuei_ai_chat/core/usecase/usecase.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/repository/chat_repository.dart';
 
-class GetMessages
-    implements UseCase<List<MessageModel>, UpdateConversationNameParams> {
+class GetAgentChatHistory
+    implements UseCase<List<MessageModel>, AgentChatHistoryParams> {
   final ChatRepository chatRepository;
 
-  GetMessages({
+  GetAgentChatHistory({
     required this.chatRepository,
   });
 
   @override
   Future<Either<ServerFailure, List<MessageModel>>> call(
-    UpdateConversationNameParams params,
+    AgentChatHistoryParams params,
   ) async =>
-      await chatRepository.getMessages(
-        params.conversationId,
+      await chatRepository.getAgentChatHistory(
+        params.agentId,
       );
 }
