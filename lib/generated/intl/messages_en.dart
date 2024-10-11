@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change conversation name"),
         "chatListEmpty": MessageLookupByLibrary.simpleMessage(
             "You do not have any conversation, please add a new one"),
+        "favoriteTitle": MessageLookupByLibrary.simpleMessage("Favorites list"),
         "helloText":
             MessageLookupByLibrary.simpleMessage("Hello! Leave a message here"),
         "loginEmail": MessageLookupByLibrary.simpleMessage("Your Id"),

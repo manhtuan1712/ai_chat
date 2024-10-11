@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shuei_ai_chat/core/base/widget/base_image_loading_widget.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 
@@ -32,6 +33,7 @@ class AIAGentCardWidget extends StatelessWidget {
             errorWidget: (context, url, error) => Image.asset(
               isGrid ? AppConstants.icHolderGrid : AppConstants.icHolderList,
             ),
+            placeholder: (context, url) => const BaseImageLoadingWidget(),
             width: imageWidth ?? MediaQuery.sizeOf(context).width,
             fit: BoxFit.fitWidth,
           ),

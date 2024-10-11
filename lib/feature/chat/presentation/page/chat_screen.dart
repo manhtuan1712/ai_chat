@@ -14,7 +14,7 @@ class ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return context.watch<AppProvider>().accessToken.isEmpty
-        ? BaseRequireLoginWidget()
+        ? const BaseRequireLoginWidget()
         : Container();
   }
 }

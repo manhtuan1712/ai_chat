@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
+import 'package:shuei_ai_chat/core/base/widget/base_app_bar_widget.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_recommend_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/widget/ai_agent_card_widget.dart';
-import 'package:shuei_ai_chat/feature/home/presentation/widget/home_filter_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -32,58 +30,13 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          behavior: HitTestBehavior.translucent,
-          onTap: () {
-            _isGrid = !_isGrid;
-            setState(() {});
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(
-              12.0,
-            ),
-            child: SvgPicture.asset(
-              _isGrid ? AppConstants.icHomeList : AppConstants.icHomeGrid,
-              width: 33.0,
-              fit: BoxFit.fitWidth,
-            ),
-          ),
-        ),
-        actions: [
-          GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            onTap: () {
-              showModalBottomSheet(
-                isScrollControlled: true,
-                isDismissible: true,
-                backgroundColor: Colors.transparent,
-                context: AppUtils.contextMain,
-                builder: (context) {
-                  return const FractionallySizedBox(
-                    heightFactor: .9,
-                    child: HomeFilterWidget(),
-                  );
-                },
-              );
-            },
-            child: Container(
-              margin: const EdgeInsets.only(
-                right: 4.0,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(
-                  8.0,
-                ),
-                child: SvgPicture.asset(
-                  AppConstants.icFilter,
-                  width: 33.0,
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-            ),
-          ),
-        ],
+      appBar: BaseAppBarWidget(
+        isGrid: _isGrid,
+        changeStyle: () {
+          _isGrid = !_isGrid;
+          setState(() {});
+        },
+        changeFilter: () {},
       ),
       body: BlocListener<HomeRecommendCubit, HomeRecommendState>(
         listener: (context, state) {

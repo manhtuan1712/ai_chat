@@ -21,7 +21,7 @@ class AppProvider extends ChangeNotifier {
   void setAccessToken(
     String value,
   ) {
-    _accessToken = accessToken;
+    _accessToken = value;
     sl<SecureStorage>().saveCustomString(
       SecureStorage.apiToken,
       value,

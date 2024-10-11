@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 import 'package:shuei_ai_chat/core/helpers/app_logger.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
@@ -94,6 +95,7 @@ class DioLoggingInterceptor extends InterceptorsWrapper {
     String errorMessage = getErrorMessage(dioError);
     if (dioError.type == DioExceptionType.badResponse &&
         dioError.response!.statusCode != 200) {
+      EasyLoading.dismiss();
       AppUtils.showToastMessage(
         errorMessage,
         AppUtils.contextMain,

@@ -13,5 +13,6 @@
   "loginEmail": "ログインid",
   "signUpEmailWrongFormat": "メールの形式が正しくありません",
   "loginPassword": "パスワード",
-  "pleaseLoginIn": "この機能を使用するにはログインしてください"
+  "pleaseLoginIn": "この機能を使用するにはログインしてください",
+  "favoriteTitle": "お気に入り一覧"
 }
