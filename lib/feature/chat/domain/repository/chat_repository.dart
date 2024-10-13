@@ -14,4 +14,8 @@ abstract class ChatRepository {
   Future<Either<ServerFailure, MessageModel>> sendMessage(
     RequestPostMessageModel request,
   );
+
+  Future<Either<ServerFailure, MessageModel>> sendVoiceMessage(
+    RequestPostMessageModel request,
+  );
 }

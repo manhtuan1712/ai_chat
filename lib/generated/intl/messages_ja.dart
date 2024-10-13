@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "select": MessageLookupByLibrary.simpleMessage("選択"),
         "signUpEmailWrongFormat":
             MessageLookupByLibrary.simpleMessage("メールの形式が正しくありません"),
+        "speechIsNotAvailable":
+            MessageLookupByLibrary.simpleMessage("音声は利用できません"),
         "startAChat": MessageLookupByLibrary.simpleMessage("チャットを開始")
       };
 }

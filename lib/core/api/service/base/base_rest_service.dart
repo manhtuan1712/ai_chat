@@ -65,4 +65,12 @@ class BaseRestService {
       request,
     );
   }
+
+  Future<MessageModel> sendVoiceMessage(
+    RequestPostMessageModel request,
+  ) async {
+    return _baseRestClient!.sendVoiceMessage(
+      request,
+    );
+  }
 }

@@ -7,10 +7,10 @@ class ChatDetailInitialState extends ChatDetailState {}
 
 class ChatDetailLoadingState extends ChatDetailState {}
 
-class ChatEventReceivedState extends ChatDetailState {
+class ChatReceivedState extends ChatDetailState {
   final MessageModel messageModel;
 
-  ChatEventReceivedState({
+  ChatReceivedState({
     required this.messageModel,
   });
 }
@@ -19,6 +19,22 @@ class ChatFailureState extends ChatDetailState {
   final String error;
 
   ChatFailureState({
+    required this.error,
+  });
+}
+
+class ChatVoiceReceivedState extends ChatDetailState {
+  final MessageModel messageModel;
+
+  ChatVoiceReceivedState({
+    required this.messageModel,
+  });
+}
+
+class ChatVoiceFailureState extends ChatDetailState {
+  final String error;
+
+  ChatVoiceFailureState({
     required this.error,
   });
 }

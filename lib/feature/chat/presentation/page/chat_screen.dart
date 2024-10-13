@@ -33,10 +33,19 @@ class ChatScreenState extends State<ChatScreen> {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         ChatListCubit chatListCubit = context.read<ChatListCubit>();
-        chatListCubit.getChatHistoryAction();
-        eventBus.on<RefreshChatListEvent>().listen(
-          (event) {
-            chatListCubit.getChatHistoryAction();
+        Future.delayed(
+          const Duration(
+            milliseconds: 200,
+          ),
+          () {
+            if (AppUtils.isLogin) {
+              chatListCubit.getChatHistoryAction();
+              eventBus.on<RefreshChatListEvent>().listen(
+                (event) {
+                  chatListCubit.getChatHistoryAction();
+                },
+              );
+            }
           },
         );
       },

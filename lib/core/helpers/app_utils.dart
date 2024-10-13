@@ -2,9 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:shuei_ai_chat/core/di/injection_container.dart' as di;
 import 'package:shuei_ai_chat/core/helpers/secure_storage.dart';
 import 'package:shuei_ai_chat/core/navigation/navigation_center.dart';
+import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 import 'package:shuei_ai_chat/core/theme/app_colors.dart';
 
 class AppUtils {
@@ -40,4 +42,7 @@ class AppUtils {
 
   static double getBottomBarHeight() =>
       42.0 + MediaQuery.paddingOf(contextMain).bottom + 18.0;
+
+  static bool get isLogin =>
+      contextMain.read<AppProvider>().accessToken.isNotEmpty;
 }
