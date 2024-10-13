@@ -219,6 +219,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Speech is not available`
+  String get speechIsNotAvailable {
+    return Intl.message(
+      'Speech is not available',
+      name: 'speechIsNotAvailable',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

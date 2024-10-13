@@ -7,6 +7,8 @@ import 'package:shuei_ai_chat/core/di/injection_container.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/core/navigation/navigation_center.dart';
+import 'package:shuei_ai_chat/feature/authentication/presentation/cubit/login_cubit.dart';
+import 'package:shuei_ai_chat/feature/authentication/presentation/page/login_screen.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/chat_history_model.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_detail_cubit.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/page/chat_detail_screen.dart';
@@ -30,20 +32,29 @@ class AIAGentCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () => NavigationCenter.goToScreen(
-        AppUtils.contextMain,
-        NavigationCenter.chatDetailScreen,
-        BlocProvider(
-          create: (_) => sl<ChatDetailCubit>(),
-          child: ChatDetailScreen(
-            data: ChatHistoryModel(
-              agentId: agentModel.id,
-              photo: agentModel.photo,
-              name: agentModel.name,
-            ),
-          ),
-        ),
-      ),
+      onTap: () {
+        NavigationCenter.goToScreen(
+          AppUtils.contextMain,
+          AppUtils.isLogin
+              ? NavigationCenter.chatDetailScreen
+              : NavigationCenter.loginScreen,
+          AppUtils.isLogin
+              ? BlocProvider(
+                  create: (_) => sl<ChatDetailCubit>(),
+                  child: ChatDetailScreen(
+                    data: ChatHistoryModel(
+                      agentId: agentModel.id,
+                      photo: agentModel.photo,
+                      name: agentModel.name,
+                    ),
+                  ),
+                )
+              : BlocProvider(
+                  create: (_) => sl<LoginCubit>(),
+                  child: const LoginScreen(),
+                ),
+        );
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

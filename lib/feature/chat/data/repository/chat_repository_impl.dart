@@ -69,4 +69,24 @@ class ChatRepositoryImpl implements ChatRepository {
       );
     }
   }
+
+  @override
+  Future<Either<ServerFailure, MessageModel>> sendVoiceMessage(
+    RequestPostMessageModel request,
+  ) async {
+    try {
+      var response = await chatRemoteDataSource.sendVoiceMessage(
+        request,
+      );
+      return Right(
+        response,
+      );
+    } on DioException catch (error) {
+      return Left(
+        ServerFailure(
+          mess: error.message,
+        ),
+      );
+    }
+  }
 }

@@ -15,5 +15,6 @@
   "loginPassword": "Password",
   "pleaseLoginIn": "Please login to use this feature",
   "favoriteTitle": "Favorites list",
-  "chatTitle": "Chat list"
+  "chatTitle": "Chat list",
+  "speechIsNotAvailable": "Speech is not available"
 }

@@ -32,4 +32,9 @@ abstract class BaseRestClient {
   Future<MessageModel> sendMessage(
     @Body() RequestPostMessageModel request,
   );
+
+  @POST('chat/voice')
+  Future<MessageModel> sendVoiceMessage(
+    @Body() RequestPostMessageModel request,
+  );
 }

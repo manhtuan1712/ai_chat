@@ -14,6 +14,7 @@ import 'package:shuei_ai_chat/feature/chat/domain/repository/chat_repository.dar
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/get_agent_chat_history.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/get_chat_history.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/send_message.dart';
+import 'package:shuei_ai_chat/feature/chat/domain/usecase/send_voice_message.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_detail_cubit.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_list_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/data/datasource/home_remote_data_source.dart';
@@ -85,6 +86,11 @@ Future<void> init() async {
       chatRepository: sl(),
     ),
   );
+  sl.registerLazySingleton<SendVoiceMessage>(
+    () => SendVoiceMessage(
+      chatRepository: sl(),
+    ),
+  );
 
   // Cubit
   sl.registerFactory<ChatListCubit>(
@@ -96,6 +102,7 @@ Future<void> init() async {
     () => ChatDetailCubit(
       getAgentChatHistory: sl(),
       sendMessage: sl(),
+      sendVoiceMessage: sl(),
     ),
   );
   sl.registerFactory<HomeRecommendCubit>(

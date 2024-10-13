@@ -16,9 +16,8 @@ class ChatMessageEvent {
 
   String get() => _value;
 
-  static const workflowStarted = ChatMessageEvent._internal('workflow_started');
-  static const workflowFinished =
-      ChatMessageEvent._internal('workflow_finished');
+  static const text = ChatMessageEvent._internal('text');
+  static const voice = ChatMessageEvent._internal('voice');
 }
 
 class MessageType {

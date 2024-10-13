@@ -17,11 +17,14 @@ class MessageModel {
         '',
       );
 
+  String? voice;
+
   MessageModel({
     this.type,
     this.created_at,
     this.message,
     this.status,
+    this.voice,
   });
 
   factory MessageModel.fromJson(Map<String, dynamic> json) =>

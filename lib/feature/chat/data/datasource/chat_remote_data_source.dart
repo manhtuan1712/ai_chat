@@ -15,6 +15,10 @@ abstract class ChatRemoteDataSource {
   Future<MessageModel> sendMessage(
     RequestPostMessageModel request,
   );
+
+  Future<MessageModel> sendVoiceMessage(
+    RequestPostMessageModel request,
+  );
 }
 
 class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
@@ -57,6 +61,20 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   ) async {
     try {
       final response = await baseRestService.sendMessage(
+        request,
+      );
+      return response;
+    } on DioExceptionType {
+      throw DioExceptionType;
+    }
+  }
+
+  @override
+  Future<MessageModel> sendVoiceMessage(
+    RequestPostMessageModel request,
+  ) async {
+    try {
+      final response = await baseRestService.sendVoiceMessage(
         request,
       );
       return response;

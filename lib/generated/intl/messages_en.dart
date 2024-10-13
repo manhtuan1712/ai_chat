@@ -45,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "select": MessageLookupByLibrary.simpleMessage("Select"),
         "signUpEmailWrongFormat": MessageLookupByLibrary.simpleMessage(
             "Email is not in the correct format"),
+        "speechIsNotAvailable":
+            MessageLookupByLibrary.simpleMessage("Speech is not available"),
         "startAChat": MessageLookupByLibrary.simpleMessage("Start a chat")
       };
 }

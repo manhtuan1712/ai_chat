@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_text_field_widget.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
+import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/core/helpers/enums.dart';
 import 'package:shuei_ai_chat/core/helpers/event_bus.dart';
 import 'package:shuei_ai_chat/core/theme/app_colors.dart';
@@ -10,6 +14,7 @@ import 'package:shuei_ai_chat/feature/chat/data/model/chat_history_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_detail_cubit.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/widget/message_list_widget.dart';
+import 'package:shuei_ai_chat/feature/chat/presentation/widget/speech_to_text_widget.dart';
 
 class ChatDetailScreen extends StatefulWidget {
   final ChatHistoryModel? data;
@@ -35,8 +40,6 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
 
   final AudioPlayer _audioPlayer = AudioPlayer();
 
-  bool _isPlaying = false;
-
   @override
   void initState() {
     super.initState();
@@ -44,10 +47,7 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         _audioPlayer.onPlayerComplete.listen(
-          (event) {
-            _isPlaying = false;
-            setState(() {});
-          },
+          (event) {},
         );
         context.read<ChatDetailCubit>().getAgentChatHistoryAction(
               widget.data?.agentId ?? '',
@@ -71,7 +71,7 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
       )),
       () {
         _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
+          _scrollController.position.maxScrollExtent + 56.0,
           duration: const Duration(
             milliseconds: 300,
           ),
@@ -89,6 +89,56 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
     super.didChangeMetrics();
   }
 
+  _sendMessageAction(
+    String action,
+    String value,
+  ) {
+    if (value.isNotEmpty) {
+      _messages.add(
+        MessageModel(
+          type: MessageType.userMessage.get(),
+          message: value,
+          status: MessagingStatus.done.get(),
+        ),
+      );
+      _messages.add(
+        MessageModel(
+          type: MessageType.aiAgentMessage.get(),
+          message: '',
+          status: MessagingStatus.loading.get(),
+        ),
+      );
+      if (action == ChatMessageEvent.voice.get()) {
+        context.read<ChatDetailCubit>().sendVoiceMessageAction(
+              value,
+              widget.data?.agentId ?? '',
+            );
+      } else {
+        context.read<ChatDetailCubit>().sendMessageAction(
+              value,
+              widget.data?.agentId ?? '',
+            );
+      }
+    }
+  }
+
+  Future<void> _playVoiceAction(
+    String voice,
+  ) async {
+    _audioPlayer.setReleaseMode(
+      ReleaseMode.stop,
+    );
+    Uint8List audioBytes = base64Decode(
+      voice,
+    );
+    await _audioPlayer.setSource(
+      BytesSource(
+        audioBytes,
+      ),
+    );
+    await _audioPlayer.resume();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,12 +154,23 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
       ),
       body: BlocListener<ChatDetailCubit, ChatDetailState>(
         listener: (context, state) async {
-          if (state is ChatEventReceivedState) {
+          if (state is ChatReceivedState) {
             eventBus.fire(
               RefreshChatListEvent(),
             );
             _messages.last.message = state.messageModel.message;
             _messages.last.status = MessagingStatus.done.get();
+            _scrollToBottom();
+            setState(() {});
+          } else if (state is ChatVoiceReceivedState) {
+            eventBus.fire(
+              RefreshChatListEvent(),
+            );
+            _messages.last.message = state.messageModel.message;
+            _messages.last.status = MessagingStatus.done.get();
+            _playVoiceAction(
+              state.messageModel.voice ?? '',
+            );
             _scrollToBottom();
             setState(() {});
           } else if (state is GetMessageSuccessState) {
@@ -160,34 +221,46 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
                       },
                     ),
                   ),
-                  const SizedBox(
-                    width: 8.0,
+                  IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        isScrollControlled: true,
+                        isDismissible: true,
+                        backgroundColor: Colors.white,
+                        context: AppUtils.contextMain,
+                        builder: (context) {
+                          return const FractionallySizedBox(
+                            heightFactor: .2,
+                            child: SpeechToTextWidget(),
+                          );
+                        },
+                      ).then(
+                        (value) {
+                          _sendMessageAction(
+                            ChatMessageEvent.voice.get(),
+                            value,
+                          );
+                          _chatController.clear();
+                          _focusNode.unfocus();
+                          _scrollToBottom();
+                          setState(() {});
+                        },
+                      );
+                    },
+                    icon: Icon(
+                      Icons.mic,
+                      color: AppColors.light.colorBrandBlue,
+                    ),
                   ),
                   IconButton(
                     onPressed: () {
-                      if (_chatController.text.isNotEmpty) {
-                        _messages.add(
-                          MessageModel(
-                            type: MessageType.userMessage.get(),
-                            message: _chatController.text,
-                            status: MessagingStatus.done.get(),
-                          ),
-                        );
-                        _messages.add(
-                          MessageModel(
-                            type: MessageType.aiAgentMessage.get(),
-                            message: '',
-                            status: MessagingStatus.loading.get(),
-                          ),
-                        );
-                        context.read<ChatDetailCubit>().sendMessageAction(
-                              _chatController.text,
-                              widget.data?.agentId ?? '',
-                            );
-                        _chatController.clear();
-                        _focusNode.unfocus();
-                        setState(() {});
-                      }
+                      _sendMessageAction(
+                        ChatMessageEvent.text.get(),
+                        _chatController.text,
+                      );
+                      _chatController.clear();
+                      _focusNode.unfocus();
+                      setState(() {});
                     },
                     icon: Icon(
                       Icons.send,

@@ -15,5 +15,6 @@
   "loginPassword": "パスワード",
   "pleaseLoginIn": "この機能を使用するにはログインしてください",
   "favoriteTitle": "お気に入り一覧",
-  "chatTitle": "チャットリスト"
+  "chatTitle": "チャットリスト",
+  "speechIsNotAvailable": "音声は利用できません"
 }
