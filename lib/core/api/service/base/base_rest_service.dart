@@ -73,4 +73,26 @@ class BaseRestService {
       request,
     );
   }
+
+  Future<List<AIAgentModel>> getFavorites() async {
+    return _baseRestClient!.getFavorites();
+  }
+
+  Future<void> addFavorite(
+    String agentId,
+  ) async {
+    Map<String, dynamic> data = {};
+    data['agentId'] = agentId;
+    return _baseRestClient!.addFavorite(
+      data,
+    );
+  }
+
+  Future<void> removeFavorite(
+    String agentId,
+  ) async {
+    return _baseRestClient!.removeFavorite(
+      agentId,
+    );
+  }
 }

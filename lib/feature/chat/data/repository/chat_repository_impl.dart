@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shuei_ai_chat/core/api/error/failures.dart';
 import 'package:shuei_ai_chat/feature/chat/data/datasource/chat_remote_data_source.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/chat_history_model.dart';
@@ -42,6 +43,7 @@ class ChatRepositoryImpl implements ChatRepository {
         response,
       );
     } on DioException catch (error) {
+      EasyLoading.dismiss();
       return Left(
         ServerFailure(
           mess: error.message,

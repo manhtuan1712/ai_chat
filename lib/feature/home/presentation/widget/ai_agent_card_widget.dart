@@ -12,6 +12,7 @@ import 'package:shuei_ai_chat/feature/authentication/presentation/page/login_scr
 import 'package:shuei_ai_chat/feature/chat/data/model/chat_history_model.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_detail_cubit.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/page/chat_detail_screen.dart';
+import 'package:shuei_ai_chat/feature/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 
 class AIAGentCardWidget extends StatelessWidget {
@@ -101,10 +102,24 @@ class AIAGentCardWidget extends StatelessWidget {
                     const SizedBox(
                       width: 10.0,
                     ),
-                    SvgPicture.asset(
-                      AppConstants.icFavorite,
-                      width: 24.0,
-                      fit: BoxFit.fitWidth,
+                    GestureDetector(
+                      behavior: HitTestBehavior.translucent,
+                      onTap: () => agentModel.favorite ?? false
+                          ? context.read<FavoriteCubit>().removeFavoriteAction(
+                                agentModel.id ?? '',
+                              )
+                          : context.read<FavoriteCubit>().addFavoriteAction(
+                                agentModel,
+                              ),
+                      child: Icon(
+                        agentModel.favorite ?? false
+                            ? Icons.favorite
+                            : Icons.favorite_border,
+                        size: 30.0,
+                        color: agentModel.favorite ?? false
+                            ? Colors.red
+                            : Colors.black,
+                      ),
                     ),
                   ],
                 ),

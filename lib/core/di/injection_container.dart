@@ -17,6 +17,13 @@ import 'package:shuei_ai_chat/feature/chat/domain/usecase/send_message.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/usecase/send_voice_message.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_detail_cubit.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_list_cubit.dart';
+import 'package:shuei_ai_chat/feature/favorite/data/datasource/favorite_remote_data_source.dart';
+import 'package:shuei_ai_chat/feature/favorite/data/repository/favorite_repository_impl.dart';
+import 'package:shuei_ai_chat/feature/favorite/domain/repository/favorite_repository.dart';
+import 'package:shuei_ai_chat/feature/favorite/domain/usecase/add_favorite.dart';
+import 'package:shuei_ai_chat/feature/favorite/domain/usecase/get_favorites.dart';
+import 'package:shuei_ai_chat/feature/favorite/domain/usecase/remove_favorite.dart';
+import 'package:shuei_ai_chat/feature/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/data/datasource/home_remote_data_source.dart';
 import 'package:shuei_ai_chat/feature/home/data/repository/home_repository_impl.dart';
 import 'package:shuei_ai_chat/feature/home/domain/repository/home_repository.dart';
@@ -42,6 +49,11 @@ Future<void> init() async {
       baseRestService: sl(),
     ),
   );
+  sl.registerLazySingleton<FavoriteRemoteDataSource>(
+    () => FavoriteRemoteDataSourceImpl(
+      baseRestService: sl(),
+    ),
+  );
 
   // Repository
   sl.registerLazySingleton<ChatRepository>(
@@ -57,6 +69,11 @@ Future<void> init() async {
   sl.registerLazySingleton<AuthenticationRepository>(
     () => AuthenticationRepositoryImpl(
       authenticationRemoteDataSource: sl(),
+    ),
+  );
+  sl.registerLazySingleton<FavoriteRepository>(
+    () => FavoriteRepositoryImpl(
+      favoriteRemoteDataSource: sl(),
     ),
   );
 
@@ -91,6 +108,21 @@ Future<void> init() async {
       chatRepository: sl(),
     ),
   );
+  sl.registerLazySingleton<GetFavorites>(
+    () => GetFavorites(
+      favoriteRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton<AddFavorite>(
+    () => AddFavorite(
+      favoriteRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton<RemoveFavorite>(
+    () => RemoveFavorite(
+      favoriteRepository: sl(),
+    ),
+  );
 
   // Cubit
   sl.registerFactory<ChatListCubit>(
@@ -113,6 +145,13 @@ Future<void> init() async {
   sl.registerFactory<LoginCubit>(
     () => LoginCubit(
       postAuth: sl(),
+    ),
+  );
+  sl.registerFactory<FavoriteCubit>(
+    () => FavoriteCubit(
+      getFavorites: sl(),
+      addFavorite: sl(),
+      removeFavorite: sl(),
     ),
   );
 

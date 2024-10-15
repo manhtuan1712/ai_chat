@@ -20,21 +20,34 @@ abstract class BaseRestClient {
     @Body() Map<String, dynamic> data,
   );
 
-  @GET('chat/history')
+  @GET('v2/chat/history')
   Future<List<ChatHistoryModel>> getChatHistory();
 
-  @GET('chat/history/{agentId}')
+  @GET('v2/chat/history/{agentId}')
   Future<List<MessageModel>> getAgentChatHistory(
     @Path() String agentId,
   );
 
-  @POST('chat')
+  @POST('v2/chat')
   Future<MessageModel> sendMessage(
     @Body() RequestPostMessageModel request,
   );
 
-  @POST('chat/voice')
+  @POST('v2/chat/voice')
   Future<MessageModel> sendVoiceMessage(
     @Body() RequestPostMessageModel request,
+  );
+
+  @GET('user/like')
+  Future<List<AIAgentModel>> getFavorites();
+
+  @PUT('user/like')
+  Future<void> addFavorite(
+    @Body() Map<String, dynamic> data,
+  );
+
+  @DELETE('user/like/{agentId}')
+  Future<void> removeFavorite(
+    @Path() String agentId,
   );
 }

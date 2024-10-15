@@ -50,7 +50,6 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
       EasyLoading.dismiss();
       return response;
     } on DioExceptionType {
-      EasyLoading.dismiss();
       throw DioExceptionType;
     }
   }
