@@ -8,4 +8,8 @@ abstract class FavoriteRepository {
   Future<Either<ServerFailure, String>> addFavorite(
     String agentId,
   );
+
+  Future<Either<ServerFailure, String>> removeFavorite(
+    String agentId,
+  );
 }

@@ -47,4 +47,24 @@ class FavoriteRepositoryImpl implements FavoriteRepository {
       );
     }
   }
+
+  @override
+  Future<Either<ServerFailure, String>> removeFavorite(
+    String agentId,
+  ) async {
+    try {
+      var response = await favoriteRemoteDataSource.removeFavorite(
+        agentId,
+      );
+      return Right(
+        response,
+      );
+    } on DioException catch (error) {
+      return Left(
+        ServerFailure(
+          mess: error.message,
+        ),
+      );
+    }
+  }
 }

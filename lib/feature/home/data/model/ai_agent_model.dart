@@ -6,6 +6,8 @@ part 'ai_agent_model.g.dart';
 class AIAgentModel {
   final String? id;
 
+  final String? agentId;
+
   final String? name;
 
   final String? place;
@@ -16,13 +18,17 @@ class AIAgentModel {
 
   final String? photo;
 
+  bool? favorite;
+
   AIAgentModel({
     this.id,
+    this.agentId,
     this.name,
     this.place,
     this.age,
     this.note,
     this.photo,
+    this.favorite,
   });
 
   factory AIAgentModel.fromJson(Map<String, dynamic> json) =>

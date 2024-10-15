@@ -62,43 +62,60 @@ class FavoriteScreenState extends State<FavoriteScreen> {
                   _favorites.addAll(
                     state.favorites ?? [],
                   );
+                  for (var element in _favorites) {
+                    element.favorite = true;
+                  }
                   setState(() {});
                 } else if (state is AddFavoriteSuccessState) {
-                  context.read<FavoriteCubit>().getFavoritesAction();
+                  _favorites.add(
+                    state.agent!,
+                  );
+                  setState(() {});
+                } else if (state is RemoveFavoriteSuccessState) {
+                  _favorites.removeWhere(
+                    (e) => e.agentId == state.agentId,
+                  );
+                  setState(() {});
                 }
               },
-              child: _isGrid
-                  ? GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 8.0,
-                        mainAxisSpacing: 8.0,
-                        childAspectRatio: 0.6,
+              child: RefreshIndicator(
+                onRefresh: () async =>
+                    context.read<FavoriteCubit>().getFavoritesAction(),
+                child: _isGrid
+                    ? GridView.builder(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 8.0,
+                          mainAxisSpacing: 8.0,
+                          childAspectRatio: 0.6,
+                        ),
+                        itemCount: _favorites.length,
+                        itemBuilder: (context, index) {
+                          return AIAGentCardWidget(
+                            _favorites[index],
+                            imageWidth: MediaQuery.sizeOf(context).width * .5,
+                          );
+                        },
+                      )
+                    : ListView.builder(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        primary: false,
+                        shrinkWrap: true,
+                        itemCount: _favorites.length,
+                        padding: const EdgeInsets.all(
+                          16.0,
+                        ),
+                        itemBuilder: (context, index) {
+                          return AIAGentCardWidget(
+                            _favorites[index],
+                            imageWidth: MediaQuery.sizeOf(context).width,
+                            isGrid: false,
+                          );
+                        },
                       ),
-                      itemCount: _favorites.length,
-                      itemBuilder: (context, index) {
-                        return AIAGentCardWidget(
-                          _favorites[index],
-                          imageWidth: MediaQuery.sizeOf(context).width * .5,
-                        );
-                      },
-                    )
-                  : ListView.builder(
-                      primary: false,
-                      shrinkWrap: true,
-                      itemCount: _favorites.length,
-                      padding: const EdgeInsets.all(
-                        16.0,
-                      ),
-                      itemBuilder: (context, index) {
-                        return AIAGentCardWidget(
-                          _favorites[index],
-                          imageWidth: MediaQuery.sizeOf(context).width,
-                          isGrid: false,
-                        );
-                      },
-                    ),
+              ),
             ),
     );
   }

@@ -23,12 +23,34 @@ class GetFavoriteFailureState extends FavoriteState {
   });
 }
 
-class AddFavoriteSuccessState extends FavoriteState {}
+class AddFavoriteSuccessState extends FavoriteState {
+  final AIAgentModel? agent;
+
+  AddFavoriteSuccessState({
+    this.agent,
+  });
+}
 
 class AddFavoriteFailureState extends FavoriteState {
   final String? error;
 
   AddFavoriteFailureState({
+    this.error,
+  });
+}
+
+class RemoveFavoriteSuccessState extends FavoriteState {
+  final String? agentId;
+
+  RemoveFavoriteSuccessState({
+    this.agentId,
+  });
+}
+
+class RemoveFavoriteFailureState extends FavoriteState {
+  final String? error;
+
+  RemoveFavoriteFailureState({
     this.error,
   });
 }

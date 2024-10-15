@@ -87,4 +87,12 @@ class BaseRestService {
       data,
     );
   }
+
+  Future<void> removeFavorite(
+    String agentId,
+  ) async {
+    return _baseRestClient!.removeFavorite(
+      agentId,
+    );
+  }
 }

@@ -22,6 +22,7 @@ import 'package:shuei_ai_chat/feature/favorite/data/repository/favorite_reposito
 import 'package:shuei_ai_chat/feature/favorite/domain/repository/favorite_repository.dart';
 import 'package:shuei_ai_chat/feature/favorite/domain/usecase/add_favorite.dart';
 import 'package:shuei_ai_chat/feature/favorite/domain/usecase/get_favorites.dart';
+import 'package:shuei_ai_chat/feature/favorite/domain/usecase/remove_favorite.dart';
 import 'package:shuei_ai_chat/feature/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/data/datasource/home_remote_data_source.dart';
 import 'package:shuei_ai_chat/feature/home/data/repository/home_repository_impl.dart';
@@ -117,6 +118,11 @@ Future<void> init() async {
       favoriteRepository: sl(),
     ),
   );
+  sl.registerLazySingleton<RemoveFavorite>(
+    () => RemoveFavorite(
+      favoriteRepository: sl(),
+    ),
+  );
 
   // Cubit
   sl.registerFactory<ChatListCubit>(
@@ -145,6 +151,7 @@ Future<void> init() async {
     () => FavoriteCubit(
       getFavorites: sl(),
       addFavorite: sl(),
+      removeFavorite: sl(),
     ),
   );
 

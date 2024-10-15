@@ -10,6 +10,10 @@ abstract class FavoriteRemoteDataSource {
   Future<String> addFavorite(
     String agentId,
   );
+
+  Future<String> removeFavorite(
+    String agentId,
+  );
 }
 
 class FavoriteRemoteDataSourceImpl implements FavoriteRemoteDataSource {
@@ -37,6 +41,23 @@ class FavoriteRemoteDataSourceImpl implements FavoriteRemoteDataSource {
     EasyLoading.show();
     try {
       await baseRestService.addFavorite(
+        agentId,
+      );
+      EasyLoading.dismiss();
+      return Status.success.get();
+    } on DioExceptionType {
+      EasyLoading.dismiss();
+      throw DioExceptionType;
+    }
+  }
+
+  @override
+  Future<String> removeFavorite(
+    String agentId,
+  ) async {
+    EasyLoading.show();
+    try {
+      await baseRestService.removeFavorite(
         agentId,
       );
       EasyLoading.dismiss();

@@ -45,4 +45,9 @@ abstract class BaseRestClient {
   Future<void> addFavorite(
     @Body() Map<String, dynamic> data,
   );
+
+  @DELETE('user/like/{agentId}')
+  Future<void> removeFavorite(
+    @Path() String agentId,
+  );
 }

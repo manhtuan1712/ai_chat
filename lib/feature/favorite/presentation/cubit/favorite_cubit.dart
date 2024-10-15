@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shuei_ai_chat/core/usecase/usecase.dart';
 import 'package:shuei_ai_chat/feature/favorite/domain/usecase/add_favorite.dart';
 import 'package:shuei_ai_chat/feature/favorite/domain/usecase/get_favorites.dart';
+import 'package:shuei_ai_chat/feature/favorite/domain/usecase/remove_favorite.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 
 part 'favorite_state.dart';
@@ -12,9 +13,12 @@ class FavoriteCubit extends Cubit<FavoriteState> {
 
   AddFavorite addFavorite;
 
+  RemoveFavorite removeFavorite;
+
   FavoriteCubit({
     required this.getFavorites,
     required this.addFavorite,
+    required this.removeFavorite,
   }) : super(FavoriteInitialState());
 
   Future<void> getFavoritesAction() async {
@@ -43,14 +47,14 @@ class FavoriteCubit extends Cubit<FavoriteState> {
   }
 
   Future<void> addFavoriteAction(
-    String agentId,
+    AIAgentModel agent,
   ) async {
     emit(
       FavoriteLoadingState(),
     );
     final result = await addFavorite(
       AddFavoriteParam(
-        agentId: agentId,
+        agentId: agent.id ?? '',
       ),
     );
     result.fold(
@@ -63,7 +67,38 @@ class FavoriteCubit extends Cubit<FavoriteState> {
       },
       (r) {
         emit(
-          AddFavoriteSuccessState(),
+          AddFavoriteSuccessState(
+            agent: agent,
+          ),
+        );
+      },
+    );
+  }
+
+  Future<void> removeFavoriteAction(
+    String agentId,
+  ) async {
+    emit(
+      FavoriteLoadingState(),
+    );
+    final result = await removeFavorite(
+      AddFavoriteParam(
+        agentId: agentId,
+      ),
+    );
+    result.fold(
+      (l) {
+        emit(
+          RemoveFavoriteFailureState(
+            error: l.mess,
+          ),
+        );
+      },
+      (r) {
+        emit(
+          RemoveFavoriteSuccessState(
+            agentId: agentId,
+          ),
         );
       },
     );
