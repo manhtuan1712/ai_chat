@@ -103,7 +103,7 @@ class _BaseRestClient implements BaseRestClient {
     )
         .compose(
           _dio.options,
-          'chat/history',
+          'v2/chat/history',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -139,7 +139,7 @@ class _BaseRestClient implements BaseRestClient {
     )
         .compose(
           _dio.options,
-          'chat/history/${agentId}',
+          'v2/chat/history/${agentId}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -175,7 +175,7 @@ class _BaseRestClient implements BaseRestClient {
     )
         .compose(
           _dio.options,
-          'chat',
+          'v2/chat',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -209,7 +209,7 @@ class _BaseRestClient implements BaseRestClient {
     )
         .compose(
           _dio.options,
-          'chat/voice',
+          'v2/chat/voice',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -227,6 +227,67 @@ class _BaseRestClient implements BaseRestClient {
       rethrow;
     }
     return _value;
+  }
+
+  @override
+  Future<List<AIAgentModel>> getFavorites() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<List<AIAgentModel>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'user/like',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<List<dynamic>>(_options);
+    late List<AIAgentModel> _value;
+    try {
+      _value = _result.data!
+          .map((dynamic i) => AIAgentModel.fromJson(i as Map<String, dynamic>))
+          .toList();
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<void> addFavorite(Map<String, dynamic> data) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(data);
+    final _options = _setStreamType<void>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          'user/like',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    await _dio.fetch<void>(_options);
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

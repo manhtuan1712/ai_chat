@@ -109,3 +109,16 @@ class SendMessageParams extends Equatable {
         lang,
       ];
 }
+
+class AddFavoriteParam extends Equatable {
+  final String agentId;
+
+  const AddFavoriteParam({
+    required this.agentId,
+  });
+
+  @override
+  List<Object> get props => [
+        agentId,
+      ];
+}

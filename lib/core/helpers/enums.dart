@@ -30,3 +30,14 @@ class MessageType {
   static const userMessage = MessageType._internal('1');
   static const aiAgentMessage = MessageType._internal('2');
 }
+
+class Status {
+  final String _value;
+
+  const Status._internal(this._value);
+
+  String get() => _value;
+
+  static const success = MessageType._internal('success');
+  static const failed = MessageType._internal('failed');
+}
