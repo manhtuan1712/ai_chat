@@ -5,6 +5,8 @@ import 'package:shuei_ai_chat/core/base/widget/base_text_field_widget.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/feature/authentication/presentation/cubit/login_cubit.dart';
+import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_list_cubit.dart';
+import 'package:shuei_ai_chat/feature/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:shuei_ai_chat/generated/l10n.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -47,6 +49,8 @@ class LoginScreenState extends State<LoginScreen> {
       body: BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
+            context.read<ChatListCubit>().getChatHistoryAction();
+            context.read<FavoriteCubit>().getFavoritesAction();
             Navigator.pop(
               context,
             );
