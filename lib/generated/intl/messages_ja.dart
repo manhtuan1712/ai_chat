@@ -36,8 +36,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginEmail": MessageLookupByLibrary.simpleMessage("ログインid"),
         "loginPassword": MessageLookupByLibrary.simpleMessage("パスワード"),
         "loginToYourAccount": MessageLookupByLibrary.simpleMessage("ログイン"),
+        "message": MessageLookupByLibrary.simpleMessage("メッセージ"),
         "newConversations": MessageLookupByLibrary.simpleMessage("新しい会話"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "place": MessageLookupByLibrary.simpleMessage("居住地"),
         "pleaseLoginIn":
             MessageLookupByLibrary.simpleMessage("この機能を使用するにはログインしてください"),
         "select": MessageLookupByLibrary.simpleMessage("選択"),

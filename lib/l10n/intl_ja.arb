@@ -16,5 +16,7 @@
   "pleaseLoginIn": "この機能を使用するにはログインしてください",
   "favoriteTitle": "お気に入り一覧",
   "chatTitle": "チャットリスト",
-  "speechIsNotAvailable": "音声は利用できません"
+  "speechIsNotAvailable": "音声は利用できません",
+  "message": "メッセージ",
+  "place": "居住地"
 }
