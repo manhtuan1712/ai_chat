@@ -89,7 +89,10 @@ class FavoriteScreenState extends State<FavoriteScreen> {
                           crossAxisCount: 2,
                           crossAxisSpacing: 8.0,
                           mainAxisSpacing: 8.0,
-                          childAspectRatio: 0.6,
+                          childAspectRatio: 0.77,
+                        ),
+                        padding: const EdgeInsets.all(
+                          16.0,
                         ),
                         itemCount: _favorites.length,
                         itemBuilder: (context, index) {

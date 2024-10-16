@@ -1,10 +1,7 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_text_field_widget.dart';
+import 'package:shuei_ai_chat/core/di/injection_container.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/core/helpers/enums.dart';
@@ -15,6 +12,7 @@ import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_detail_cubit.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/widget/message_list_widget.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/widget/speech_to_text_widget.dart';
+import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 
 class ChatDetailScreen extends StatefulWidget {
   final ChatHistoryModel? data;
@@ -38,17 +36,12 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
 
   final List<MessageModel> _messages = [];
 
-  final AudioPlayer _audioPlayer = AudioPlayer();
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        _audioPlayer.onPlayerComplete.listen(
-          (event) {},
-        );
         context.read<ChatDetailCubit>().getAgentChatHistoryAction(
               widget.data?.agentId ?? '',
             );
@@ -58,7 +51,6 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
 
   @override
   void dispose() {
-    _audioPlayer.dispose();
     WidgetsBinding.instance.removeObserver(this);
     _scrollController.dispose();
     super.dispose();
@@ -97,23 +89,6 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
     }
   }
 
-  Future<void> _playVoiceAction(
-    String voice,
-  ) async {
-    _audioPlayer.setReleaseMode(
-      ReleaseMode.stop,
-    );
-    Uint8List audioBytes = base64Decode(
-      voice,
-    );
-    await _audioPlayer.setSource(
-      BytesSource(
-        audioBytes,
-      ),
-    );
-    await _audioPlayer.resume();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -144,16 +119,6 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
             );
             _messages.last.message = state.messageModel.message;
             _messages.last.status = MessagingStatus.done.get();
-            setState(() {});
-          } else if (state is ChatVoiceReceivedState) {
-            eventBus.fire(
-              RefreshChatListEvent(),
-            );
-            _messages.last.message = state.messageModel.message;
-            _messages.last.status = MessagingStatus.done.get();
-            _playVoiceAction(
-              state.messageModel.voice ?? '',
-            );
             setState(() {});
           } else if (state is GetMessageSuccessState) {
             _messages.clear();
@@ -209,23 +174,34 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
                         isDismissible: true,
                         backgroundColor: Colors.white,
                         context: AppUtils.contextMain,
-                        builder: (context) {
-                          return const FractionallySizedBox(
-                            heightFactor: .2,
-                            child: SpeechToTextWidget(),
+                        builder: (contextDialog) {
+                          return BlocProvider(
+                            create: (_) => sl<ChatDetailCubit>(),
+                            child: FractionallySizedBox(
+                              heightFactor: .95,
+                              child: SpeechToTextWidget(
+                                agentModel: AIAgentModel(
+                                  name: widget.data?.name,
+                                  photo: widget.data?.photo,
+                                  id: widget.data?.agentId,
+                                ),
+                              ),
+                            ),
                           );
                         },
                       ).then(
                         (value) {
-                          if (value != null) {
-                            _sendMessageAction(
-                              ChatMessageEvent.voice.get(),
-                              value,
-                            );
-                            _chatController.clear();
-                            _focusNode.unfocus();
-                            setState(() {});
-                          }
+                          eventBus.fire(
+                            RefreshChatListEvent(),
+                          );
+                          context
+                              .read<ChatDetailCubit>()
+                              .getAgentChatHistoryAction(
+                                widget.data?.agentId ?? '',
+                              );
+                          _chatController.clear();
+                          _focusNode.unfocus();
+                          setState(() {});
                         },
                       );
                     },
