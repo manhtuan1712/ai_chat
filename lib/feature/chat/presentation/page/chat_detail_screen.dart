@@ -64,31 +64,6 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
     super.dispose();
   }
 
-  void _scrollToBottom() {
-    Future.delayed(
-      (const Duration(
-        milliseconds: 200,
-      )),
-      () {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent + 56.0,
-          duration: const Duration(
-            milliseconds: 300,
-          ),
-          curve: Curves.easeOut,
-        );
-      },
-    );
-  }
-
-  @override
-  void didChangeMetrics() {
-    if (MediaQuery.viewInsetsOf(context).bottom > 0) {
-      _scrollToBottom();
-    }
-    super.didChangeMetrics();
-  }
-
   _sendMessageAction(
     String action,
     String value,
@@ -143,6 +118,15 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => Navigator.pop(
+            context,
+          ),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            size: 20.0,
+          ),
+        ),
         title: Text(
           widget.data?.name ?? '',
           style: AppConstants.textHeadingH5.copyWith(
@@ -160,7 +144,6 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
             );
             _messages.last.message = state.messageModel.message;
             _messages.last.status = MessagingStatus.done.get();
-            _scrollToBottom();
             setState(() {});
           } else if (state is ChatVoiceReceivedState) {
             eventBus.fire(
@@ -171,14 +154,12 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
             _playVoiceAction(
               state.messageModel.voice ?? '',
             );
-            _scrollToBottom();
             setState(() {});
           } else if (state is GetMessageSuccessState) {
             _messages.clear();
             _messages.addAll(
               state.messages,
             );
-            _scrollToBottom();
             setState(() {});
           } else if (state is GetMessageFailureState) {
             debugPrint('======> error: ${state.error}');
@@ -190,7 +171,7 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
           children: [
             Expanded(
               child: MessageListWidget(
-                messages: _messages,
+                messages: _messages.reversed.toList(),
                 scrollController: _scrollController,
                 agentPhoto: widget.data?.photo ?? '',
               ),
@@ -236,14 +217,15 @@ class ChatDetailScreenState extends State<ChatDetailScreen>
                         },
                       ).then(
                         (value) {
-                          _sendMessageAction(
-                            ChatMessageEvent.voice.get(),
-                            value,
-                          );
-                          _chatController.clear();
-                          _focusNode.unfocus();
-                          _scrollToBottom();
-                          setState(() {});
+                          if (value != null) {
+                            _sendMessageAction(
+                              ChatMessageEvent.voice.get(),
+                              value,
+                            );
+                            _chatController.clear();
+                            _focusNode.unfocus();
+                            setState(() {});
+                          }
                         },
                       );
                     },

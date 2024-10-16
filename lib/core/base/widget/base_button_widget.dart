@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
+import 'package:shuei_ai_chat/core/theme/app_colors.dart';
 
 enum ButtonState {
   normal,
@@ -14,10 +15,16 @@ class BaseButtonWidget extends StatelessWidget {
 
   final ButtonState buttonState;
 
+  final double? width;
+
+  final double? height;
+
   const BaseButtonWidget({
     super.key,
     required this.text,
     required this.onClick,
+    this.width,
+    this.height,
     this.buttonState = ButtonState.disabled,
   });
 
@@ -26,14 +33,14 @@ class BaseButtonWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => buttonState != ButtonState.disabled ? onClick() : null,
       child: Container(
-        width: MediaQuery.sizeOf(context).width,
-        height: 48.0,
+        width: width ?? MediaQuery.sizeOf(context).width,
+        height: height ?? 48.0,
         decoration: BoxDecoration(
           color: buttonState == ButtonState.normal
-              ? Theme.of(context).colorScheme.primary
-              : Theme.of(context).colorScheme.secondary,
+              ? AppColors.light.colorBrandBlue
+              : AppColors.light.colorBrandBlue10,
           borderRadius: BorderRadius.circular(
-            8.0,
+            12.0,
           ),
         ),
         child: Center(

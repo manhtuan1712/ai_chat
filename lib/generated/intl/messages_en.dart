@@ -37,9 +37,11 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginEmail": MessageLookupByLibrary.simpleMessage("Your Id"),
         "loginPassword": MessageLookupByLibrary.simpleMessage("Password"),
         "loginToYourAccount": MessageLookupByLibrary.simpleMessage("Login"),
+        "message": MessageLookupByLibrary.simpleMessage("Message"),
         "newConversations":
             MessageLookupByLibrary.simpleMessage("New Conversations"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "place": MessageLookupByLibrary.simpleMessage("Place"),
         "pleaseLoginIn": MessageLookupByLibrary.simpleMessage(
             "Please login to use this feature"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),

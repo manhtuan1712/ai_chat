@@ -3,15 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_image_loading_widget.dart';
-import 'package:shuei_ai_chat/core/di/injection_container.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/core/navigation/navigation_center.dart';
-import 'package:shuei_ai_chat/feature/authentication/presentation/cubit/login_cubit.dart';
-import 'package:shuei_ai_chat/feature/authentication/presentation/page/login_screen.dart';
-import 'package:shuei_ai_chat/feature/chat/data/model/chat_history_model.dart';
-import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_detail_cubit.dart';
-import 'package:shuei_ai_chat/feature/chat/presentation/page/chat_detail_screen.dart';
+import 'package:shuei_ai_chat/feature/agent-detail/presentation/page/agent_detail_screen.dart';
 import 'package:shuei_ai_chat/feature/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 
@@ -33,44 +28,33 @@ class AIAGentCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
-      onTap: () {
-        NavigationCenter.goToScreen(
-          AppUtils.contextMain,
-          AppUtils.isLogin
-              ? NavigationCenter.chatDetailScreen
-              : NavigationCenter.loginScreen,
-          AppUtils.isLogin
-              ? BlocProvider(
-                  create: (_) => sl<ChatDetailCubit>(),
-                  child: ChatDetailScreen(
-                    data: ChatHistoryModel(
-                      agentId: agentModel.id,
-                      photo: agentModel.photo,
-                      name: agentModel.name,
-                    ),
-                  ),
-                )
-              : BlocProvider(
-                  create: (_) => sl<LoginCubit>(),
-                  child: const LoginScreen(),
-                ),
-        );
-      },
+      onTap: () => NavigationCenter.goToScreen(
+        AppUtils.contextMain,
+        NavigationCenter.agentDetailScreen,
+        AgentDetailScreen(
+          agentModel: agentModel,
+        ),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(
-              16.0,
-            ),
-            child: CachedNetworkImage(
-              imageUrl: agentModel.photo ?? '',
-              errorWidget: (context, url, error) => Image.asset(
-                isGrid ? AppConstants.icHolderGrid : AppConstants.icHolderList,
+          Hero(
+            tag: agentModel.id ?? '',
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(
+                16.0,
               ),
-              placeholder: (context, url) => const BaseImageLoadingWidget(),
-              width: imageWidth ?? MediaQuery.sizeOf(context).width,
-              fit: BoxFit.fitWidth,
+              child: CachedNetworkImage(
+                imageUrl: agentModel.photo ?? '',
+                errorWidget: (context, url, error) => Image.asset(
+                  isGrid
+                      ? AppConstants.icHolderGrid
+                      : AppConstants.icHolderList,
+                ),
+                placeholder: (context, url) => const BaseImageLoadingWidget(),
+                width: imageWidth ?? MediaQuery.sizeOf(context).width,
+                fit: BoxFit.fitWidth,
+              ),
             ),
           ),
           Padding(

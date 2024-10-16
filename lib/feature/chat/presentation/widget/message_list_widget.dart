@@ -26,6 +26,7 @@ class MessageListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       controller: scrollController,
+      reverse: true,
       padding: const EdgeInsets.all(
         16.0,
       ),
