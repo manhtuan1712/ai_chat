@@ -23,7 +23,16 @@ class HomeScreenState extends State<HomeScreen> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
-        context.read<HomeRecommendCubit>().getRecommendAgentAction();
+        HomeRecommendCubit homeRecommendCubit =
+            context.read<HomeRecommendCubit>();
+        Future.delayed(
+          const Duration(
+            milliseconds: 200,
+          ),
+          () {
+            homeRecommendCubit.getRecommendAgentAction();
+          },
+        );
       },
     );
   }
