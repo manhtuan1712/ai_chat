@@ -36,6 +36,7 @@ dependencies:
   audioplayers: ^6.1.0
   event_bus: ^2.0.1
   speech_to_text: ^7.0.0
+  typewritertext: ^3.0.9
 
 dev_dependencies:
   flutter_test:

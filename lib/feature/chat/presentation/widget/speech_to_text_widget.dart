@@ -15,6 +15,7 @@ import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 import 'package:shuei_ai_chat/generated/l10n.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:typewritertext/typewritertext.dart';
 
 class SpeechToTextWidget extends StatefulWidget {
   final AIAgentModel agentModel;
@@ -140,14 +141,31 @@ class SpeechToTextWidgetState extends State<SpeechToTextWidget> {
             ),
             Visibility(
               visible: _isLoading,
-              child: Padding(
-                padding: const EdgeInsets.all(
-                  32.0,
-                ),
-                child: SpinKitChasingDots(
-                  color: AppColors.light.colorBrandBlue,
-                  size: 100.0,
-                ),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(
+                      32.0,
+                    ),
+                    child: SpinKitChasingDots(
+                      color: AppColors.light.colorBrandBlue,
+                      size: 100.0,
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.sizeOf(context).width,
+                    child: TypeWriter.text(
+                      _lastWords,
+                      duration: const Duration(
+                        milliseconds: 50,
+                      ),
+                      textAlign: TextAlign.center,
+                      style: AppConstants.textHeadingH5.copyWith(
+                        color: Colors.black54,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             const Spacer(),
