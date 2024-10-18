@@ -31,12 +31,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "chatListEmpty":
             MessageLookupByLibrary.simpleMessage("会話がありません。新しい会話を追加してください"),
         "chatTitle": MessageLookupByLibrary.simpleMessage("チャットリスト"),
+        "doNotHaveAccount":
+            MessageLookupByLibrary.simpleMessage("アカウントをお持ちではありませんか?"),
         "favoriteTitle": MessageLookupByLibrary.simpleMessage("お気に入り一覧"),
         "helloText": MessageLookupByLibrary.simpleMessage("こんにちは！ここにメッセージをどーぞ"),
         "logOut": MessageLookupByLibrary.simpleMessage("ログアウト"),
-        "loginEmail": MessageLookupByLibrary.simpleMessage("ログインid"),
+        "loginEmail": MessageLookupByLibrary.simpleMessage("メールアドレス"),
         "loginPassword": MessageLookupByLibrary.simpleMessage("パスワード"),
+        "loginRePassword": MessageLookupByLibrary.simpleMessage("パスワード（確認）"),
+        "loginRePasswordNotMatch":
+            MessageLookupByLibrary.simpleMessage("パスワードの確認が一致しません"),
         "loginToYourAccount": MessageLookupByLibrary.simpleMessage("ログイン"),
+        "loginUserName": MessageLookupByLibrary.simpleMessage("ログインid"),
         "message": MessageLookupByLibrary.simpleMessage("メッセージ"),
         "newConversations": MessageLookupByLibrary.simpleMessage("新しい会話"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),

@@ -7,6 +7,7 @@ class NavigationCenter {
   static const String chatDetailScreen = 'chat-detail-screen';
   static const String loginScreen = 'login-screen';
   static const String agentDetailScreen = 'agent-detail-screen';
+  static const String signUpScreen = 'sign-up-screen';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {

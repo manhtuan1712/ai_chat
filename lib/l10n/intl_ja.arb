@@ -10,9 +10,12 @@
   "ok": "OK",
   "cancel": "キャンセル",
   "loginToYourAccount": "ログイン",
-  "loginEmail": "ログインid",
+  "loginUserName": "ログインid",
+  "loginEmail": "メールアドレス",
   "signUpEmailWrongFormat": "メールの形式が正しくありません",
   "loginPassword": "パスワード",
+  "loginRePassword": "パスワード（確認）",
+  "loginRePasswordNotMatch": "パスワードの確認が一致しません",
   "pleaseLoginIn": "この機能を使用するにはログインしてください",
   "favoriteTitle": "お気に入り一覧",
   "chatTitle": "チャットリスト",
@@ -20,5 +23,6 @@
   "message": "メッセージ",
   "place": "居住地",
   "profileTitle": "アカウント設定",
-  "logOut": "ログアウト"
+  "logOut": "ログアウト",
+  "doNotHaveAccount": "アカウントをお持ちではありませんか?"
 }
