@@ -17,8 +17,11 @@ class AIAGentCardWidget extends StatelessWidget {
 
   final double? imageWidth;
 
+  final String screen;
+
   const AIAGentCardWidget(
-    this.agentModel, {
+    this.agentModel,
+    this.screen, {
     super.key,
     this.isGrid = false,
     this.imageWidth,
@@ -33,13 +36,14 @@ class AIAGentCardWidget extends StatelessWidget {
         NavigationCenter.agentDetailScreen,
         AgentDetailScreen(
           agentModel: agentModel,
+          screen: screen,
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Hero(
-            tag: agentModel.id ?? '',
+            tag: '${agentModel.id ?? agentModel.agentId}-$screen',
             child: ClipRRect(
               borderRadius: BorderRadius.circular(
                 16.0,

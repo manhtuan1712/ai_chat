@@ -18,9 +18,12 @@ import 'package:shuei_ai_chat/generated/l10n.dart';
 class AgentDetailScreen extends StatefulWidget {
   final AIAgentModel agentModel;
 
+  final String screen;
+
   const AgentDetailScreen({
     super.key,
     required this.agentModel,
+    required this.screen,
   });
 
   @override
@@ -60,7 +63,8 @@ class AgentDetailScreenState extends State<AgentDetailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Hero(
-                tag: widget.agentModel.id ?? '',
+                tag:
+                    '${widget.agentModel.id ?? widget.agentModel.agentId}-${widget.screen}',
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(
                     16.0,

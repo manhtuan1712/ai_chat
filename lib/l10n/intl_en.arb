@@ -18,5 +18,7 @@
   "chatTitle": "Chat list",
   "speechIsNotAvailable": "Speech is not available",
   "message": "Message",
-  "place": "Place"
+  "place": "Place",
+  "profileTitle": "Account setting",
+  "logOut": "Log out"
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_app_bar_widget.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
+import 'package:shuei_ai_chat/core/navigation/navigation_center.dart';
 import 'package:shuei_ai_chat/feature/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_recommend_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/widget/ai_agent_card_widget.dart';
@@ -102,6 +103,7 @@ class HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (context, index) {
                     return AIAGentCardWidget(
                       _aiAgents[index],
+                      NavigationCenter.homeScreen,
                       imageWidth: MediaQuery.sizeOf(context).width * .5,
                       isGrid: true,
                     );
@@ -117,6 +119,7 @@ class HomeScreenState extends State<HomeScreen> {
                   itemBuilder: (context, index) {
                     return AIAGentCardWidget(
                       _aiAgents[index],
+                      NavigationCenter.homeScreen,
                       imageWidth: MediaQuery.sizeOf(context).width,
                       isGrid: false,
                     );

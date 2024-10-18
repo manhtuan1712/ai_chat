@@ -18,5 +18,7 @@
   "chatTitle": "チャットリスト",
   "speechIsNotAvailable": "音声は利用できません",
   "message": "メッセージ",
-  "place": "居住地"
+  "place": "居住地",
+  "profileTitle": "アカウント設定",
+  "logOut": "ログアウト"
 }
