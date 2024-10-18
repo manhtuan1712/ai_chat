@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "chatTitle": MessageLookupByLibrary.simpleMessage("チャットリスト"),
         "favoriteTitle": MessageLookupByLibrary.simpleMessage("お気に入り一覧"),
         "helloText": MessageLookupByLibrary.simpleMessage("こんにちは！ここにメッセージをどーぞ"),
+        "logOut": MessageLookupByLibrary.simpleMessage("ログアウト"),
         "loginEmail": MessageLookupByLibrary.simpleMessage("ログインid"),
         "loginPassword": MessageLookupByLibrary.simpleMessage("パスワード"),
         "loginToYourAccount": MessageLookupByLibrary.simpleMessage("ログイン"),
@@ -42,6 +43,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "place": MessageLookupByLibrary.simpleMessage("居住地"),
         "pleaseLoginIn":
             MessageLookupByLibrary.simpleMessage("この機能を使用するにはログインしてください"),
+        "profileTitle": MessageLookupByLibrary.simpleMessage("アカウント設定"),
         "select": MessageLookupByLibrary.simpleMessage("選択"),
         "signUpEmailWrongFormat":
             MessageLookupByLibrary.simpleMessage("メールの形式が正しくありません"),

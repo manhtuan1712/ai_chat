@@ -40,6 +40,11 @@ class AppUtils {
     }
   }
 
+  static void logOut() {
+    contextMain.read<AppProvider>().setUser('');
+    contextMain.read<AppProvider>().setAccessToken('');
+  }
+
   static double getBottomBarHeight() =>
       42.0 + MediaQuery.paddingOf(contextMain).bottom + 18.0;
 

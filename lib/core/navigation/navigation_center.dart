@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class NavigationCenter {
   static final navigatorKey = GlobalKey<NavigatorState>();
+  static const String homeScreen = 'home-screen';
+  static const String favoriteScreen = 'favorite-screen';
   static const String chatDetailScreen = 'chat-detail-screen';
   static const String loginScreen = 'login-screen';
   static const String agentDetailScreen = 'agent-detail-screen';

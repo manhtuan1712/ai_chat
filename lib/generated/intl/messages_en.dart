@@ -34,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "favoriteTitle": MessageLookupByLibrary.simpleMessage("Favorites list"),
         "helloText":
             MessageLookupByLibrary.simpleMessage("Hello! Leave a message here"),
+        "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
         "loginEmail": MessageLookupByLibrary.simpleMessage("Your Id"),
         "loginPassword": MessageLookupByLibrary.simpleMessage("Password"),
         "loginToYourAccount": MessageLookupByLibrary.simpleMessage("Login"),
@@ -44,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "place": MessageLookupByLibrary.simpleMessage("Place"),
         "pleaseLoginIn": MessageLookupByLibrary.simpleMessage(
             "Please login to use this feature"),
+        "profileTitle": MessageLookupByLibrary.simpleMessage("Account setting"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
         "signUpEmailWrongFormat": MessageLookupByLibrary.simpleMessage(
             "Email is not in the correct format"),

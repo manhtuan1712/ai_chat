@@ -36,6 +36,9 @@ class AuthenticationRemoteDataSourceImpl
       appProvider.setAccessToken(
         response.token ?? '',
       );
+      appProvider.setUser(
+        response.name ?? '',
+      );
       EasyLoading.dismiss();
       return response;
     } on DioExceptionType {

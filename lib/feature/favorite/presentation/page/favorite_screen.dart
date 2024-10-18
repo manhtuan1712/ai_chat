@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_app_bar_widget.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_require_login_widget.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
+import 'package:shuei_ai_chat/core/navigation/navigation_center.dart';
 import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 import 'package:shuei_ai_chat/feature/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
@@ -98,6 +99,7 @@ class FavoriteScreenState extends State<FavoriteScreen> {
                         itemBuilder: (context, index) {
                           return AIAGentCardWidget(
                             _favorites[index],
+                            NavigationCenter.favoriteScreen,
                             imageWidth: MediaQuery.sizeOf(context).width * .5,
                           );
                         },
@@ -113,6 +115,7 @@ class FavoriteScreenState extends State<FavoriteScreen> {
                         itemBuilder: (context, index) {
                           return AIAGentCardWidget(
                             _favorites[index],
+                            NavigationCenter.favoriteScreen,
                             imageWidth: MediaQuery.sizeOf(context).width,
                             isGrid: false,
                           );
