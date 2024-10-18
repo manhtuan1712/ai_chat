@@ -161,9 +161,19 @@ class S {
   }
 
   /// `Your Id`
-  String get loginEmail {
+  String get loginUserName {
     return Intl.message(
       'Your Id',
+      name: 'loginUserName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email address`
+  String get loginEmail {
+    return Intl.message(
+      'Email address',
       name: 'loginEmail',
       desc: '',
       args: [],
@@ -185,6 +195,26 @@ class S {
     return Intl.message(
       'Password',
       name: 'loginPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password confirmation`
+  String get loginRePassword {
+    return Intl.message(
+      'Password confirmation',
+      name: 'loginRePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password confirmation does not match`
+  String get loginRePasswordNotMatch {
+    return Intl.message(
+      'Password confirmation does not match',
+      name: 'loginRePasswordNotMatch',
       desc: '',
       args: [],
     );
@@ -265,6 +295,16 @@ class S {
     return Intl.message(
       'Log out',
       name: 'logOut',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Do not have an account?`
+  String get doNotHaveAccount {
+    return Intl.message(
+      'Do not have an account?',
+      name: 'doNotHaveAccount',
       desc: '',
       args: [],
     );

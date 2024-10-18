@@ -31,13 +31,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "chatListEmpty": MessageLookupByLibrary.simpleMessage(
             "You do not have any conversation, please add a new one"),
         "chatTitle": MessageLookupByLibrary.simpleMessage("Chat list"),
+        "doNotHaveAccount":
+            MessageLookupByLibrary.simpleMessage("Do not have an account?"),
         "favoriteTitle": MessageLookupByLibrary.simpleMessage("Favorites list"),
         "helloText":
             MessageLookupByLibrary.simpleMessage("Hello! Leave a message here"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
-        "loginEmail": MessageLookupByLibrary.simpleMessage("Your Id"),
+        "loginEmail": MessageLookupByLibrary.simpleMessage("Email address"),
         "loginPassword": MessageLookupByLibrary.simpleMessage("Password"),
+        "loginRePassword":
+            MessageLookupByLibrary.simpleMessage("Password confirmation"),
+        "loginRePasswordNotMatch": MessageLookupByLibrary.simpleMessage(
+            "Password confirmation does not match"),
         "loginToYourAccount": MessageLookupByLibrary.simpleMessage("Login"),
+        "loginUserName": MessageLookupByLibrary.simpleMessage("Your Id"),
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "newConversations":
             MessageLookupByLibrary.simpleMessage("New Conversations"),

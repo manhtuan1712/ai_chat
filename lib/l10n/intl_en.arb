@@ -10,9 +10,12 @@
   "ok": "OK",
   "cancel": "Cancel",
   "loginToYourAccount": "Login",
-  "loginEmail": "Your Id",
+  "loginUserName": "Your Id",
+  "loginEmail": "Email address",
   "signUpEmailWrongFormat": "Email is not in the correct format",
   "loginPassword": "Password",
+  "loginRePassword": "Password confirmation",
+  "loginRePasswordNotMatch": "Password confirmation does not match",
   "pleaseLoginIn": "Please login to use this feature",
   "favoriteTitle": "Favorites list",
   "chatTitle": "Chat list",
@@ -20,5 +23,6 @@
   "message": "Message",
   "place": "Place",
   "profileTitle": "Account setting",
-  "logOut": "Log out"
+  "logOut": "Log out",
+  "doNotHaveAccount": "Do not have an account?"
 }
