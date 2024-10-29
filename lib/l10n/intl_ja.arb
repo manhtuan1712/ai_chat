@@ -24,5 +24,12 @@
   "place": "居住地",
   "profileTitle": "アカウント設定",
   "logOut": "ログアウト",
-  "doNotHaveAccount": "アカウントをお持ちではありませんか?"
+  "doNotHaveAccount": "アカウントをお持ちではありませんか?",
+  "accountInformation": "アカウント情報",
+  "changePassword": "パスワード変更",
+  "nickName": "ニックネーム",
+  "age": "年齢",
+  "hobbies": "趣味",
+  "update": "更新",
+  "description": "説明"
 }

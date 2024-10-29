@@ -22,19 +22,24 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accountInformation": MessageLookupByLibrary.simpleMessage("アカウント情報"),
         "addNewConversationCTA":
             MessageLookupByLibrary.simpleMessage("新しい会話を追加"),
+        "age": MessageLookupByLibrary.simpleMessage("年齢"),
         "appTitle": MessageLookupByLibrary.simpleMessage("Shuei AI Chat"),
         "cancel": MessageLookupByLibrary.simpleMessage("キャンセル"),
         "changeConversationName":
             MessageLookupByLibrary.simpleMessage("会話名を変更"),
+        "changePassword": MessageLookupByLibrary.simpleMessage("パスワード変更"),
         "chatListEmpty":
             MessageLookupByLibrary.simpleMessage("会話がありません。新しい会話を追加してください"),
         "chatTitle": MessageLookupByLibrary.simpleMessage("チャットリスト"),
+        "description": MessageLookupByLibrary.simpleMessage("説明"),
         "doNotHaveAccount":
             MessageLookupByLibrary.simpleMessage("アカウントをお持ちではありませんか?"),
         "favoriteTitle": MessageLookupByLibrary.simpleMessage("お気に入り一覧"),
         "helloText": MessageLookupByLibrary.simpleMessage("こんにちは！ここにメッセージをどーぞ"),
+        "hobbies": MessageLookupByLibrary.simpleMessage("趣味"),
         "logOut": MessageLookupByLibrary.simpleMessage("ログアウト"),
         "loginEmail": MessageLookupByLibrary.simpleMessage("メールアドレス"),
         "loginPassword": MessageLookupByLibrary.simpleMessage("パスワード"),
@@ -45,6 +50,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginUserName": MessageLookupByLibrary.simpleMessage("ログインid"),
         "message": MessageLookupByLibrary.simpleMessage("メッセージ"),
         "newConversations": MessageLookupByLibrary.simpleMessage("新しい会話"),
+        "nickName": MessageLookupByLibrary.simpleMessage("ニックネーム"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "place": MessageLookupByLibrary.simpleMessage("居住地"),
         "pleaseLoginIn":
@@ -55,6 +61,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("メールの形式が正しくありません"),
         "speechIsNotAvailable":
             MessageLookupByLibrary.simpleMessage("音声は利用できません"),
-        "startAChat": MessageLookupByLibrary.simpleMessage("チャットを開始")
+        "startAChat": MessageLookupByLibrary.simpleMessage("チャットを開始"),
+        "update": MessageLookupByLibrary.simpleMessage("更新")
       };
 }
