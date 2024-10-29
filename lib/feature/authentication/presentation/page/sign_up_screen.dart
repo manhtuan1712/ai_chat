@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_button_widget.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_text_field_widget.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
+import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
+import 'package:shuei_ai_chat/feature/authentication/presentation/cubit/sign_up_cubit.dart';
 import 'package:shuei_ai_chat/generated/l10n.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -52,131 +55,152 @@ class SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(
-          32.0,
-        ),
-        width: MediaQuery.sizeOf(context).width,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Align(
-                alignment: Alignment.center,
-                child: Image.asset(
-                  AppConstants.icLogo(
-                    context,
+      body: BlocListener<SignUpCubit, SignUpState>(
+        listener: (context, state) {
+          if (state is SignUpSuccessState) {
+            Navigator.pop(
+              context,
+            );
+          } else if (state is SignUpFailureState) {
+            AppUtils.showToastMessage(
+              state.message,
+              context,
+            );
+          }
+        },
+        child: Container(
+          padding: const EdgeInsets.all(
+            32.0,
+          ),
+          width: MediaQuery.sizeOf(context).width,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    AppConstants.icLogo(
+                      context,
+                    ),
+                    width: MediaQuery.sizeOf(context).width * .4,
+                    fit: BoxFit.fitWidth,
                   ),
-                  width: MediaQuery.sizeOf(context).width * .4,
-                  fit: BoxFit.fitWidth,
                 ),
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              BaseTextFieldWidget(
-                height: 56.0,
-                hintText: S.of(context).loginEmail,
-                background: Colors.white,
-                padding: const EdgeInsets.only(
-                  left: 16.0,
+                const SizedBox(
+                  height: 20.0,
                 ),
-                colorText: Colors.black,
-                onChanged: (value) {
-                  setState(() {
-                    _email = value;
-                  });
-                },
-                alert: !_isEmailValid() && _email.isNotEmpty,
-                alertMessage: S.of(context).signUpEmailWrongFormat,
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              BaseTextFieldWidget(
-                height: 56.0,
-                hintText: S.of(context).loginUserName,
-                background: Colors.white,
-                padding: const EdgeInsets.only(
-                  left: 16.0,
+                BaseTextFieldWidget(
+                  height: 56.0,
+                  hintText: S.of(context).loginEmail,
+                  background: Colors.white,
+                  padding: const EdgeInsets.only(
+                    left: 16.0,
+                  ),
+                  colorText: Colors.black,
+                  onChanged: (value) {
+                    setState(() {
+                      _email = value;
+                    });
+                  },
+                  alert: !_isEmailValid() && _email.isNotEmpty,
+                  alertMessage: S.of(context).signUpEmailWrongFormat,
                 ),
-                colorText: Colors.black,
-                onChanged: (value) {
-                  setState(() {
-                    _userName = value;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              BaseTextFieldWidget(
-                height: 56.0,
-                hintText: S.of(context).loginPassword,
-                background: Colors.white,
-                padding: const EdgeInsets.only(
-                  left: 16.0,
+                const SizedBox(
+                  height: 16.0,
                 ),
-                colorText: Colors.black,
-                obscureText: _isObscurePassword,
-                suffix: Icon(
-                  _isObscurePassword ? Icons.visibility : Icons.visibility_off,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                onTapSuffix: () => setState(
-                  () {
-                    _isObscurePassword = !_isObscurePassword;
+                BaseTextFieldWidget(
+                  height: 56.0,
+                  hintText: S.of(context).loginUserName,
+                  background: Colors.white,
+                  padding: const EdgeInsets.only(
+                    left: 16.0,
+                  ),
+                  colorText: Colors.black,
+                  onChanged: (value) {
+                    setState(() {
+                      _userName = value;
+                    });
                   },
                 ),
-                rightPosition: 16.0,
-                onChanged: (value) {
-                  setState(() {
-                    _password = value;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 16.0,
-              ),
-              BaseTextFieldWidget(
-                height: 56.0,
-                hintText: S.of(context).loginRePassword,
-                background: Colors.white,
-                padding: const EdgeInsets.only(
-                  left: 16.0,
+                const SizedBox(
+                  height: 16.0,
                 ),
-                colorText: Colors.black,
-                obscureText: _isObscureRePassword,
-                suffix: Icon(
-                  _isObscureRePassword
-                      ? Icons.visibility
-                      : Icons.visibility_off,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                onTapSuffix: () => setState(
-                  () {
-                    _isObscureRePassword = !_isObscureRePassword;
+                BaseTextFieldWidget(
+                  height: 56.0,
+                  hintText: S.of(context).loginPassword,
+                  background: Colors.white,
+                  padding: const EdgeInsets.only(
+                    left: 16.0,
+                  ),
+                  colorText: Colors.black,
+                  obscureText: _isObscurePassword,
+                  suffix: Icon(
+                    _isObscurePassword
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  onTapSuffix: () => setState(
+                    () {
+                      _isObscurePassword = !_isObscurePassword;
+                    },
+                  ),
+                  rightPosition: 16.0,
+                  onChanged: (value) {
+                    setState(() {
+                      _password = value;
+                    });
                   },
                 ),
-                rightPosition: 16.0,
-                alert: _rePassword != _password,
-                alertMessage: S.of(context).loginRePasswordNotMatch,
-                onChanged: (value) {
-                  setState(() {
-                    _rePassword = value;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 32.0,
-              ),
-              BaseButtonWidget(
-                text: S.of(context).loginToYourAccount,
-                buttonState:
-                    _isButtonActive ? ButtonState.normal : ButtonState.disabled,
-                onClick: () {},
-              ),
-            ],
+                const SizedBox(
+                  height: 16.0,
+                ),
+                BaseTextFieldWidget(
+                  height: 56.0,
+                  hintText: S.of(context).loginRePassword,
+                  background: Colors.white,
+                  padding: const EdgeInsets.only(
+                    left: 16.0,
+                  ),
+                  colorText: Colors.black,
+                  obscureText: _isObscureRePassword,
+                  suffix: Icon(
+                    _isObscureRePassword
+                        ? Icons.visibility
+                        : Icons.visibility_off,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  onTapSuffix: () => setState(
+                    () {
+                      _isObscureRePassword = !_isObscureRePassword;
+                    },
+                  ),
+                  rightPosition: 16.0,
+                  alert: _rePassword != _password,
+                  alertMessage: S.of(context).loginRePasswordNotMatch,
+                  onChanged: (value) {
+                    setState(() {
+                      _rePassword = value;
+                    });
+                  },
+                ),
+                const SizedBox(
+                  height: 32.0,
+                ),
+                BaseButtonWidget(
+                  text: S.of(context).loginToYourAccount,
+                  buttonState: _isButtonActive
+                      ? ButtonState.normal
+                      : ButtonState.disabled,
+                  onClick: () => context.read<SignUpCubit>().signUp(
+                        _email,
+                        _userName,
+                        _password,
+                      ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

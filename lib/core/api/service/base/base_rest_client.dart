@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:shuei_ai_chat/feature/authentication/data/model/response_auth_model.dart';
+import 'package:shuei_ai_chat/feature/authentication/data/model/request/request_sign_up_model.dart';
+import 'package:shuei_ai_chat/feature/authentication/data/model/response/response_auth_model.dart';
+import 'package:shuei_ai_chat/feature/authentication/data/model/response/response_sign_up_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/chat_history_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/request_post_message_model.dart';
@@ -18,6 +20,11 @@ abstract class BaseRestClient {
   @POST('auth')
   Future<ResponseAuthModel> auth(
     @Body() Map<String, dynamic> data,
+  );
+
+  @POST('register/user')
+  Future<ResponseSignUpModel> signUp(
+    @Body() RequestSignUpModel request,
   );
 
   @GET('v2/chat/history')

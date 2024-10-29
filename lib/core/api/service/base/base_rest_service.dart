@@ -2,7 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:shuei_ai_chat/core/api/dio_logging_interceptor.dart';
 import 'package:shuei_ai_chat/core/api/service/base/base_rest_client.dart';
 import 'package:shuei_ai_chat/core/helpers/global_configs.dart';
-import 'package:shuei_ai_chat/feature/authentication/data/model/response_auth_model.dart';
+import 'package:shuei_ai_chat/feature/authentication/data/model/request/request_sign_up_model.dart';
+import 'package:shuei_ai_chat/feature/authentication/data/model/response/response_auth_model.dart';
+import 'package:shuei_ai_chat/feature/authentication/data/model/response/response_sign_up_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/chat_history_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/request_post_message_model.dart';
@@ -44,6 +46,12 @@ class BaseRestService {
     data['id'] = id;
     data['password'] = password;
     return _baseRestClient!.auth(data);
+  }
+
+  Future<ResponseSignUpModel> signUp(
+    RequestSignUpModel request,
+  ) async {
+    return _baseRestClient!.signUp(request);
   }
 
   Future<List<ChatHistoryModel>> getChatHistory() async {

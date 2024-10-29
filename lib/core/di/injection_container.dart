@@ -7,7 +7,9 @@ import 'package:shuei_ai_chat/feature/authentication/data/datasource/authenticat
 import 'package:shuei_ai_chat/feature/authentication/data/repository/authentication_repository_impl.dart';
 import 'package:shuei_ai_chat/feature/authentication/domain/repository/authentication_repository.dart';
 import 'package:shuei_ai_chat/feature/authentication/domain/usecase/post_auth.dart';
+import 'package:shuei_ai_chat/feature/authentication/domain/usecase/post_sign_up.dart';
 import 'package:shuei_ai_chat/feature/authentication/presentation/cubit/login_cubit.dart';
+import 'package:shuei_ai_chat/feature/authentication/presentation/cubit/sign_up_cubit.dart';
 import 'package:shuei_ai_chat/feature/chat/data/datasource/chat_remote_data_source.dart';
 import 'package:shuei_ai_chat/feature/chat/data/repository/chat_repository_impl.dart';
 import 'package:shuei_ai_chat/feature/chat/domain/repository/chat_repository.dart';
@@ -88,6 +90,11 @@ Future<void> init() async {
       authenticationRepository: sl(),
     ),
   );
+  sl.registerLazySingleton<PostSignUp>(
+    () => PostSignUp(
+      authenticationRepository: sl(),
+    ),
+  );
   sl.registerLazySingleton<GetChatHistory>(
     () => GetChatHistory(
       chatRepository: sl(),
@@ -145,6 +152,11 @@ Future<void> init() async {
   sl.registerFactory<LoginCubit>(
     () => LoginCubit(
       postAuth: sl(),
+    ),
+  );
+  sl.registerFactory<SignUpCubit>(
+    () => SignUpCubit(
+      postSignUp: sl(),
     ),
   );
   sl.registerFactory<FavoriteCubit>(
