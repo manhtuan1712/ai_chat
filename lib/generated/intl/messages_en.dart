@@ -22,20 +22,27 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "accountInformation":
+            MessageLookupByLibrary.simpleMessage("Account information"),
         "addNewConversationCTA":
             MessageLookupByLibrary.simpleMessage("Add new conversation"),
+        "age": MessageLookupByLibrary.simpleMessage("Age"),
         "appTitle": MessageLookupByLibrary.simpleMessage("Shuei AI Chat"),
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "changeConversationName":
             MessageLookupByLibrary.simpleMessage("Change conversation name"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Change password"),
         "chatListEmpty": MessageLookupByLibrary.simpleMessage(
             "You do not have any conversation, please add a new one"),
         "chatTitle": MessageLookupByLibrary.simpleMessage("Chat list"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
         "doNotHaveAccount":
             MessageLookupByLibrary.simpleMessage("Do not have an account?"),
         "favoriteTitle": MessageLookupByLibrary.simpleMessage("Favorites list"),
         "helloText":
             MessageLookupByLibrary.simpleMessage("Hello! Leave a message here"),
+        "hobbies": MessageLookupByLibrary.simpleMessage("Hobbies"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log out"),
         "loginEmail": MessageLookupByLibrary.simpleMessage("Email address"),
         "loginPassword": MessageLookupByLibrary.simpleMessage("Password"),
@@ -48,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "newConversations":
             MessageLookupByLibrary.simpleMessage("New Conversations"),
+        "nickName": MessageLookupByLibrary.simpleMessage("Nick name"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "place": MessageLookupByLibrary.simpleMessage("Place"),
         "pleaseLoginIn": MessageLookupByLibrary.simpleMessage(
@@ -58,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Email is not in the correct format"),
         "speechIsNotAvailable":
             MessageLookupByLibrary.simpleMessage("Speech is not available"),
-        "startAChat": MessageLookupByLibrary.simpleMessage("Start a chat")
+        "startAChat": MessageLookupByLibrary.simpleMessage("Start a chat"),
+        "update": MessageLookupByLibrary.simpleMessage("Update")
       };
 }

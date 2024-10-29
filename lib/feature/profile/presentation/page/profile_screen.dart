@@ -5,8 +5,8 @@ import 'package:shuei_ai_chat/core/base/widget/base_require_login_widget.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/core/provider/app_provider.dart';
-import 'package:shuei_ai_chat/core/theme/app_colors.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_recommend_cubit.dart';
+import 'package:shuei_ai_chat/feature/profile/presentation/widget/update_profile_widget.dart';
 import 'package:shuei_ai_chat/generated/l10n.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -50,35 +50,33 @@ class ProfileScreenState extends State<ProfileScreen> {
               padding: const EdgeInsets.all(
                 16.0,
               ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.light.colorBrandBlue.withOpacity(
-                        0.1,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        40.0,
-                      ),
-                    ),
-                    padding: const EdgeInsets.all(
-                      6.0,
-                    ),
-                    child: Icon(
-                      Icons.person,
-                      color: AppColors.light.colorBrandBlue,
-                      size: 50.0,
+                  _itemProfile(
+                    Icons.info,
+                    S.of(context).accountInformation,
+                    () => showModalBottomSheet(
+                      isScrollControlled: true,
+                      isDismissible: true,
+                      backgroundColor: Colors.white,
+                      context: AppUtils.contextMain,
+                      builder: (contextDialog) {
+                        return const FractionallySizedBox(
+                          heightFactor: .95,
+                          child: UpdateProfileWidget(),
+                        );
+                      },
                     ),
                   ),
-                  const SizedBox(
-                    width: 16.0,
+                  const Divider(
+                    color: Colors.grey,
+                    height: 1.0,
                   ),
-                  Text(
-                    context.watch<AppProvider>().user,
-                    style: AppConstants.textButtonLarge.copyWith(
-                      color: Colors.black,
-                    ),
+                  _itemProfile(
+                    Icons.update,
+                    S.of(context).changePassword,
+                    () => {},
                   ),
                 ],
               ),
@@ -86,4 +84,36 @@ class ProfileScreenState extends State<ProfileScreen> {
           : const BaseRequireLoginWidget(),
     );
   }
+
+  Widget _itemProfile(
+    IconData icon,
+    String name,
+    Function onClick,
+  ) =>
+      GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () => onClick(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 12.0,
+          ),
+          child: Row(
+            children: [
+              Icon(
+                icon,
+                size: 30.0,
+              ),
+              const SizedBox(
+                width: 16.0,
+              ),
+              Text(
+                name,
+                style: AppConstants.textHeadingH5.copyWith(
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
 }

@@ -74,6 +74,10 @@ class BaseTextFieldWidget extends StatefulWidget {
 
   final FocusNode? focusNode;
 
+  final TextAlignVertical textAlignVertical;
+
+  final int maxLine;
+
   const BaseTextFieldWidget({
     super.key,
     this.focusNode,
@@ -93,6 +97,7 @@ class BaseTextFieldWidget extends StatefulWidget {
     this.borderRadius = 8.0,
     this.colorText,
     this.textAlign = TextAlign.start,
+    this.textAlignVertical = TextAlignVertical.center,
     this.fontSize = 14.0,
     this.widthBorder = 0.0,
     this.margin = EdgeInsets.zero,
@@ -111,6 +116,7 @@ class BaseTextFieldWidget extends StatefulWidget {
     this.alertMessage = '',
     this.onTapSuffix,
     this.onWidgetReady,
+    this.maxLine = 1,
   });
 
   @override
@@ -192,7 +198,7 @@ class BaseTextFieldWidgetState extends State<BaseTextFieldWidget> {
                   maxLengthEnforcement:
                       MaxLengthEnforcement.truncateAfterCompositionEnds,
                   textAlign: widget.textAlign!,
-                  textAlignVertical: TextAlignVertical.center,
+                  textAlignVertical: widget.textAlignVertical,
                   obscureText: widget.obscureText,
                   textCapitalization: widget.textCapitalization,
                   enabled: widget.enabled,
@@ -205,6 +211,7 @@ class BaseTextFieldWidgetState extends State<BaseTextFieldWidget> {
                   focusNode: focusNode,
                   key: widget.key,
                   maxLength: widget.maxLength,
+                  maxLines: widget.maxLine,
                   style: TextStyle(
                     fontSize: widget.fontSize!,
                     color: widget.colorText ?? Colors.black,

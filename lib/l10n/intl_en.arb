@@ -24,5 +24,12 @@
   "place": "Place",
   "profileTitle": "Account setting",
   "logOut": "Log out",
-  "doNotHaveAccount": "Do not have an account?"
+  "doNotHaveAccount": "Do not have an account?",
+  "accountInformation": "Account information",
+  "changePassword": "Change password",
+  "nickName": "Nick name",
+  "age": "Age",
+  "hobbies": "Hobbies",
+  "description": "Description",
+  "update": "Update"
 }
