@@ -76,6 +76,27 @@ class AuthParams extends Equatable {
       ];
 }
 
+class SignUpParams extends Equatable {
+  final String id;
+
+  final String name;
+
+  final String password;
+
+  const SignUpParams({
+    required this.id,
+    required this.password,
+    required this.name,
+  });
+
+  @override
+  List<Object> get props => [
+        id,
+        password,
+        name,
+      ];
+}
+
 class AgentChatHistoryParams extends Equatable {
   final String agentId;
 

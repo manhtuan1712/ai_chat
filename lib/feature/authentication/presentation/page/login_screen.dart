@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_button_widget.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_text_field_widget.dart';
+import 'package:shuei_ai_chat/core/di/injection_container.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/core/navigation/navigation_center.dart';
 import 'package:shuei_ai_chat/core/theme/app_colors.dart';
 import 'package:shuei_ai_chat/feature/authentication/presentation/cubit/login_cubit.dart';
+import 'package:shuei_ai_chat/feature/authentication/presentation/cubit/sign_up_cubit.dart';
 import 'package:shuei_ai_chat/feature/authentication/presentation/page/sign_up_screen.dart';
 import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_list_cubit.dart';
 import 'package:shuei_ai_chat/feature/favorite/presentation/cubit/favorite_cubit.dart';
@@ -142,7 +144,10 @@ class LoginScreenState extends State<LoginScreen> {
                   onTap: () => NavigationCenter.goToScreen(
                     context,
                     NavigationCenter.signUpScreen,
-                    const SignUpScreen(),
+                    BlocProvider(
+                      create: (_) => sl<SignUpCubit>(),
+                      child: const SignUpScreen(),
+                    ),
                   ),
                   child: Align(
                     alignment: Alignment.centerRight,
