@@ -31,5 +31,8 @@
   "age": "年齢",
   "hobbies": "趣味",
   "update": "更新",
-  "description": "説明"
+  "description": "説明",
+  "newPassword": "新しいパスワード",
+  "reNewPassword": "パスワード（再入力）",
+  "changePasswordSuccess": "パスワードを変更しました"
 }

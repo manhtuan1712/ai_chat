@@ -9,6 +9,7 @@ import 'package:shuei_ai_chat/feature/chat/data/model/chat_history_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/request_post_message_model.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
+import 'package:shuei_ai_chat/feature/profile/data/model/request/request_change_password_model.dart';
 
 class BaseRestService {
   Dio? _dio;
@@ -51,7 +52,17 @@ class BaseRestService {
   Future<ResponseSignUpModel> signUp(
     RequestSignUpModel request,
   ) async {
-    return _baseRestClient!.signUp(request);
+    return _baseRestClient!.signUp(
+      request,
+    );
+  }
+
+  Future<ResponseSignUpModel> changePassword(
+    RequestChangePasswordModel request,
+  ) async {
+    return _baseRestClient!.changePassword(
+      request,
+    );
   }
 
   Future<List<ChatHistoryModel>> getChatHistory() async {

@@ -31,6 +31,11 @@ import 'package:shuei_ai_chat/feature/home/data/repository/home_repository_impl.
 import 'package:shuei_ai_chat/feature/home/domain/repository/home_repository.dart';
 import 'package:shuei_ai_chat/feature/home/domain/usecase/get_recommend_agent.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_recommend_cubit.dart';
+import 'package:shuei_ai_chat/feature/profile/data/datasource/profile_remote_data_source.dart';
+import 'package:shuei_ai_chat/feature/profile/data/repository/profile_repository_impl.dart';
+import 'package:shuei_ai_chat/feature/profile/domain/repository/profile_repository.dart';
+import 'package:shuei_ai_chat/feature/profile/domain/usecase/change_password.dart';
+import 'package:shuei_ai_chat/feature/profile/presentation/cubit/profile_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -56,6 +61,11 @@ Future<void> init() async {
       baseRestService: sl(),
     ),
   );
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSourceImpl(
+      baseRestService: sl(),
+    ),
+  );
 
   // Repository
   sl.registerLazySingleton<ChatRepository>(
@@ -76,6 +86,11 @@ Future<void> init() async {
   sl.registerLazySingleton<FavoriteRepository>(
     () => FavoriteRepositoryImpl(
       favoriteRemoteDataSource: sl(),
+    ),
+  );
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(
+      profileRemoteDataSource: sl(),
     ),
   );
 
@@ -130,6 +145,11 @@ Future<void> init() async {
       favoriteRepository: sl(),
     ),
   );
+  sl.registerLazySingleton<ChangePassword>(
+    () => ChangePassword(
+      profileRepository: sl(),
+    ),
+  );
 
   // Cubit
   sl.registerFactory<ChatListCubit>(
@@ -164,6 +184,11 @@ Future<void> init() async {
       getFavorites: sl(),
       addFavorite: sl(),
       removeFavorite: sl(),
+    ),
+  );
+  sl.registerFactory<ProfileCubit>(
+    () => ProfileCubit(
+      changePassword: sl(),
     ),
   );
 
