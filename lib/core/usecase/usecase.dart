@@ -160,3 +160,32 @@ class AddFavoriteParam extends Equatable {
         agentId,
       ];
 }
+
+class UpdateProfileParams extends Equatable {
+  final String name;
+
+  final num age;
+
+  final String location;
+
+  final String hobbies;
+
+  final String description;
+
+  const UpdateProfileParams({
+    required this.name,
+    required this.age,
+    required this.location,
+    required this.hobbies,
+    required this.description,
+  });
+
+  @override
+  List<Object> get props => [
+        name,
+        age,
+        location,
+        hobbies,
+        description,
+      ];
+}
