@@ -6,6 +6,7 @@ import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_recommend_cubit.dart';
+import 'package:shuei_ai_chat/feature/profile/presentation/widget/update_password_widget.dart';
 import 'package:shuei_ai_chat/feature/profile/presentation/widget/update_profile_widget.dart';
 import 'package:shuei_ai_chat/generated/l10n.dart';
 
@@ -76,7 +77,18 @@ class ProfileScreenState extends State<ProfileScreen> {
                   _itemProfile(
                     Icons.update,
                     S.of(context).changePassword,
-                    () => {},
+                    () => showModalBottomSheet(
+                      isScrollControlled: true,
+                      isDismissible: true,
+                      backgroundColor: Colors.white,
+                      context: AppUtils.contextMain,
+                      builder: (contextDialog) {
+                        return const FractionallySizedBox(
+                          heightFactor: .95,
+                          child: UpdatePasswordWidget(),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),

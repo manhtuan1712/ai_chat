@@ -31,5 +31,8 @@
   "age": "Age",
   "hobbies": "Hobbies",
   "description": "Description",
-  "update": "Update"
+  "update": "Update",
+  "newPassword": "New password",
+  "reNewPassword": "Re-new password",
+  "changePasswordSuccess": "Change password successfully"
 }

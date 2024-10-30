@@ -31,6 +31,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "changeConversationName":
             MessageLookupByLibrary.simpleMessage("会話名を変更"),
         "changePassword": MessageLookupByLibrary.simpleMessage("パスワード変更"),
+        "changePasswordSuccess":
+            MessageLookupByLibrary.simpleMessage("パスワードを変更しました"),
         "chatListEmpty":
             MessageLookupByLibrary.simpleMessage("会話がありません。新しい会話を追加してください"),
         "chatTitle": MessageLookupByLibrary.simpleMessage("チャットリスト"),
@@ -50,12 +52,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginUserName": MessageLookupByLibrary.simpleMessage("ログインid"),
         "message": MessageLookupByLibrary.simpleMessage("メッセージ"),
         "newConversations": MessageLookupByLibrary.simpleMessage("新しい会話"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("新しいパスワード"),
         "nickName": MessageLookupByLibrary.simpleMessage("ニックネーム"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "place": MessageLookupByLibrary.simpleMessage("居住地"),
         "pleaseLoginIn":
             MessageLookupByLibrary.simpleMessage("この機能を使用するにはログインしてください"),
         "profileTitle": MessageLookupByLibrary.simpleMessage("アカウント設定"),
+        "reNewPassword": MessageLookupByLibrary.simpleMessage("パスワード（再入力）"),
         "select": MessageLookupByLibrary.simpleMessage("選択"),
         "signUpEmailWrongFormat":
             MessageLookupByLibrary.simpleMessage("メールの形式が正しくありません"),

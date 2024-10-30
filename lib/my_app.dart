@@ -12,6 +12,7 @@ import 'package:shuei_ai_chat/feature/chat/presentation/cubit/chat_list_cubit.da
 import 'package:shuei_ai_chat/feature/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_recommend_cubit.dart';
 import 'package:shuei_ai_chat/feature/main/presentation/page/main_screen.dart';
+import 'package:shuei_ai_chat/feature/profile/presentation/cubit/profile_cubit.dart';
 import 'package:shuei_ai_chat/generated/l10n.dart';
 
 class MyApp extends StatefulWidget {
@@ -50,6 +51,9 @@ class MyAppState extends State<MyApp> {
           ),
           BlocProvider(
             create: (_) => sl<FavoriteCubit>(),
+          ),
+          BlocProvider(
+            create: (_) => sl<ProfileCubit>(),
           ),
         ],
         child: MaterialApp(

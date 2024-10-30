@@ -33,6 +33,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Change conversation name"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change password"),
+        "changePasswordSuccess": MessageLookupByLibrary.simpleMessage(
+            "Change password successfully"),
         "chatListEmpty": MessageLookupByLibrary.simpleMessage(
             "You do not have any conversation, please add a new one"),
         "chatTitle": MessageLookupByLibrary.simpleMessage("Chat list"),
@@ -55,12 +57,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "message": MessageLookupByLibrary.simpleMessage("Message"),
         "newConversations":
             MessageLookupByLibrary.simpleMessage("New Conversations"),
+        "newPassword": MessageLookupByLibrary.simpleMessage("New password"),
         "nickName": MessageLookupByLibrary.simpleMessage("Nick name"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "place": MessageLookupByLibrary.simpleMessage("Place"),
         "pleaseLoginIn": MessageLookupByLibrary.simpleMessage(
             "Please login to use this feature"),
         "profileTitle": MessageLookupByLibrary.simpleMessage("Account setting"),
+        "reNewPassword":
+            MessageLookupByLibrary.simpleMessage("Re-new password"),
         "select": MessageLookupByLibrary.simpleMessage("Select"),
         "signUpEmailWrongFormat": MessageLookupByLibrary.simpleMessage(
             "Email is not in the correct format"),

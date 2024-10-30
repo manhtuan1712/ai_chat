@@ -96,10 +96,10 @@ class DioLoggingInterceptor extends InterceptorsWrapper {
     if (dioError.type == DioExceptionType.badResponse &&
         dioError.response!.statusCode != 200) {
       EasyLoading.dismiss();
-      AppUtils.showToastMessage(
-        errorMessage,
-        AppUtils.contextMain,
-      );
+      // AppUtils.showToastMessage(
+      //   errorMessage,
+      //   AppUtils.contextMain,
+      // );
     }
   }
 

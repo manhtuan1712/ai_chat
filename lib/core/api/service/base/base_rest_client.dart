@@ -7,6 +7,7 @@ import 'package:shuei_ai_chat/feature/chat/data/model/chat_history_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/request_post_message_model.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
+import 'package:shuei_ai_chat/feature/profile/data/model/request/request_change_password_model.dart';
 
 part 'base_rest_client.g.dart';
 
@@ -25,6 +26,11 @@ abstract class BaseRestClient {
   @POST('register/user')
   Future<ResponseSignUpModel> signUp(
     @Body() RequestSignUpModel request,
+  );
+
+  @PUT('changepass/user')
+  Future<ResponseSignUpModel> changePassword(
+    @Body() RequestChangePasswordModel request,
   );
 
   @GET('v2/chat/history')
