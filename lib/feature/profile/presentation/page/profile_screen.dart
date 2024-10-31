@@ -107,7 +107,7 @@ class ProfileScreenState extends State<ProfileScreen> {
         onTap: () => onClick(),
         child: Padding(
           padding: const EdgeInsets.symmetric(
-            vertical: 12.0,
+            vertical: 16.0,
           ),
           child: Row(
             children: [

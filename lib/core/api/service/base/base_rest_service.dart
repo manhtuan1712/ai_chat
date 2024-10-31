@@ -10,6 +10,8 @@ import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/request_post_message_model.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 import 'package:shuei_ai_chat/feature/profile/data/model/request/request_change_password_model.dart';
+import 'package:shuei_ai_chat/feature/profile/data/model/request/request_update_profile_model.dart';
+import 'package:shuei_ai_chat/feature/profile/data/model/response/response_update_profile_model.dart';
 
 class BaseRestService {
   Dio? _dio;
@@ -112,6 +114,18 @@ class BaseRestService {
   ) async {
     return _baseRestClient!.removeFavorite(
       agentId,
+    );
+  }
+
+  Future<RequestUpdateProfileModel> getProfile() async {
+    return _baseRestClient!.getProfile();
+  }
+
+  Future<ResponseUpdateProfileModel> updateProfile(
+    RequestUpdateProfileModel request,
+  ) async {
+    return _baseRestClient!.updateProfile(
+      request,
     );
   }
 }

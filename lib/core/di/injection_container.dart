@@ -35,6 +35,8 @@ import 'package:shuei_ai_chat/feature/profile/data/datasource/profile_remote_dat
 import 'package:shuei_ai_chat/feature/profile/data/repository/profile_repository_impl.dart';
 import 'package:shuei_ai_chat/feature/profile/domain/repository/profile_repository.dart';
 import 'package:shuei_ai_chat/feature/profile/domain/usecase/change_password.dart';
+import 'package:shuei_ai_chat/feature/profile/domain/usecase/get_profile.dart';
+import 'package:shuei_ai_chat/feature/profile/domain/usecase/update_profile.dart';
 import 'package:shuei_ai_chat/feature/profile/presentation/cubit/profile_cubit.dart';
 
 final sl = GetIt.instance;
@@ -150,6 +152,16 @@ Future<void> init() async {
       profileRepository: sl(),
     ),
   );
+  sl.registerLazySingleton<GetProfile>(
+    () => GetProfile(
+      profileRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton<UpdateProfile>(
+    () => UpdateProfile(
+      profileRepository: sl(),
+    ),
+  );
 
   // Cubit
   sl.registerFactory<ChatListCubit>(
@@ -189,6 +201,8 @@ Future<void> init() async {
   sl.registerFactory<ProfileCubit>(
     () => ProfileCubit(
       changePassword: sl(),
+      getProfile: sl(),
+      updateProfile: sl(),
     ),
   );
 

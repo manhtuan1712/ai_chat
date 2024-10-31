@@ -4,6 +4,8 @@ import 'package:shuei_ai_chat/core/api/error/failures.dart';
 import 'package:shuei_ai_chat/feature/authentication/data/model/response/response_sign_up_model.dart';
 import 'package:shuei_ai_chat/feature/profile/data/datasource/profile_remote_data_source.dart';
 import 'package:shuei_ai_chat/feature/profile/data/model/request/request_change_password_model.dart';
+import 'package:shuei_ai_chat/feature/profile/data/model/request/request_update_profile_model.dart';
+import 'package:shuei_ai_chat/feature/profile/data/model/response/response_update_profile_model.dart';
 import 'package:shuei_ai_chat/feature/profile/domain/repository/profile_repository.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
@@ -19,6 +21,42 @@ class ProfileRepositoryImpl implements ProfileRepository {
   ) async {
     try {
       var response = await profileRemoteDataSource.changePassword(
+        request,
+      );
+      return Right(
+        response,
+      );
+    } on DioException catch (error) {
+      return Left(
+        ServerFailure(
+          mess: error.response?.data['message'],
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, RequestUpdateProfileModel>> getProfile() async {
+    try {
+      var response = await profileRemoteDataSource.getProfile();
+      return Right(
+        response,
+      );
+    } on DioException catch (error) {
+      return Left(
+        ServerFailure(
+          mess: error.response?.data['message'],
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<ServerFailure, ResponseUpdateProfileModel>> updateProfile(
+    RequestUpdateProfileModel request,
+  ) async {
+    try {
+      var response = await profileRemoteDataSource.updateProfile(
         request,
       );
       return Right(
