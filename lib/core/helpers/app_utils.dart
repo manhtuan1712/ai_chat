@@ -43,6 +43,7 @@ class AppUtils {
   static void logOut() {
     contextMain.read<AppProvider>().setUser('');
     contextMain.read<AppProvider>().setAccessToken('');
+    contextMain.read<AppProvider>().clearFilter();
   }
 
   static double getBottomBarHeight() =>

@@ -39,8 +39,12 @@ class BaseRestService {
     );
   }
 
-  Future<List<AIAgentModel>> getRecommendAgent() async {
-    return _baseRestClient!.getRecommendAgent();
+  Future<List<AIAgentModel>> getRecommendAgent(
+    Map<String, dynamic> queries,
+  ) async {
+    return _baseRestClient!.getRecommendAgent(
+      queries,
+    );
   }
 
   Future<ResponseAuthModel> auth(

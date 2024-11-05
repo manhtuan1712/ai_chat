@@ -28,7 +28,7 @@ class HomeFilterCubit extends Cubit<HomeFilterState> {
 
   Future<void> getListAgesAction() async {
     emit(
-      HomeFilterLoadingState(),
+      GetListAgesLoadingState(),
     );
     final result = await getListAges(
       NoParams(),
@@ -47,7 +47,7 @@ class HomeFilterCubit extends Cubit<HomeFilterState> {
 
   Future<void> getListGendersAction() async {
     emit(
-      HomeFilterLoadingState(),
+      GetListGendersLoadingState(),
     );
     final result = await getListGenders(
       NoParams(),
@@ -66,7 +66,7 @@ class HomeFilterCubit extends Cubit<HomeFilterState> {
 
   Future<void> getListHobbiesAction() async {
     emit(
-      HomeFilterLoadingState(),
+      GetListHobbiesLoadingState(),
     );
     final result = await getListHobbies(
       NoParams(),
@@ -85,7 +85,7 @@ class HomeFilterCubit extends Cubit<HomeFilterState> {
 
   Future<void> getListOccupationAction() async {
     emit(
-      HomeFilterLoadingState(),
+      GetListOccupationLoadingState(),
     );
     final result = await getListOccupation(
       NoParams(),

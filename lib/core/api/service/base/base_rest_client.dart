@@ -20,7 +20,9 @@ abstract class BaseRestClient {
   factory BaseRestClient(Dio dio, {String baseUrl}) = _BaseRestClient;
 
   @GET('recommend/agent')
-  Future<List<AIAgentModel>> getRecommendAgent();
+  Future<List<AIAgentModel>> getRecommendAgent(
+    @Queries() Map<String, dynamic> queries,
+  );
 
   @POST('auth')
   Future<ResponseAuthModel> auth(

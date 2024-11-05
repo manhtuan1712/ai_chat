@@ -6,6 +6,7 @@ import 'package:shuei_ai_chat/core/di/injection_container.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/core/navigation/navigation_center.dart';
+import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 import 'package:shuei_ai_chat/core/theme/app_colors.dart';
 import 'package:shuei_ai_chat/feature/authentication/presentation/cubit/login_cubit.dart';
 import 'package:shuei_ai_chat/feature/authentication/presentation/cubit/sign_up_cubit.dart';
@@ -57,7 +58,10 @@ class LoginScreenState extends State<LoginScreen> {
           if (state is LoginSuccessState) {
             context.read<ChatListCubit>().getChatHistoryAction();
             context.read<FavoriteCubit>().getFavoritesAction();
-            context.read<HomeRecommendCubit>().getRecommendAgentAction();
+            context.read<AppProvider>().clearFilter();
+            context.read<HomeRecommendCubit>().getRecommendAgentAction(
+              {},
+            );
             Navigator.pop(
               context,
             );

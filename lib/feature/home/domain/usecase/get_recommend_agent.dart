@@ -4,7 +4,8 @@ import 'package:shuei_ai_chat/core/usecase/usecase.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 import 'package:shuei_ai_chat/feature/home/domain/repository/home_repository.dart';
 
-class GetRecommendAgent implements UseCase<List<AIAgentModel>, NoParams> {
+class GetRecommendAgent
+    implements UseCase<List<AIAgentModel>, HomeFilterParam> {
   final HomeRepository homeRepository;
 
   GetRecommendAgent({
@@ -13,7 +14,9 @@ class GetRecommendAgent implements UseCase<List<AIAgentModel>, NoParams> {
 
   @override
   Future<Either<ServerFailure, List<AIAgentModel>>> call(
-    NoParams params,
+    HomeFilterParam params,
   ) async =>
-      await homeRepository.getRecommendAgent();
+      await homeRepository.getRecommendAgent(
+        params.queries,
+      );
 }

@@ -40,7 +40,10 @@ class ProfileScreenState extends State<ProfileScreen> {
             text: S.of(context).logOut,
             onClick: () {
               AppUtils.logOut();
-              context.read<HomeRecommendCubit>().getRecommendAgentAction();
+
+              context.read<HomeRecommendCubit>().getRecommendAgentAction(
+                {},
+              );
             },
             buttonState: ButtonState.normal,
           ),
