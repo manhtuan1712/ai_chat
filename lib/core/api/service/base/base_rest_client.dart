@@ -7,6 +7,8 @@ import 'package:shuei_ai_chat/feature/chat/data/model/chat_history_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/request_post_message_model.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
+import 'package:shuei_ai_chat/feature/home/data/model/attribute_age_filter_model.dart';
+import 'package:shuei_ai_chat/feature/home/data/model/attribute_filter_model.dart';
 import 'package:shuei_ai_chat/feature/profile/data/model/request/request_change_password_model.dart';
 import 'package:shuei_ai_chat/feature/profile/data/model/request/request_update_profile_model.dart';
 import 'package:shuei_ai_chat/feature/profile/data/model/response/response_update_profile_model.dart';
@@ -73,4 +75,16 @@ abstract class BaseRestClient {
   Future<ResponseUpdateProfileModel> updateProfile(
     @Body() RequestUpdateProfileModel request,
   );
+
+  @GET('agents/list-occupation')
+  Future<List<AttributeFilterModel>> getListOccupation();
+
+  @GET('agents/list-hobbies')
+  Future<List<AttributeFilterModel>> getListHobbies();
+
+  @GET('agents/list-genders')
+  Future<List<AttributeFilterModel>> getListGenders();
+
+  @GET('agents/list-ages')
+  Future<List<AttributeAgeFilterModel>> getListAges();
 }

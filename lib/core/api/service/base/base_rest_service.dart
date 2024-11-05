@@ -9,6 +9,8 @@ import 'package:shuei_ai_chat/feature/chat/data/model/chat_history_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/message_model.dart';
 import 'package:shuei_ai_chat/feature/chat/data/model/request_post_message_model.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
+import 'package:shuei_ai_chat/feature/home/data/model/attribute_age_filter_model.dart';
+import 'package:shuei_ai_chat/feature/home/data/model/attribute_filter_model.dart';
 import 'package:shuei_ai_chat/feature/profile/data/model/request/request_change_password_model.dart';
 import 'package:shuei_ai_chat/feature/profile/data/model/request/request_update_profile_model.dart';
 import 'package:shuei_ai_chat/feature/profile/data/model/response/response_update_profile_model.dart';
@@ -127,5 +129,21 @@ class BaseRestService {
     return _baseRestClient!.updateProfile(
       request,
     );
+  }
+
+  Future<List<AttributeFilterModel>> getListOccupation() async {
+    return _baseRestClient!.getListOccupation();
+  }
+
+  Future<List<AttributeFilterModel>> getListHobbies() async {
+    return _baseRestClient!.getListHobbies();
+  }
+
+  Future<List<AttributeFilterModel>> getListGenders() async {
+    return _baseRestClient!.getListGenders();
+  }
+
+  Future<List<AttributeAgeFilterModel>> getListAges() async {
+    return _baseRestClient!.getListAges();
   }
 }

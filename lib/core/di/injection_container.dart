@@ -29,7 +29,12 @@ import 'package:shuei_ai_chat/feature/favorite/presentation/cubit/favorite_cubit
 import 'package:shuei_ai_chat/feature/home/data/datasource/home_remote_data_source.dart';
 import 'package:shuei_ai_chat/feature/home/data/repository/home_repository_impl.dart';
 import 'package:shuei_ai_chat/feature/home/domain/repository/home_repository.dart';
+import 'package:shuei_ai_chat/feature/home/domain/usecase/get_list_ages.dart';
+import 'package:shuei_ai_chat/feature/home/domain/usecase/get_list_genders.dart';
+import 'package:shuei_ai_chat/feature/home/domain/usecase/get_list_hobbies.dart';
+import 'package:shuei_ai_chat/feature/home/domain/usecase/get_list_occupation.dart';
 import 'package:shuei_ai_chat/feature/home/domain/usecase/get_recommend_agent.dart';
+import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_filter_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_recommend_cubit.dart';
 import 'package:shuei_ai_chat/feature/profile/data/datasource/profile_remote_data_source.dart';
 import 'package:shuei_ai_chat/feature/profile/data/repository/profile_repository_impl.dart';
@@ -162,6 +167,26 @@ Future<void> init() async {
       profileRepository: sl(),
     ),
   );
+  sl.registerLazySingleton<GetListGenders>(
+    () => GetListGenders(
+      homeRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton<GetListAges>(
+    () => GetListAges(
+      homeRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton<GetListHobbies>(
+    () => GetListHobbies(
+      homeRepository: sl(),
+    ),
+  );
+  sl.registerLazySingleton<GetListOccupation>(
+    () => GetListOccupation(
+      homeRepository: sl(),
+    ),
+  );
 
   // Cubit
   sl.registerFactory<ChatListCubit>(
@@ -179,6 +204,14 @@ Future<void> init() async {
   sl.registerFactory<HomeRecommendCubit>(
     () => HomeRecommendCubit(
       getRecommendAgent: sl(),
+    ),
+  );
+  sl.registerFactory<HomeFilterCubit>(
+    () => HomeFilterCubit(
+      getListGenders: sl(),
+      getListAges: sl(),
+      getListHobbies: sl(),
+      getListOccupation: sl(),
     ),
   );
   sl.registerFactory<LoginCubit>(
