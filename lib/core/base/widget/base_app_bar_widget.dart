@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shuei_ai_chat/core/di/injection_container.dart';
 import 'package:shuei_ai_chat/core/helpers/app_constants.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
+import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_filter_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/widget/home_filter_widget.dart';
 
 class BaseAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -55,9 +58,12 @@ class BaseAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               backgroundColor: Colors.transparent,
               context: AppUtils.contextMain,
               builder: (context) {
-                return const FractionallySizedBox(
+                return FractionallySizedBox(
                   heightFactor: .9,
-                  child: HomeFilterWidget(),
+                  child: BlocProvider(
+                    create: (_) => sl<HomeFilterCubit>(),
+                    child: const HomeFilterWidget(),
+                  ),
                 );
               },
             );

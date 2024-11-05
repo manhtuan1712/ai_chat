@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shuei_ai_chat/feature/home/data/model/attribute_age_filter_model.dart';
+import 'package:shuei_ai_chat/feature/home/data/model/attribute_filter_model.dart';
+import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_filter_cubit.dart';
 
 class HomeFilterWidget extends StatefulWidget {
   const HomeFilterWidget({
@@ -10,25 +14,35 @@ class HomeFilterWidget extends StatefulWidget {
 }
 
 class HomeFilterWidgetState extends State<HomeFilterWidget> {
-  double age = 25;
+  final List<AttributeFilterModel> _genders = [];
 
-  double area = 25;
+  final List<AttributeFilterModel> _selectedGender = [];
 
-  List<String> regions = ['アジア', 'ヨーロッパ', 'アメリカ'];
+  final List<AttributeAgeFilterModel> _ages = [];
 
-  String selectedRegion = 'アメリカ';
+  final List<AttributeAgeFilterModel> _selectedAge = [];
 
-  List<String> education = ['大学', '専門学校', '中学校'];
+  final List<AttributeFilterModel> _hobbies = [];
 
-  String selectedEducation = '大学';
+  final List<AttributeFilterModel> _selectedHobbies = [];
 
-  List<String> styles = ['可愛い', 'おもしろい', 'セクシー'];
+  final List<AttributeFilterModel> _occupations = [];
 
-  List<String> selectedStyles = [];
+  final List<AttributeFilterModel> _selectedOccupation = [];
 
-  List<String> hobbies = ['映画', '音楽', 'ゲーム'];
-
-  List<String> selectedHobbies = [];
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        context.read<HomeFilterCubit>()
+          ..getListAgesAction()
+          ..getListGendersAction()
+          ..getListHobbiesAction()
+          ..getListOccupationAction();
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,108 +61,39 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(
-          16.0,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+      body: BlocListener<HomeFilterCubit, HomeFilterState>(
+        listener: (context, state) {
+          if (state is GetListGendersSuccessState) {
+            _genders.clear();
+            _genders.addAll(
+              state.genders ?? [],
+            );
+            setState(() {});
+          } else if (state is GetListAgesSuccessState) {
+            _ages.clear();
+            _ages.addAll(
+              state.ages ?? [],
+            );
+            setState(() {});
+          } else if (state is GetListHobbiesSuccessState) {
+            _hobbies.clear();
+            _hobbies.addAll(
+              state.hobbies ?? [],
+            );
+            setState(() {});
+          } else if (state is GetListOccupationSuccessState) {
+            _occupations.clear();
+            _occupations.addAll(
+              state.occupation ?? [],
+            );
+            setState(() {});
+          }
+        },
+        child: ListView(
+          padding: const EdgeInsets.all(
+            16.0,
+          ),
           children: [
-            const Text(
-              '年齢',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 14.0,
-              ),
-            ),
-            Stack(
-              children: [
-                Slider(
-                  value: age,
-                  min: 0,
-                  max: 100,
-                  divisions: 100,
-                  label: '${age.toInt()}歳',
-                  onChanged: (value) {
-                    setState(() {
-                      age = value;
-                    });
-                  },
-                ),
-                const Positioned.fill(
-                  top: -30.0,
-                  left: 20.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '0',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12.0,
-                        ),
-                      ),
-                      Text(
-                        '100歳',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const Text(
-              'エリア',
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 14.0,
-              ),
-            ),
-            Stack(
-              children: [
-                Slider(
-                  value: area,
-                  min: 0,
-                  max: 100,
-                  divisions: 100,
-                  label: '${area.toInt()}km',
-                  onChanged: (value) {
-                    setState(() {
-                      area = value;
-                    });
-                  },
-                ),
-                const Positioned.fill(
-                  top: -30.0,
-                  left: 20.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '0',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12.0,
-                        ),
-                      ),
-                      Text(
-                        '100km',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
             const Text(
               '地域',
               style: TextStyle(
@@ -158,13 +103,19 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
             ),
             Wrap(
               spacing: 10.0,
-              children: regions.map((region) {
+              children: _genders.map((gender) {
                 return ChoiceChip(
-                  label: Text(region),
-                  selected: selectedRegion == region,
+                  label: Text(
+                    gender.name ?? '',
+                  ),
+                  selected: _selectedGender.contains(gender),
                   onSelected: (bool selected) {
                     setState(() {
-                      selectedRegion = region;
+                      if (selected) {
+                        _selectedGender.add(gender);
+                      } else {
+                        _selectedGender.remove(gender);
+                      }
                     });
                   },
                 );
@@ -182,13 +133,19 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
             ),
             Wrap(
               spacing: 10.0,
-              children: education.map((level) {
+              children: _ages.map((age) {
                 return ChoiceChip(
-                  label: Text(level),
-                  selected: selectedEducation == level,
+                  label: Text(
+                    age.name ?? '',
+                  ),
+                  selected: _selectedAge.contains(age),
                   onSelected: (bool selected) {
                     setState(() {
-                      selectedEducation = level;
+                      if (selected) {
+                        _selectedAge.add(age);
+                      } else {
+                        _selectedAge.remove(age);
+                      }
                     });
                   },
                 );
@@ -206,16 +163,18 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
             ),
             Wrap(
               spacing: 10.0,
-              children: styles.map((style) {
+              children: _hobbies.map((hobby) {
                 return FilterChip(
-                  label: Text(style),
-                  selected: selectedStyles.contains(style),
+                  label: Text(
+                    hobby.name ?? '',
+                  ),
+                  selected: _selectedHobbies.contains(hobby),
                   onSelected: (bool selected) {
                     setState(() {
                       if (selected) {
-                        selectedStyles.add(style);
+                        _selectedHobbies.add(hobby);
                       } else {
-                        selectedStyles.remove(style);
+                        _selectedHobbies.remove(hobby);
                       }
                     });
                   },
@@ -234,17 +193,19 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
             ),
             Wrap(
               spacing: 10.0,
-              children: hobbies.map((hobby) {
+              children: _occupations.map((occupation) {
                 return FilterChip(
-                  label: Text(hobby),
-                  selected: selectedHobbies.contains(hobby),
+                  label: Text(
+                    occupation.name ?? '',
+                  ),
+                  selected: _selectedOccupation.contains(occupation),
                   onSelected: (bool selected) {
                     setState(
                       () {
                         if (selected) {
-                          selectedHobbies.add(hobby);
+                          _selectedOccupation.add(occupation);
                         } else {
-                          selectedHobbies.remove(hobby);
+                          _selectedOccupation.remove(occupation);
                         }
                       },
                     );
@@ -253,6 +214,9 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
               }).toList(),
             ),
             const Spacer(),
+            const SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
