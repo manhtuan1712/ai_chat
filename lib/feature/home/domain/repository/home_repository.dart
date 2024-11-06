@@ -5,7 +5,9 @@ import 'package:shuei_ai_chat/feature/home/data/model/attribute_age_filter_model
 import 'package:shuei_ai_chat/feature/home/data/model/attribute_filter_model.dart';
 
 abstract class HomeRepository {
-  Future<Either<ServerFailure, List<AIAgentModel>>> getRecommendAgent();
+  Future<Either<ServerFailure, List<AIAgentModel>>> getRecommendAgent(
+    Map<String, dynamic> queries,
+  );
 
   Future<Either<ServerFailure, List<AttributeFilterModel>>> getListOccupation();
 

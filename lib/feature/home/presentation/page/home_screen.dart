@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shuei_ai_chat/core/base/widget/base_app_bar_widget.dart';
 import 'package:shuei_ai_chat/core/helpers/app_utils.dart';
 import 'package:shuei_ai_chat/core/navigation/navigation_center.dart';
+import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 import 'package:shuei_ai_chat/feature/favorite/presentation/cubit/favorite_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_recommend_cubit.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/widget/ai_agent_card_widget.dart';
@@ -31,7 +32,9 @@ class HomeScreenState extends State<HomeScreen> {
             milliseconds: 200,
           ),
           () {
-            homeRecommendCubit.getRecommendAgentAction();
+            homeRecommendCubit.getRecommendAgentAction(
+              {},
+            );
           },
         );
       },
@@ -86,7 +89,9 @@ class HomeScreenState extends State<HomeScreen> {
         ],
         child: RefreshIndicator(
           onRefresh: () async =>
-              context.read<HomeRecommendCubit>().getRecommendAgentAction(),
+              context.read<HomeRecommendCubit>().getRecommendAgentAction(
+                    context.read<AppProvider>().getFilter(),
+                  ),
           child: _isGrid
               ? GridView.builder(
                   primary: false,

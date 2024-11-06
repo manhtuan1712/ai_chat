@@ -6,7 +6,9 @@ import 'package:shuei_ai_chat/feature/home/data/model/attribute_age_filter_model
 import 'package:shuei_ai_chat/feature/home/data/model/attribute_filter_model.dart';
 
 abstract class HomeRemoteDataSource {
-  Future<List<AIAgentModel>> getRecommendAgent();
+  Future<List<AIAgentModel>> getRecommendAgent(
+    Map<String, dynamic> queries,
+  );
 
   Future<List<AttributeFilterModel>> getListOccupation();
 
@@ -25,10 +27,14 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   });
 
   @override
-  Future<List<AIAgentModel>> getRecommendAgent() async {
+  Future<List<AIAgentModel>> getRecommendAgent(
+    Map<String, dynamic> queries,
+  ) async {
     EasyLoading.show();
     try {
-      final response = await baseRestService.getRecommendAgent();
+      final response = await baseRestService.getRecommendAgent(
+        queries,
+      );
       EasyLoading.dismiss();
       return response;
     } on DioExceptionType {

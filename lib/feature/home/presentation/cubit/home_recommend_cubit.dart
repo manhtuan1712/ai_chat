@@ -13,12 +13,16 @@ class HomeRecommendCubit extends Cubit<HomeRecommendState> {
     required this.getRecommendAgent,
   }) : super(HomeRecommendInitialState());
 
-  Future<void> getRecommendAgentAction() async {
+  Future<void> getRecommendAgentAction(
+    Map<String, dynamic> queries,
+  ) async {
     emit(
       HomeRecommendLoadingState(),
     );
     final result = await getRecommendAgent(
-      NoParams(),
+      HomeFilterParam(
+        queries: queries,
+      ),
     );
     result.fold(
       (l) {

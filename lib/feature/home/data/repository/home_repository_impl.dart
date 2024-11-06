@@ -15,9 +15,13 @@ class HomeRepositoryImpl implements HomeRepository {
   });
 
   @override
-  Future<Either<ServerFailure, List<AIAgentModel>>> getRecommendAgent() async {
+  Future<Either<ServerFailure, List<AIAgentModel>>> getRecommendAgent(
+    Map<String, dynamic> queries,
+  ) async {
     try {
-      var response = await homeRemoteDataSource.getRecommendAgent();
+      var response = await homeRemoteDataSource.getRecommendAgent(
+        queries,
+      );
       return Right(
         response,
       );

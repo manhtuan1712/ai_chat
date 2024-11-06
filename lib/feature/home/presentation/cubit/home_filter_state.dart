@@ -7,6 +7,8 @@ class HomeFilterInitialState extends HomeFilterState {}
 
 class HomeFilterLoadingState extends HomeFilterState {}
 
+class GetListAgesLoadingState extends HomeFilterState {}
+
 class GetListAgesSuccessState extends HomeFilterState {
   final List<AttributeAgeFilterModel>? ages;
 
@@ -14,6 +16,8 @@ class GetListAgesSuccessState extends HomeFilterState {
     this.ages,
   });
 }
+
+class GetListGendersLoadingState extends HomeFilterState {}
 
 class GetListGendersSuccessState extends HomeFilterState {
   final List<AttributeFilterModel>? genders;
@@ -23,6 +27,8 @@ class GetListGendersSuccessState extends HomeFilterState {
   });
 }
 
+class GetListHobbiesLoadingState extends HomeFilterState {}
+
 class GetListHobbiesSuccessState extends HomeFilterState {
   final List<AttributeFilterModel>? hobbies;
 
@@ -30,6 +36,8 @@ class GetListHobbiesSuccessState extends HomeFilterState {
     this.hobbies,
   });
 }
+
+class GetListOccupationLoadingState extends HomeFilterState {}
 
 class GetListOccupationSuccessState extends HomeFilterState {
   final List<AttributeFilterModel>? occupation;

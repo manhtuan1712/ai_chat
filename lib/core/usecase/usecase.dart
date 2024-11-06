@@ -12,6 +12,17 @@ class NoParams extends Equatable {
   List<Object> get props => [];
 }
 
+class HomeFilterParam extends Equatable {
+  final Map<String, dynamic> queries;
+
+  const HomeFilterParam({
+    required this.queries,
+  });
+
+  @override
+  List<Object> get props => [];
+}
+
 class InitChatParams extends Equatable {
   final Map<String, dynamic> data;
 
