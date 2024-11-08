@@ -7,8 +7,11 @@ import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_filter_cubit.
 import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_recommend_cubit.dart';
 
 class HomeFilterWidget extends StatefulWidget {
+  final bool isFavorite;
+
   const HomeFilterWidget({
     super.key,
+    required this.isFavorite,
   });
 
   @override
@@ -106,7 +109,7 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
                           ),
                           selected: context
                               .watch<AppProvider>()
-                              .selectedGender
+                              .selectedGender(widget.isFavorite)
                               .where(
                                 (e) => e.name == gender.name,
                               )
@@ -117,14 +120,14 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
                                 if (selected) {
                                   context
                                       .read<AppProvider>()
-                                      .selectedGender
+                                      .selectedGender(widget.isFavorite)
                                       .add(
                                         gender,
                                       );
                                 } else {
                                   context
                                       .read<AppProvider>()
-                                      .selectedGender
+                                      .selectedGender(widget.isFavorite)
                                       .removeWhere(
                                         (e) => e.name == gender.name,
                                       );
@@ -159,7 +162,7 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
                         ),
                         selected: context
                             .watch<AppProvider>()
-                            .selectedAge
+                            .selectedAge(widget.isFavorite)
                             .where(
                               (e) => e.name == age.name,
                             )
@@ -168,11 +171,17 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
                           setState(
                             () {
                               if (selected) {
-                                context.read<AppProvider>().selectedAge.add(
+                                context
+                                    .read<AppProvider>()
+                                    .selectedAge(widget.isFavorite)
+                                    .add(
                                       age,
                                     );
                               } else {
-                                context.read<AppProvider>().selectedAge.remove(
+                                context
+                                    .read<AppProvider>()
+                                    .selectedAge(widget.isFavorite)
+                                    .remove(
                                       age,
                                     );
                               }
@@ -206,7 +215,7 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
                           ),
                           selected: context
                               .watch<AppProvider>()
-                              .selectedHobbies
+                              .selectedHobbies(widget.isFavorite)
                               .where(
                                 (e) => e.name == hobby.name,
                               )
@@ -217,14 +226,14 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
                                 if (selected) {
                                   context
                                       .read<AppProvider>()
-                                      .selectedHobbies
+                                      .selectedHobbies(widget.isFavorite)
                                       .add(
                                         hobby,
                                       );
                                 } else {
                                   context
                                       .read<AppProvider>()
-                                      .selectedHobbies
+                                      .selectedHobbies(widget.isFavorite)
                                       .removeWhere(
                                         (e) => e.name == hobby.name,
                                       );
@@ -259,7 +268,7 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
                         ),
                         selected: context
                             .watch<AppProvider>()
-                            .selectedOccupation
+                            .selectedOccupation(widget.isFavorite)
                             .where(
                               (e) => e.name == occupation.name,
                             )
@@ -270,14 +279,14 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
                               if (selected) {
                                 context
                                     .read<AppProvider>()
-                                    .selectedOccupation
+                                    .selectedOccupation(widget.isFavorite)
                                     .add(
                                       occupation,
                                     );
                               } else {
                                 context
                                     .read<AppProvider>()
-                                    .selectedOccupation
+                                    .selectedOccupation(widget.isFavorite)
                                     .removeWhere(
                                       (e) => e.name == occupation.name,
                                     );
@@ -312,7 +321,9 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
                 ElevatedButton(
                   onPressed: () {
                     context.read<HomeRecommendCubit>().getRecommendAgentAction(
-                          context.read<AppProvider>().getFilter(),
+                          context
+                              .read<AppProvider>()
+                              .getFilter(widget.isFavorite),
                         );
                     Navigator.pop(
                       context,

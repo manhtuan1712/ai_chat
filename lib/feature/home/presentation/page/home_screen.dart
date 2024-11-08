@@ -45,6 +45,7 @@ class HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBarWidget(
+        isFavorite: false,
         isGrid: _isGrid,
         changeStyle: () {
           _isGrid = !_isGrid;
@@ -90,7 +91,7 @@ class HomeScreenState extends State<HomeScreen> {
         child: RefreshIndicator(
           onRefresh: () async =>
               context.read<HomeRecommendCubit>().getRecommendAgentAction(
-                    context.read<AppProvider>().getFilter(),
+                    context.read<AppProvider>().getFilter(false),
                   ),
           child: _isGrid
               ? GridView.builder(
