@@ -46,6 +46,7 @@ class FavoriteScreenState extends State<FavoriteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: BaseAppBarWidget(
+        isFavorite: true,
         isGrid: _isGrid,
         changeStyle: () {
           _isGrid = !_isGrid;

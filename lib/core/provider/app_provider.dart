@@ -15,19 +15,31 @@ class AppProvider extends ChangeNotifier {
 
   List<AttributeFilterModel> _selectedGender = [];
 
-  List<AttributeFilterModel> get selectedGender => _selectedGender;
+  List<AttributeFilterModel> _selectedGenderFavorite = [];
+
+  List<AttributeFilterModel> selectedGender(bool isFavorite) =>
+      isFavorite ? _selectedGenderFavorite : _selectedGender;
 
   List<AttributeFilterModel> _selectedHobbies = [];
 
-  List<AttributeFilterModel> get selectedHobbies => _selectedHobbies;
+  List<AttributeFilterModel> _selectedHobbiesFavorite = [];
+
+  List<AttributeFilterModel> selectedHobbies(bool isFavorite) =>
+      isFavorite ? _selectedHobbiesFavorite : _selectedHobbies;
 
   List<AttributeFilterModel> _selectedOccupation = [];
 
-  List<AttributeFilterModel> get selectedOccupation => _selectedOccupation;
+  List<AttributeFilterModel> _selectedOccupationFavorite = [];
+
+  List<AttributeFilterModel> selectedOccupation(bool isFavorite) =>
+      isFavorite ? _selectedOccupationFavorite : _selectedOccupation;
 
   List<AttributeAgeFilterModel> _selectedAge = [];
 
-  List<AttributeAgeFilterModel> get selectedAge => _selectedAge;
+  List<AttributeAgeFilterModel> _selectedAgeFavorite = [];
+
+  List<AttributeAgeFilterModel> selectedAge(bool isFavorite) =>
+      isFavorite ? _selectedAgeFavorite : _selectedAge;
 
   AppProvider() {
     _getAccessToken();
@@ -70,48 +82,21 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setSelectedGender(
-    List<AttributeFilterModel> value,
-  ) {
-    _selectedGender = value;
-    notifyListeners();
-  }
-
-  void setSelectedHobbies(
-    List<AttributeFilterModel> value,
-  ) {
-    _selectedHobbies = value;
-    notifyListeners();
-  }
-
-  void setSelectedOccupation(
-    List<AttributeFilterModel> value,
-  ) {
-    _selectedOccupation = value;
-    notifyListeners();
-  }
-
-  void setSelectedAge(
-    List<AttributeAgeFilterModel> value,
-  ) {
-    _selectedAge = value;
-    notifyListeners();
-  }
-
-  Map<String, dynamic> getFilter() {
+  Map<String, dynamic> getFilter(bool isFavorite) {
     final Map<String, dynamic> filter = {};
-    if (_selectedGender.isNotEmpty) {
-      filter['gender'] = _selectedGender.map((e) => e.id).toList();
+    if (selectedGender(isFavorite).isNotEmpty) {
+      filter['gender'] = selectedGender(isFavorite).map((e) => e.id).toList();
     }
-    if (_selectedHobbies.isNotEmpty) {
-      filter['hobbies'] = _selectedHobbies.map((e) => e.id).toList();
+    if (selectedHobbies(isFavorite).isNotEmpty) {
+      filter['hobbies'] = selectedHobbies(isFavorite).map((e) => e.id).toList();
     }
-    if (_selectedOccupation.isNotEmpty) {
-      filter['occupations'] = _selectedOccupation.map((e) => e.id).toList();
+    if (selectedOccupation(isFavorite).isNotEmpty) {
+      filter['occupations'] =
+          selectedOccupation(isFavorite).map((e) => e.id).toList();
     }
-    if (_selectedAge.isNotEmpty) {
+    if (selectedAge(isFavorite).isNotEmpty) {
       filter['age'] = [];
-      for (final age in _selectedAge) {
+      for (final age in selectedAge(isFavorite)) {
         for (final id in age.id!) {
           filter['age'].add(id);
         }
@@ -122,9 +107,13 @@ class AppProvider extends ChangeNotifier {
 
   void clearFilter() {
     _selectedGender = [];
+    _selectedGenderFavorite = [];
     _selectedHobbies = [];
+    _selectedHobbiesFavorite = [];
     _selectedOccupation = [];
+    _selectedOccupationFavorite = [];
     _selectedAge = [];
+    _selectedAgeFavorite = [];
     notifyListeners();
   }
 }

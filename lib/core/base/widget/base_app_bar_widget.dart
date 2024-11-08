@@ -16,11 +16,14 @@ class BaseAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   final String title;
 
+  final bool isFavorite;
+
   const BaseAppBarWidget({
     super.key,
     required this.changeFilter,
     required this.changeStyle,
     required this.isGrid,
+    required this.isFavorite,
     this.title = '',
   });
 
@@ -62,7 +65,9 @@ class BaseAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                   heightFactor: .9,
                   child: BlocProvider(
                     create: (_) => sl<HomeFilterCubit>(),
-                    child: const HomeFilterWidget(),
+                    child: HomeFilterWidget(
+                      isFavorite: isFavorite,
+                    ),
                   ),
                 );
               },
