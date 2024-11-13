@@ -101,8 +101,12 @@ class BaseRestService {
     );
   }
 
-  Future<List<AIAgentModel>> getFavorites() async {
-    return _baseRestClient!.getFavorites();
+  Future<List<AIAgentModel>> getFavorites(
+    Map<String, dynamic> queries,
+  ) async {
+    return _baseRestClient!.getFavorites(
+      queries,
+    );
   }
 
   Future<void> addFavorite(

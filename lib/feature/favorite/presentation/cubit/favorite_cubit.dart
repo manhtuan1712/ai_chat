@@ -21,12 +21,16 @@ class FavoriteCubit extends Cubit<FavoriteState> {
     required this.removeFavorite,
   }) : super(FavoriteInitialState());
 
-  Future<void> getFavoritesAction() async {
+  Future<void> getFavoritesAction(
+    Map<String, dynamic> queries,
+  ) async {
     emit(
       FavoriteLoadingState(),
     );
     final result = await getFavorites(
-      NoParams(),
+      HomeFilterParam(
+        queries: queries,
+      ),
     );
     result.fold(
       (l) {

@@ -28,13 +28,18 @@ class FavoriteScreenState extends State<FavoriteScreen> {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         FavoriteCubit favoriteCubit = context.read<FavoriteCubit>();
+        AppProvider appProvider = context.read<AppProvider>();
         Future.delayed(
           const Duration(
             milliseconds: 200,
           ),
           () {
             if (AppUtils.isLogin) {
-              favoriteCubit.getFavoritesAction();
+              favoriteCubit.getFavoritesAction(
+                appProvider.getFilter(
+                  true,
+                ),
+              );
             }
           },
         );
@@ -52,7 +57,11 @@ class FavoriteScreenState extends State<FavoriteScreen> {
           _isGrid = !_isGrid;
           setState(() {});
         },
-        changeFilter: () {},
+        changeFilter: () => context.read<FavoriteCubit>().getFavoritesAction(
+              context.read<AppProvider>().getFilter(
+                    true,
+                  ),
+            ),
         title: S.of(context).favoriteTitle,
       ),
       body: context.watch<AppProvider>().accessToken.isEmpty
@@ -82,7 +91,11 @@ class FavoriteScreenState extends State<FavoriteScreen> {
               },
               child: RefreshIndicator(
                 onRefresh: () async =>
-                    context.read<FavoriteCubit>().getFavoritesAction(),
+                    context.read<FavoriteCubit>().getFavoritesAction(
+                          context.read<AppProvider>().getFilter(
+                                true,
+                              ),
+                        ),
                 child: _isGrid
                     ? GridView.builder(
                         physics: const AlwaysScrollableScrollPhysics(),

@@ -5,7 +5,9 @@ import 'package:shuei_ai_chat/core/helpers/enums.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 
 abstract class FavoriteRemoteDataSource {
-  Future<List<AIAgentModel>> getFavorites();
+  Future<List<AIAgentModel>> getFavorites(
+    Map<String, dynamic> queries,
+  );
 
   Future<String> addFavorite(
     String agentId,
@@ -24,10 +26,14 @@ class FavoriteRemoteDataSourceImpl implements FavoriteRemoteDataSource {
   });
 
   @override
-  Future<List<AIAgentModel>> getFavorites() async {
+  Future<List<AIAgentModel>> getFavorites(
+    Map<String, dynamic> queries,
+  ) async {
     EasyLoading.show();
     try {
-      final response = await baseRestService.getFavorites();
+      final response = await baseRestService.getFavorites(
+        queries,
+      );
       EasyLoading.dismiss();
       return response;
     } on DioExceptionType {

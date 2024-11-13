@@ -58,7 +58,9 @@ abstract class BaseRestClient {
   );
 
   @GET('user/like')
-  Future<List<AIAgentModel>> getFavorites();
+  Future<List<AIAgentModel>> getFavorites(
+    @Queries() Map<String, dynamic> queries,
+  );
 
   @PUT('user/like')
   Future<void> addFavorite(
