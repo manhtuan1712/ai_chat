@@ -51,7 +51,12 @@ class HomeScreenState extends State<HomeScreen> {
           _isGrid = !_isGrid;
           setState(() {});
         },
-        changeFilter: () {},
+        changeFilter: () =>
+            context.read<HomeRecommendCubit>().getRecommendAgentAction(
+                  context.read<AppProvider>().getFilter(
+                        false,
+                      ),
+                ),
       ),
       body: MultiBlocListener(
         listeners: [

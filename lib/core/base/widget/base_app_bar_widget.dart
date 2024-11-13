@@ -67,6 +67,7 @@ class BaseAppBarWidget extends StatelessWidget implements PreferredSizeWidget {
                     create: (_) => sl<HomeFilterCubit>(),
                     child: HomeFilterWidget(
                       isFavorite: isFavorite,
+                      changeFilter: changeFilter,
                     ),
                   ),
                 );

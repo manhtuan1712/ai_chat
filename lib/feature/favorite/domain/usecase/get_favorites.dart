@@ -4,7 +4,7 @@ import 'package:shuei_ai_chat/core/usecase/usecase.dart';
 import 'package:shuei_ai_chat/feature/favorite/domain/repository/favorite_repository.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/ai_agent_model.dart';
 
-class GetFavorites implements UseCase<List<AIAgentModel>, NoParams> {
+class GetFavorites implements UseCase<List<AIAgentModel>, HomeFilterParam> {
   final FavoriteRepository favoriteRepository;
 
   GetFavorites({
@@ -13,7 +13,9 @@ class GetFavorites implements UseCase<List<AIAgentModel>, NoParams> {
 
   @override
   Future<Either<ServerFailure, List<AIAgentModel>>> call(
-    NoParams params,
+    HomeFilterParam homeFilterParam,
   ) async =>
-      await favoriteRepository.getFavorites();
+      await favoriteRepository.getFavorites(
+        homeFilterParam.queries,
+      );
 }

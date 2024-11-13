@@ -57,7 +57,9 @@ class LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
           if (state is LoginSuccessState) {
             context.read<ChatListCubit>().getChatHistoryAction();
-            context.read<FavoriteCubit>().getFavoritesAction();
+            context.read<FavoriteCubit>().getFavoritesAction(
+              {},
+            );
             context.read<AppProvider>().clearFilter();
             context.read<HomeRecommendCubit>().getRecommendAgentAction(
               {},

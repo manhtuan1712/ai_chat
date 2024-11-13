@@ -13,9 +13,13 @@ class FavoriteRepositoryImpl implements FavoriteRepository {
   });
 
   @override
-  Future<Either<ServerFailure, List<AIAgentModel>>> getFavorites() async {
+  Future<Either<ServerFailure, List<AIAgentModel>>> getFavorites(
+    Map<String, dynamic> queries,
+  ) async {
     try {
-      var response = await favoriteRemoteDataSource.getFavorites();
+      var response = await favoriteRemoteDataSource.getFavorites(
+        queries,
+      );
       return Right(
         response,
       );

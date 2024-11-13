@@ -301,9 +301,10 @@ class _BaseRestClient implements BaseRestClient {
   }
 
   @override
-  Future<List<AIAgentModel>> getFavorites() async {
+  Future<List<AIAgentModel>> getFavorites(Map<String, dynamic> queries) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.addAll(queries);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options = _setStreamType<List<AIAgentModel>>(Options(

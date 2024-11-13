@@ -4,14 +4,16 @@ import 'package:shuei_ai_chat/core/provider/app_provider.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/attribute_age_filter_model.dart';
 import 'package:shuei_ai_chat/feature/home/data/model/attribute_filter_model.dart';
 import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_filter_cubit.dart';
-import 'package:shuei_ai_chat/feature/home/presentation/cubit/home_recommend_cubit.dart';
 
 class HomeFilterWidget extends StatefulWidget {
   final bool isFavorite;
 
+  final Function changeFilter;
+
   const HomeFilterWidget({
     super.key,
     required this.isFavorite,
+    required this.changeFilter,
   });
 
   @override
@@ -320,11 +322,7 @@ class HomeFilterWidgetState extends State<HomeFilterWidget> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    context.read<HomeRecommendCubit>().getRecommendAgentAction(
-                          context
-                              .read<AppProvider>()
-                              .getFilter(widget.isFavorite),
-                        );
+                    widget.changeFilter.call();
                     Navigator.pop(
                       context,
                     );
